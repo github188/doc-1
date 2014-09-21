@@ -1,0 +1,41 @@
+#!/bin/bash
+
+host=$1
+passwd=$2
+if [ "x$1" = "x" -o "x$2" = "x" ];then
+        echo -e "auto-ssh host passwd"
+	exit -1
+fi	
+
+expect -c "
+
+set timeout 10
+spawn  ssh root@$host
+expect {
+\"*(yes/no)?\" {
+	send \"yes\r\" ;
+	exp_continue
+}
+\"password:\" {
+	send \"$passwd\r\" ;
+	exp_continue ;
+	expect \"please try again.\" 
+}
+\"please try again.\" {
+	exp_continue;
+	expect \"password:\"
+}
+
+\"Connection refused\" {
+#	expect eof
+	exit -1
+}
+\"(publickey,password).\" {
+	exit -1
+}
+timeout {
+	exit -1
+}
+}
+interact
+"

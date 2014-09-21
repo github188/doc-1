@@ -1,0 +1,6 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+# /dev/sdd3
+UUID=f0548aae-353c-4a4e-a677-496ae3656169	/	ext4	defaults	0 1

@@ -1,0 +1,4 @@
+=xfce-extra/xfce4-gvfs-mount-0.0.4 ~amd64
+sys-kernel/git-sources ~amd64
+=sys-devel/patch-2.7.1-r3 ~amd64
+=xfce-extra/xfce4-composite-editor-0 ~amd64

@@ -1,0 +1,9 @@
+1. 安装snmpd  运行snmpwalk -v 2c -c public localhost
+  会列出本机所有的变量
+2. 如果要访问远程机器， 在需要被控制的机器上安装snmpd后，修改
+   /etc/snmp/snmpd.conf 将agentAddress udp:127.0.0.1:161改为
+   agentAddress udp:161,udp6:[::1]:161
+   运行snmpwal -v 2c -c 被控机器的ip 会显示被控机器的变量则成功
+3. 如果OID和名称不能对应，或者只能使用OID来查询，则需要配置mibs
+  安装snmp-mibs-downloader并在/etc/snmp/snmp.conf中添加mibs +ALL即可。
+  使用snmptranslate -To来验证是否配置成功。

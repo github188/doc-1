@@ -1,0 +1,1 @@
+cmd_/home/lyt/Documents/kernel/my-jiffies/my_jiffies.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.8.0-34-generic/scripts/module-common.lds --build-id  -o /home/lyt/Documents/kernel/my-jiffies/my_jiffies.ko /home/lyt/Documents/kernel/my-jiffies/my_jiffies.o /home/lyt/Documents/kernel/my-jiffies/my_jiffies.mod.o

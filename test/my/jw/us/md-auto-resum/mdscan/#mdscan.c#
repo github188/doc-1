@@ -1,0 +1,180 @@
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+#include "dev_manage.h"
+#include "util.h"
+#include "pdm_info.h"
+
+#define MDSCAN_FILE "/tmp/mdscan"
+#define MDSCAN_TMP_FILE "/tmp/.mdscan"
+
+#define PDMSCAN_FILE "/tmp/pdmscan"
+#define PDMDEV_FILE "/tmp/pdmdev"
+
+typedef struct mapping {
+	char *name;
+	int num;
+}mapping_t;
+
+
+mapping_t pers[] = {
+	{"linear", LEVEL_LINEAR},
+	{"raid0", 0},
+	{"0", 0},
+	{"stripe", 0},
+	{"raid1", 1},
+	{"1", 1},
+	{"mirror", 1},
+	{"raid4", 4},
+	{"4", 4},
+	{"raid5", 5},
+	{"5", 5},
+	{"multipath", LEVEL_MULTIPATH},
+	{"mp", LEVEL_MULTIPATH},
+	{"raid6", 6},
+	{"6", 6},
+	{"raid10", 10},
+	{"10", 10},
+	{"raid30", 30},
+	{"30", 30},
+	{"raid50", 50},
+	{"50", 50},
+	{"raid60", 60},
+	{"60", 60},
+	{"raid0+1", 101},
+	{"0+1", 101},
+	{"faulty", LEVEL_FAULTY},
+	{NULL, 0}
+};
+
+char *map_num(mapping_t *map, int num)
+{
+	while (map->name) {
+		if (map->num == num)
+			return map->name;
+		map++;
+	}
+
+	return "-unknown-";
+}
+
+static void dump_md_dev(struct md_ident *id, FILE *fp)
+{
+	struct md_info *info = &id->info;
+	char *c = map_num(pers, info->level);
+	int i;
+
+	fprintf(fp, "ARRAY /dev/md%u level=%s ", id->md_num, c);
+	fprintf(fp, "metadata=1.2 ");
+	fprintf(fp, "num-devices=%u UUID=", info->raid_disks);
+	for (i = 0; i < sizeof(info->uuid); i++) {
+		if ((i & 3) == 0 && i != 0)
+			fprintf(fp, ":");
+		fprintf(fp, "%02x", info->uuid[i]);
+ 	}
+
+	if (info->md_name[0])
+		fprintf(fp, " name=%.32s", info->md_name);
+	fprintf(fp, "\n");
+}
+
+pdm_info_stat_t check_md_pdm(struct md_ident *id)
+{
+	struct md_dev *dev = NULL;
+	struct md_dev *dev_dst = NULL;
+	struct md_dev *dev_src = NULL;
+	struct list *pos = NULL;
+
+	if (list_empty(&id->pdm_dev_list))
+		goto out_null;
+
+	list_for_each(pos, &id->pdm_dev_list) {
+		dev = list_entry(pos, struct md_dev, pdm_Dev_list);
+		if (!dev->pdm) {
+			fprintf(stderr, "BUG, NO PDM INFO!\n");
+			goto out_error;
+		}
+
+		if (PDM_SRC == dev->pdm->magic &&
+		    NULL == dev_src) {
+			dev_src = dev;
+		} else if (PDM_DEST == dev->pdm->magic &&
+			   NULL == dev_dst) {
+			dev_dst = dev;
+		} else {
+			fprintf(stderr, "magic %llu, dev %p, src %p, dst %p\n",
+				(unsigned long long)dev->pdm->magic, dev, dev_src, dev_dst);
+			dev_dst = NULL;
+			dev_src = NULL;
+			goto out_error;
+		}
+	}
+	if (NULL == dev_dst || NULL == dev_src) {
+		fprintf(stderr, "src %p, dst %p\n", dev_src, dev_dst);
+		goto out_error;
+	}
+
+
+	if (!dev_src->st)
+		goto out_error;
+	if (memcmp(dev_src->pdm->src_uuid, id->st->device_uuid, 16) != 0)
+		goto out_error;
+	if (memcmp(dev_src->pdm->md_uuid, id->info.uuid, 16) != 0)
+		goto out_error;
+	if (dev_src->pdm->end_pos == 0)
+		goto out_error;
+	if (dev_src->pdm->end_pos > dev_src->pdm->src_size)
+		goto out_error;
+	if (dev_src->pdm->end_pos > dev_src->pdm->dst_size)
+		goto out_error;
+
+
+	if (memcmp(dev_dst->pdm->md_uuid, id->info.uuid, 16) != 0)
+		goto out_error;
+	if (dev_dst->pdm->end_pos == 0)
+		goto out_error;
+	if (dev_dst->pdm->end_pos > dev_dst->pdm->src_size)
+		goto out_error;
+	if (dev_dst->pdm->end_pos > dev_dst->pdm->dst_size)
+		goto out_error;
+
+	if (memcmp(dev_src->pdm->pdm_uuid, dev_dst->pdm->pdm_uuid 16) != 0)
+		goto out_error;
+	if (memcmp(dev_src->pdm->src_uuid, dev_dst->pdm->src_uuid, 16) !=0)
+		goto out_error;
+	if (memcmp(dev_src->pdm->dst_uuid, dev_dst->pdm->dst_uuid, 16) != 0)
+		goto out_error;
+	if (dev_src->pdm->src_size != dev_dst->pdm->src_size)
+		goto out_error;
+	if (dev_src->pdm->dst_size != dev_dst->pdm->dst_size)
+		goto out_error;
+
+	return pdm_ok;
+out_error:
+	fprintf(stderr, "PDM INFO ERROR\n");
+	return pdm_bad;
+out_null:
+	return pdm_null;
+}
+
+void dump_md_pdm(struct md_ident *id, FILE *fp)
+{
+	struct list *pos;
+	struct md_info *info = &id->info;
+	struct md_dev *dev;
+	pdm_super_t *pdm = NULL;
+	unsigned long long off = 0;
+
+	fprintf(fp, "md=/dev/md%u md_uuid=%s ", id->md_num, uuid_to_str(info->uuid));
+
+	list_for_each(pos, &id->pdm_dev_list) {
+		dev = list_entry(pos, struct md_dev, pdm_dev_list);
+		pdm = dev->pdm;
+		if (pdm->magic == PDM_DEST) {
+			fprintf(fp, "dst=%s ", dev->name);
+		}else if (pdm->magic == PDM_SRC) {
+			fprintf(fp, "s")
+		}
+	}
+}
+
