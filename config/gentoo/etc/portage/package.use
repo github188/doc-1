@@ -1,0 +1,12 @@
+app-portage/eix optimization sqlite strong-optimization
+app-editors/emacs X Xaw3d alsa aqua athena dbus games gconf gif gnutls gpm gsettings gtk gzip-el hesiod imagemagick jpeg kerberos libxml2 motif png sound svg tiff toolkit-scroll-bars wide-int xft
+app-emacs/emacs-common-gentoo games X 
+sys-devel/gdb vanilla expat
+x11-libs/cairo X glib svg aqua directfb drm gallium gles2 opengl openvg qt4 valgrind xcb xlib-xcb
+dev-lang/php apache2 cjk ftp  cgi curl mysql sqlite  threads gd
+www-servers/apache threads
+app-admin/eselect-php apache2
+media-libs/mesa xa gbm gles2 openvg 
+>=dev-libs/libxml2-2.9.1-r4 python
+>=x11-libs/libdrm-2.4.52 libkms
+x11-libs/gtk+ xinerama

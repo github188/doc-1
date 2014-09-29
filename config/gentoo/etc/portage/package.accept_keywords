@@ -1,0 +1,4 @@
+app-vim/bufexplorer ~amd64
+app-vim/json ~amd64
+=media-libs/mesa-10.3.0 ~amd64
+=x11-libs/libdrm-2.4.56 ~amd64
