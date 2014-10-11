@@ -9,10 +9,10 @@ ServerAdmin root@localhost
 #
 # If you change this to something that isn't under /var/www then suexec
 # will no longer work.
-DocumentRoot "/var/www/localhost/htdocs"
+DocumentRoot "/srv/apache2/localhost/htdocs"
 
 # This should be changed to whatever you set DocumentRoot to.
-<Directory "/var/www/localhost/htdocs">
+<Directory "/srv/apache2/localhost/htdocs">
 	# Possible values for the Options directive are "None", "All",
 	# or any combination of:
 	#   Indexes Includes FollowSymLinks SymLinksifOwnerMatch ExecCGI MultiViews
@@ -58,12 +58,12 @@ DocumentRoot "/var/www/localhost/htdocs"
 	# run by the server when requested rather than as documents sent to the
 	# client.  The same rules about trailing "/" apply to ScriptAlias
 	# directives as to Alias.
-	ScriptAlias /cgi-bin/ "/var/www/localhost/cgi-bin/"
+	ScriptAlias /cgi-bin/ "/srv/apache2/localhost/cgi-bin/"
 </IfModule>
 
 # "/var/www/localhost/cgi-bin" should be changed to whatever your ScriptAliased
 # CGI directory exists, if you have that configured.
-<Directory "/var/www/localhost/cgi-bin">
+<Directory "/srv/apache2/localhost/cgi-bin">
 	AllowOverride None
 	Options None
 	Order allow,deny

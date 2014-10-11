@@ -8,8 +8,8 @@
 #
 
 # IPv4 and IPv6 localhost aliases
-127.0.0.1	gentoo.localdomain 	gentoo localhost
-::1		gentoo.localdomain 	gentoo localhost
+127.0.0.1	localhost.localdomain  gentoo localhost
+::1		localhost.localdomain  gentoo localhost
 
 #
 # Imaginary network.

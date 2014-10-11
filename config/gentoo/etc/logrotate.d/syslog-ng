@@ -8,6 +8,6 @@
     missingok
     sharedscripts
     postrotate
-        /etc/init.d/syslog-ng reload > /dev/null 2>&1 || true
+        systemctl kill -s HUP syslog-ng > /dev/null 2>&1 || true
     endscript
 }
