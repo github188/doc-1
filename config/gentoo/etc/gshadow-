@@ -40,7 +40,7 @@ lpadmin:!::
 ldap:!::
 postmaster:!::
 nullmail:!::
-mysql:!::
+mysql:!::lyt
 colord:!::
 cron:!::
 crontab:!::

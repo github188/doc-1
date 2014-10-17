@@ -1,0 +1,3040 @@
+
+GPIO/gpiodevice.c,564
+#define DEVICE_NAME	13,263
+#define GPIO_MAJOR 14,296
+#define GPIO_MAGIC 15,319
+#define CMD_SOME	17,344
+static int gpio_major 20,406
+struct gpio_dev 22,443
+	struct cdev cdev;23,461
+	struct semaphore sem;24,480
+struct gpio_dev *gpio_devp;gpio_devp27,507
+static int gpio_open(30,552
+int gpio_release(40,791
+static ssize_t gpio_read(46,900
+static ssize_t gpio_write(56,1118
+static int gipi_ioctl(66,1346
+static struct file_operations gpio_fops 79,1558
+static void gpio_setup_cdev(88,1735
+static int gpio_init(103,2090
+static void gpio_exit(138,2764
+
+test/libev/test1.c,388
+struct test_ev 13,360
+	ev_io ev;14,377
+	int fd;15,388
+struct test_ev t_ev;18,401
+ev_io stdin_watcher;19,422
+ev_timer timeout_watcher;20,443
+ev_signal signal_watcher;21,469
+ev_child cw;22,495
+ev_stat file;23,508
+static void file_cb(25,523
+static void child_cb(38,931
+static void sigint_cb(45,1103
+static void stdin_cb(51,1234
+static void timeout_cb(62,1615
+int main(69,1726
+
+test/test1/libev/test1.c,388
+struct test_ev 13,360
+	ev_io ev;14,377
+	int fd;15,388
+struct test_ev t_ev;18,401
+ev_io stdin_watcher;19,422
+ev_timer timeout_watcher;20,443
+ev_signal signal_watcher;21,469
+ev_child cw;22,495
+ev_stat file;23,508
+static void file_cb(25,523
+static void child_cb(38,931
+static void sigint_cb(45,1103
+static void stdin_cb(51,1234
+static void timeout_cb(62,1615
+int main(69,1726
+
+test/test1/regex/test3.c,70
+#define REG 7,102
+static char *outstr(outstr8,176
+int main(17,363
+
+test/test1/regex/test2.c,47
+#define REG_MV_DISK_SLOT 6,82
+int main(9,138
+
+test/test1/regex/test1.c,47
+#define REG_MV_DISK_SLOT 6,82
+int main(9,173
+
+test/test1/sqlite/test1.c,40
+int print_record(5,61
+int main(15,254
+
+test/test1/test/pic_ctl/pic_ctl.h,829
+#define PIC_CTL_H2,18
+#define HZ 7,79
+	PERR_SUCCESS 10,103
+	PERR_NODEV 11,122
+	PERR_IOERR 12,142
+	PERR_INVAL 13,162
+	PIC_LED_NUMBER 17,193
+	PIC_LED_OFF 19,217
+	PIC_LED_OFF = 0x00,x0019,217
+	PIC_LED_ON 20,238
+	PIC_LED_ON  = 0x01,x0120,238
+	PIC_LED_BLINK 21,259
+	PIC_LED_BLINK = 0x02,x0221,259
+	PIC_LED_B2 22,282
+	PIC_LED_B2  = 0x03,x0322,282
+	PIC_LED_FREQ_NORMAL 24,304
+	PIC_LED_FREQ_NORMAL = PIC_HZ 24,304
+	PIC_LED_FREQ_SLOW 25,339
+	PIC_LED_FREQ_SLOW   = PIC_HZ,25,339
+	PIC_LED_FREQ_FAST 26,370
+	PIC_LED_FREQ_FAST   = PIC_HZ 26,370
+	PIC_LED_STS_MASK 28,406
+	PIC_LED_STS_MASK   = 0x03,x0328,406
+	PIC_LED_FREQ_SHIFT 29,434
+	PIC_LED_FREQ_MASK 30,459
+	PIC_LED_FREQ_MASK  = 0xfc,xfc30,459
+	PIC_WDT_START 35,499
+	PIC_WDT_START = 0x55,x5535,499
+	PIC_WDT_STOP 36,522
+	PIC_WDT_STOP  = 0xaa,xaa36,522
+
+test/test1/test/pic_ctl/pic_reg.h,498
+#define PIC_REG_H2,18
+	PIC_HZ 5,44
+	PIC_ADDRESS 10,70
+	PIC_ADDRESS = 0x30,x3010,70
+	PIC_VERH	12,93
+	PIC_VERH	= 0x00,x0012,93
+	PIC_VERL	13,111
+	PIC_VERL	= 0x01,x0113,111
+	PIC_WDT	15,130
+	PIC_WDT		= 0x05,x0515,130
+	PIC_LED_START	16,148
+	PIC_LED_START	= 0x10,x1016,148
+	PIC_HDD_RESET_TIMER 18,172
+	PIC_HDD_RESET_TIMER = 0x70,x7018,172
+	PIC_HDD_RESET_START 19,201
+	PIC_HDD_RESET_START = 0x80,x8019,201
+	PIC_HDD_RESET_CLR_START 20,230
+	PIC_HDD_RESET_CLR_START = 0xa0,xa020,230
+
+test/test1/test/pic_ctl/pic_ctl.c,445
+#define I2C_DEV 18,453
+static int pic_is_initialized;20,483
+static int pic_fd;21,514
+static int __pic_read_reg(23,534
+static int __pic_write_reg(34,706
+int pic_init(45,870
+void pic_release(67,1149
+#define PIC_CHECK_INIT(75,1250
+int pic_get_version(82,1351
+int pic_set_led(99,1614
+int pic_start_watchdog(113,1894
+int pic_stop_watchdog(119,1996
+int pic_reset_timer(125,2096
+int pic_reset_hd(131,2205
+int pic_clear_reset_hd(137,2310
+
+test/test1/test/common/config-os.h,429
+#define __CONFIG_OS_H_2,23
+typedef bool _Bool;13,191
+#      define _Bool 15,221
+#  define bool 18,273
+#  define false 19,294
+#  define true 20,312
+#  define __bool_true_false_are_defined 21,330
+#  define __u_char_defined46,729
+typedef unsigned char u_char;47,756
+typedef unsigned short u_short;48,786
+typedef unsigned int u_int;49,818
+typedef unsigned long u_long;50,846
+typedef unsigned long long u_longlong;51,876
+
+test/test1/test/common/log.c,467
+int LogInsert(23,550
+ssize_t LogGetQuantity(70,1556
+typedef struct _session_info session_s;92,2000
+struct _session_info 93,2040
+	uint32_t session_id;94,2063
+	int page_size;95,2085
+	uint64_t last_rec;96,2101
+static inline const char *__session_file(__session_file99,2125
+#define LOG_DEFAULT_PAGE_SIZE 107,2301
+uint64_t __get_header_id(109,2335
+bool __session_update(131,2779
+bool __session_info(150,3133
+ssize_t LogGet(167,3409
+#define ROW_MAX 184,3657
+
+test/test1/test/common/config.h,299
+#define __CONFIG_H2,19
+#define __aligned(9,105
+#define __always_inline 13,158
+#define offsetof(18,241
+#define offsetof(20,312
+#define container_of(25,411
+#undef __END_DELCS31,554
+#define __BEGIN_DECLS 34,599
+#define __END_DECLS 35,634
+#define __BEGIN_DECLS37,662
+#define _END_DECLS38,684
+
+test/test1/test/common/config-gcc.h,100
+#define __CONFIG_GCC_H_2,24
+#define __aligned(4,49
+#define __printf(5,102
+#define __scanf(6,168
+
+test/test1/test/common/debug.h,301
+#define __COMMON_DEBUG_H_2,26
+static inline void __dbg_fprintf(25,365
+#define DBG_INSERT(43,631
+#define DBGP(44,677
+#define DEGE(45,722
+#define DBGVP(46,767
+#define DBGVE(47,812
+#define DBG_INSERT(49,864
+#define DBGP(50,901
+#define DBGVP(54,1016
+#define DBGE(57,1121
+#define DBGVE(60,1235
+
+test/test1/test/common/debug.c,106
+static bool bstamp 17,422
+void set_dbgstamp(19,450
+bool get_dbgstamp(24,502
+void __dbg_vprintf(29,543
+
+test/test1/test/common/log.h,1964
+#define _SYS_LOG_H2,19
+#define LOG_INVALID_ARG 11,158
+#define LOG_FILE 12,185
+#define LOG_TABLE 13,223
+#define LOCAL_ADDR 14,249
+static inline const char *_IntToStr(_IntToStr21,405
+static inline const int _StrToInt(33,576
+typedef enum _module log_module_e;48,842
+enum _module49,877
+	LOG_MOD_WEB 51,892
+	LOG_MOD_DISK,52,910
+	LOG_MOD_VG,53,925
+	LOG_MOD_UDV,54,938
+	LOG_MOD_ISCSI,55,952
+	LOG_MOD_NAS,56,968
+	LOG_MOD_SYSCONF,57,982
+	LOG_MOD_SYSMON,58,1000
+	LOG_MOD_UNKNOWN 59,1017
+static inline const char *LogModuleStr(LogModuleStr62,1043
+static inline const int LogModuleInt(68,1218
+typedef enum _category log_category_e;76,1471
+enum _category77,1510
+	LOG_CATG_AUTO 79,1527
+	LOG_CATG_MANUAL,80,1547
+	LOG_CATG_UNKNOWN 81,1565
+static inline const char *LogCategoryStr(LogCategoryStr84,1592
+static inline const int LogCategoryInt(89,1707
+typedef enum _event log_event_e;96,1899
+enum _event97,1932
+	LOG_EV_INFO 99,1946
+	LOG_EV_WARNING,100,1964
+	LOG_EV_ERROR,101,1981
+	LOG_EV_UNKNOWN 102,1996
+static inline const char *LogEventStr(LogEventStr105,2021
+static inline const int LogEventInt(110,2121
+typedef struct _log_stru log_info_s;117,2301
+struct _log_stru118,2338
+	uint64_t idid;120,2357
+	char datetime[datetime121,2373
+	char module[module122,2393
+	char category[category123,2411
+	char event[event124,2431
+	char content[content125,2448
+#define LOG_MAGIC 129,2474
+struct _msg_header 130,2503
+	uint32_t magic;131,2524
+	int reg_mode;132,2541
+	LOG_REQ_WRITE 136,2567
+	LOG_REQ_UNKNOW137,2587
+#define MSG_HEADER_INIT(140,2607
+#define MSG_HEADER_CORRECT(144,2695
+typedef struct _msg_request msg_request_t;147,2758
+struct _msg_request 148,2801
+	struct _msg_header header;149,2823
+#define magic 151,2852
+#define req_mode 152,2879
+	log_module_e module;153,2912
+	log_category_e category;154,2934
+	log_event_e event;155,2960
+	char user[user156,2980
+	int content_length;157,2996
+	char content[content158,3017
+
+test/test1/test/common/jw-unistd.h,36
+#define __YCC_COMMON_UNISTD_H_2,31
+
+test/test1/test/common/mkdir_p.c,20
+int mkdir_p(17,434
+
+test/test1/test/test1.c,100
+struct test 5,58
+	struct list list;6,72
+	int count;7,91
+struct test root;9,106
+int main(10,124
+
+test/test1/test/monitor/pmu-info.h,282
+#define _PMU_INFO_H2,20
+#define PMU_DEV1 4,41
+#define PMU_DEV2 5,86
+struct pmu_info 7,132
+	float vin;8,150
+	float vout;9,162
+	float fan_speed;10,175
+	float temp;11,193
+	int is_vin_fault 13,207
+	    is_vout_fault 14,230
+	    is_fan_fault 15,254
+	    is_temp_fault 16,277
+
+test/test1/test/monitor/libsysmon.c,70
+#define SYSMON_ADDR 8,132
+int sysmon_event(10,184
+int main(52,1309
+
+test/test1/test/monitor/sys-mon.h,72
+#define __SYS_MON_H__2,22
+#define likely(6,94
+#define unlikely(7,137
+
+test/test1/test/monitor/sys-capture.c,798
+#define NCT_ROOT 18,487
+const char *mod_cap_list[mod_cap_list20,541
+const char *mod_ch_name[mod_ch_name22,662
+bool isCaptureSupported(26,803
+const char *__read_file_line(__read_file_line38,965
+int __atoi(59,1320
+int __read_int_value(68,1405
+int capture_cpu_temp(73,1489
+int capture_env_temp(84,1711
+int global_case_temp 93,1856
+int capture_case_temp(95,1884
+int capture_case_fan1(112,2187
+int capture_case_fan2(122,2351
+int capture_cpu_fan(131,2514
+int _power_check(141,2676
+#define POWER_TEMP_CHECK_INTERVAL 155,3119
+int capture_power(157,3158
+capture_func capture_get(197,3912
+void sys_capture_init(221,4456
+void sys_capture_release(226,4510
+sys_capture_t *sys_capture_alloc(sys_capture_alloc238,4709
+void sys_capture_set_handler(257,5049
+void sys_capture_add(263,5181
+
+test/test1/test/monitor/list.c,410
+void list_init(12,323
+void list_add(17,389
+void list_add_h(28,540
+void list_del(40,694
+void list_move(46,778
+int list_empty(52,876
+int list_start(57,946
+int list_end(62,1041
+struct list *list_first(list_first67,1134
+struct list *list_last(list_last72,1232
+struct list *list_prev(list_prev77,1329
+struct list *list_next(list_next82,1458
+unsigned int list_size(87,1584
+void list_splice(99,1725
+
+test/test1/test/monitor/debug.h,301
+#define __COMMON_DEBUG_H_2,26
+static inline void __dbg_fprintf(25,375
+#define DBG_INSERT(43,641
+#define DBGP(44,687
+#define DEGE(45,732
+#define DBGVP(46,777
+#define DBGVE(47,822
+#define DBG_INSERT(49,874
+#define DBGP(50,911
+#define DBGVP(54,1026
+#define DBGE(57,1131
+#define DBGVE(60,1245
+
+test/test1/test/monitor/sys-module.h,185
+#define __SYS_MODULE_H__6,91
+typedef struct _sys_module sys_module_t;8,117
+struct _sys_module 9,158
+	struct list list;10,179
+	struct list event_list;11,198
+	char name[name12,223
+
+test/test1/test/monitor/sys-event.c,124
+void sys_event_zero(11,331
+sys_event_conf_t *sys_event_conf_alloc(sys_event_conf_alloc18,452
+void sys_event_fill(34,738
+
+test/test1/test/monitor/sys-global.c,85
+sys_global_t gconf;11,333
+void sys_global_init(13,354
+void dump_sys_global(22,499
+
+test/test1/test/monitor/sys-action.h,406
+#define __SYS_ACTION_H__5,68
+typedef void (*sys_alarm_handler)sys_alarm_handler7,94
+typedef struct _sys_alarm sys_alarm_t;9,143
+struct _sys_alarm 10,182
+	struct list alarm_list;11,202
+	char name[name12,227
+	sys_alarm_handler handler;13,244
+typedef struct _sys_action sys_action_t;16,276
+struct _sys_action 17,317
+	struct list list;18,338
+	struct list alarm_list;19,357
+	char name[name20,382
+
+test/test1/test/monitor/debug.c,106
+static bool bstamp 17,422
+void set_dbgstamp(19,450
+bool get_dbgstamp(24,502
+void __dbg_vprintf(29,543
+
+test/test1/test/monitor/sys-tmpfs.c,552
+#define TMPFS_MSG_ROOT 24,618
+#define _SORTED_ROOT 25,653
+#define TMPFS_ALARM_ROOT 26,703
+#define ACCESSPERMS 28,753
+int mkdir_p(29,778
+#define DIRPTR 55,1191
+#define STAT 56,1211
+#define _DIR_LIST_BEGIN(57,1230
+#define _DIR_LIST_END	70,1536
+int tmpfs_msg_count(78,1610
+int _dir_max_file_num(97,1916
+const char *tmpfs_msg_insert(tmpfs_msg_insert113,2182
+const char *tmpfs_msg_remove_oldest(tmpfs_msg_remove_oldest138,2776
+ssize_t tmpfs_msg_sorted_link(174,3408
+void tmpfs_write_alarm(186,3639
+ssize_t tmpfs_msg_sorted_unlink(207,4042
+
+test/test1/test/monitor/sys-event.h,596
+#define __SYS_EVENT_H__6,91
+struct _sys_event_global 8,116
+	char module[module9,143
+	char event[event10,162
+	char level[level11,180
+typedef struct _sys_event_conf sys_event_conf_t;14,202
+struct _sys_event_conf 15,251
+	struct list event_list;16,276
+	char module[module17,301
+	char event[event18,320
+	char level[level19,338
+	sys_action_t *action;action20,356
+	int count;21,379
+typedef struct _sys_event sys_event_t;24,395
+struct _sys_event 25,434
+	char module[module26,454
+	char event[event27,473
+	char *level;level28,491
+	char param[param29,505
+	char msg[msg30,523
+
+test/test1/test/monitor/list.h,418
+#define LIB_DEVICE_MAPPER_H2,28
+#	define __typeof__ 18,267
+struct list 25,342
+	struct list *n,n26,356
+	struct list *n, *p;p26,356
+#define LIST_INIT(29,381
+#define list_struct_base(66,1541
+#define list_item(69,1641
+#define struct_field(72,1770
+#define list_head(75,1862
+#define list_iterate(78,1933
+#define list_uniterate(82,2039
+#define list_iterate_safe(86,2149
+#define list_iterate_items_gen(89,2250
+
+test/test1/test/monitor/sys-conf.c,395
+#define _XML_STR_VAL(16,459
+#define _XML_IGN_CHECK(17,531
+#define _XML_NODE_NAME(19,651
+#define _XML_ATTR_EQU(20,729
+void _xml_self_run_parse(23,813
+void _xml_global_parse(54,1616
+void _xml_module_event_parse(80,2264
+void _xml_module_parse(95,2703
+void _xml_action_alarm_parse(105,2910
+void _xml_action_parse(117,3273
+void sys_mon_conf_check(127,3480
+void sys_mon_load_conf(132,3519
+
+test/test1/test/monitor/sys-alarm.c,892
+#define SHELL 17,473
+#define BUZZER_ON_CMD 18,497
+#define BUZZER_OFF_CMD 19,576
+struct event_record 21,657
+	char param[param22,679
+	struct list list_entry;23,697
+int _safe_system(26,726
+int _gconf_level_count(42,905
+void sys_alarm_default(58,1174
+void sys_alarm_buzzer_on(77,1549
+void sys_alarm_buzzer_off(97,1973
+void sys_alarm_notify_tmpfs(115,2341
+char *_get_next_disk_slot(_get_next_disk_slot127,2518
+void sys_alarm_diskled_on(166,3217
+void sys_alarm_diskled_off(178,3462
+void sys_alarm_diskled_blink1s1(190,3707
+void sys_alarm_diskled_blink1s4(202,3977
+void sys_alarm_diskled_blink2s1(214,4252
+static int sysled_cnt 229,4559
+void sys_alarm_sysled_on(231,4587
+void sys_alarm_sysled_off(257,5105
+struct _handler_map 283,5596
+	char name[name284,5618
+	sys_alarm_handler handler;285,5635
+struct _handler_map _map[_map288,5667
+void sys_alarm_set_handler(304,6185
+
+test/test1/test/monitor/pmu-info.c,578
+#define VOUT_EXP 17,449
+#define CHECK_FAULT(19,472
+	REG_STATUS	27,581
+	REG_STATUS	 = 0x79,x7927,581
+	REG_VIN	28,602
+	REG_VIN		 = 0x88,x8828,602
+	REG_VOUT	29,621
+	REG_VOUT	 = 0x8b,x8b29,621
+	REG_TEMP	30,640
+	REG_TEMP	 = 0x8e,x8e30,640
+	REG_FAN	31,659
+	REG_FAN		 = 0x90,x9031,659
+	STS_TEMP_FAULT	33,679
+	STS_VIN_FAULT	34,708
+	STS_VOUT_FAULT	35,736
+	STS_FAN_FAULT	36,765
+static float pmu_linear_to_real(39,797
+int pmu_get_info(53,1023
+#define POWER_TEMP_HI 94,2239
+#define POWER_TEMP_MI 95,2264
+#define POWER_TEMP_LO 96,2289
+#define POWER_FAN_LO 97,2314
+
+test/test1/test/monitor/sys-mon.c,299
+struct mon_io 20,535
+	ev_io io;21,551
+	int sockfd;22,562
+static struct mon_io mon_io;27,655
+static struct ev_loop *mon_loop mon_loop28,684
+void mon_release(30,725
+static void mon_io_cb(42,923
+int mon_serv_create(73,1566
+void usage(102,2219
+int global_print_on 108,2292
+int main(110,2318
+
+test/test1/test/monitor/sys-utils.h,26
+#define _SYS_UTILS_H4,43
+
+test/test1/test/monitor/sys-interval-check.h,653
+#define _SYS_INTERVAL_CHECK__5,73
+enum CAPTURE_RESULT 7,104
+	VAL_NORMAL,8,126
+	VAL_WARNING,9,139
+	VAL_ERROR,10,153
+	VAL_CRIT,11,165
+	VAL_EMERG,12,176
+#define isExecutable(15,192
+#define isExpried(16,236
+#define update(17,316
+#define execute(18,369
+#define CHECK_INTVAL 20,409
+typedef int (*capture_func)capture_func22,433
+typedef struct _sys_capture_conf sys_capture_t;27,565
+struct _sys_capture_conf 28,613
+	struct list list;29,640
+	char name[name30,659
+	int check_intval;31,675
+	int min_thr,32,694
+	int min_thr, max_thr;32,694
+	time_t _last_update;33,717
+	capture_func _capture;34,739
+	int _error;35,763
+	bool _preset;36,776
+
+test/test1/test/monitor/sys-action.c,557
+struct list _gaction_list;12,353
+void sys_action_init(14,381
+void _action_alarm_release(20,438
+void sys_action_release(32,620
+sys_action_t *sys_action_alloc(sys_action_alloc48,854
+void _sys_action_default_alarm_add(63,1164
+bool sys_action_add(81,1545
+sys_action_t *sys_action_get(sys_action_get99,1910
+sys_alarm_t *sys_alarm_alloc(sys_alarm_alloc115,2182
+bool sys_action_alarm_add(130,2484
+sys_alarm_t *sys_action_alarm_get(sys_action_alarm_get144,2798
+void do_sys_action(164,3245
+void _dump_alarm(180,3530
+void dump_action_alarm(193,3819
+
+test/test1/test/monitor/sys-global.h,486
+#define __SYS_GLOBAL_H__11,172
+#define SYSMON_CONF 13,198
+#define SYSMON_ADDR 14,256
+#define _LOG_OPT 16,310
+#define log_init(17,338
+#define log_release(18,398
+typedef struct _sys_global sys_global_t;21,433
+struct _sys_global 22,474
+	bool tmpfs;23,495
+		int info,25,518
+		int info, warning,25,518
+		int info, warning, error;25,518
+	}msg_buff_size;msg_buff_size26,546
+	int power_cnt;27,563
+#define info_size 30,583
+#define warning_size 31,620
+#define error_size 32,663
+
+test/test1/test/monitor/sys-interval-check.c,320
+struct list _g_capture;16,459
+static const char *MOD_NAME(MOD_NAME18,484
+void alarm_email_send(30,697
+#define CPU_TEMP_REBOOT 39,943
+#define CPU_TEMP_POWEROFF 40,970
+int _value_check_error(42,1001
+void _capture(72,1685
+void _check_interval(150,3798
+void do_interval_check(190,4852
+void dump_self_run(200,5025
+
+test/test1/test/monitor/sys-module.c,414
+struct list _gmodule_list;11,333
+void sys_module_init(13,361
+void _module_event_release(18,417
+void sys_module_release(30,655
+bool sys_module_add(45,891
+sys_module_t *sys_module_get(sys_module_get69,1401
+bool sys_module_event_add(84,1672
+sys_event_conf_t *sys_module_event_get(sys_module_event_get98,2029
+void sys_module_event_update(123,2604
+void _dump_event(129,2684
+void dump_module_event(141,2995
+
+test/test1/test/log.h,1380
+#define _SYS_LOG_H2,19
+#define LOG_INVALID_ARG 11,158
+#define LOG_FILE 12,185
+#define LOG_TABLE 13,215
+#define LOCAL_ADDR 14,241
+static inline const char *_IntToStr(_IntToStr20,392
+static inline const int _StrToInt(32,566
+typedef enum _module log_module_e;46,751
+enum _module 47,786
+	LOG_MOD_WEB 48,801
+	LOG_MOD_DISK,49,819
+	LOG_MOD_VG,50,834
+	LOG_MOD_UDV,51,847
+	LOG_MOD_ISCSI,52,861
+	LOG_MOD_NAS,53,877
+	LOG_MOD_SYSCONF,54,891
+	LOG_MOD_SYSMON,55,909
+	LOG_MOD_UNKNOWN 56,926
+static inline const char *LogModuleStr(LogModuleStr59,951
+static inline const int LogModuleInt(65,1126
+typedef enum _category log_category_e;73,1299
+enum _category 74,1338
+	LOG_CATG_AUTO 76,1356
+	LOG_CATG_MANUAL,77,1376
+	LOG_CATG_UNKNOWN 78,1394
+static inline const char *LogCategoryStr(LogCategoryStr81,1421
+static inline const int LogCategoryInt(86,1537
+typedef enum _event log_event_e;92,1648
+enum _event 93,1681
+	LOG_EV_INFO 94,1695
+	LOG_EV_WARNING,95,1713
+	LOG_EV_ERROR,96,1730
+	LOG_EV_UNKNOWN 97,1745
+static inline const char *LogEventStr(LogEventStr100,1770
+static inline const int LogEventInt(105,1870
+typedef struct _log_stu log_info_s;111,1969
+struct _log_stru 112,2005
+	uint64_t idid;113,2024
+	char datetime[datetime114,2040
+	char module[module115,2060
+	char category[category116,2078
+	char event[event117,2098
+	char content[content118,2115
+
+test/test1/test/list.h,1457
+#define _LIST_H2,16
+#define offsetof(8,94
+#define container_of(12,186
+struct list 16,288
+	struct list *next,next17,302
+	struct list *next, *prev;prev17,302
+#define LIST_INIT(20,333
+#define LIST(21,379
+#define list_entry(24,437
+static inline void init_list(27,533
+static inline void __list_add(33,626
+static inline void list_add(43,858
+static inline void list_add_tail(49,994
+static inline void __list_del(55,1140
+static inline void list_del(62,1283
+static inline void list_del_init(69,1412
+static inline void list_move(75,1528
+static inline void list_move_tail(81,1660
+static inline int list_empty(87,1802
+static inline void __list_splice(92,1889
+static inline void list_splice(106,2207
+static inline void list_splice_tail(113,2383
+#define list_for_each(120,2563
+#define list_for_each_safe(123,2664
+struct hlist_node 131,2828
+	struct hlist_node *next,next132,2848
+	struct hlist_node *next, **pprev;pprev132,2848
+struct hlist 135,2887
+	struct hlist_node *first;first136,2902
+#define HLIST_INIT 139,2933
+#define HLIST(140,2970
+static inline void init_hlist(141,3021
+static inline void init_hlist_node(146,3091
+static inline int hlist_unhashed(152,3188
+static inline int hlist_empty(157,3273
+static inline void hlist_del(162,3350
+static inline void hlist_del_init(172,3532
+static inline void hlist_add_head(180,3661
+#define hlist_entry(191,3873
+#define hlist_for_each(192,3944
+#define hlist_for_each_safe(194,4029
+
+test/test1/soket/unix/cli.c,44
+#define UNIX_DOMAIN 9,146
+int main(11,183
+
+test/test1/soket/unix/srv.c,178
+#define UNIX_DOMAIN 9,142
+struct mon_io 11,179
+	ev_io io;12,195
+	int sockfd;13,206
+struct mon_io mon_io;16,223
+static i=17,245
+static void sock_cb(19,258
+int main(34,543
+
+test/test1/fs_write_v2/parse_args.c,359
+void print_help(13,226
+void print_usage(17,315
+int dir_mounted(34,1333
+int dir_enough_space(56,1751
+int del_list_node(72,2152
+int check_fs(79,2336
+int get_dirs(98,2801
+int check_threadn(129,3424
+void print_dirsp(137,3593
+int check_dirsp(148,3816
+int check_time(159,4093
+int check_policy(170,4334
+int update_list(189,4722
+int parse_args(205,4960
+
+test/test1/fs_write_v2/mdigest.h,374
+#define _MDIGEST_H_3,78
+#define MD4_DIGEST_LEN 6,124
+#define MD5_DIGEST_LEN 7,150
+#define MAX_DIGEST_LEN 8,176
+typedef unsigned int u32;10,215
+typedef unsigned char u8;11,241
+#define CSUM_CHUNK 13,268
+	u32 A,16,308
+	u32 A, B,16,308
+	u32 A, B, C,16,308
+	u32 A, B, C, D;16,308
+	u32 totalN;17,325
+	u32 totalN2;18,378
+	u8 buffer[buffer19,431
+} md_context;20,455
+
+test/test1/fs_write_v2/byteorder.h,352
+#define __i386__23,785
+#undef CAREFUL_ALIGNMENT26,810
+#define CAREFUL_ALIGNMENT 31,981
+#define CAREFUL_ALIGNMENT 35,1043
+#define CVAL(38,1079
+#define UVAL(39,1133
+#define SCVAL(40,1176
+#define PVAL(43,1250
+#define IVAL(44,1309
+#define SSVALX(45,1369
+#define SIVALX(46,1449
+#define SIVAL(47,1532
+#define IVAL(55,1812
+#define SIVAL(56,1868
+
+test/test1/fs_write_v2/list.c,176
+int list_empty(9,307
+struct dirsname *list_end(list_end16,400
+int list_have(26,578
+int list_add(39,794
+int list_del(59,1222
+struct dirsname *list_next(list_next74,1526
+
+test/test1/fs_write_v2/main.h,22
+#define __MAIN_H2,17
+
+test/test1/fs_write_v2/threads.h,334
+#define __W_THREAD2,19
+#define FILE_MOD 3,38
+struct thread_args{thread_args7,152
+	long file_size;8,172
+	int block_size;9,189
+	int thread_num;10,206
+	int time_s;11,223
+	int thread_n;12,236
+	int policy;13,251
+	struct dirsname *dp;dp14,264
+struct d_args{d_args18,316
+	struct dirsname *dp;dp19,331
+	int *flag;flag20,353
+
+test/test1/fs_write_v2/md5.c,361
+void md5_begin(24,814
+static void md5_process(34,973
+#define S(60,1509
+#define P(62,1569
+#define F(64,1636
+#undef F83,2251
+#define F(84,2260
+#undef F103,2875
+#define F(104,2884
+#undef F123,3491
+#define F(124,3500
+#undef F143,4110
+void md5_update(151,4179
+static u8 md5_padding[md5_padding185,4772
+void md5_result(187,4819
+void get_md5(212,5320
+
+test/test1/fs_write_v2/comm.h,214
+#define __COMM2,15
+#define THREAD_MAX 7,71
+#define START_RELEASE 8,117
+#define END_RELEASE 9,178
+struct dirsname{dirsname12,221
+	char name[name13,238
+	struct dirsname *next;next14,255
+	int weight;15,279
+
+test/test1/fs_write_v2/threads.c,331
+pthread_mutex_t mutex=28,677
+int get_random(30,728
+int get_date(36,792
+int get_hour(47,959
+int get_newpath(61,1208
+int write_file(85,1680
+struct dirsname *choose_policy(choose_policy184,4717
+void *w_thread(w_thread205,5247
+int start_w_thread 267,7065
+void *d_thread(d_thread299,8248
+pthread_t start_d_thread(310,8460
+
+test/test1/fs_write_v2/moniter.c,436
+unsigned long get_fs_space(26,742
+float get_fs_stat(38,1012
+struct dirsname *get_fs_dirs_by_percent(get_fs_dirs_by_percent51,1278
+struct dirsname *get_fs_dirs_by_size(get_fs_dirs_by_size69,1812
+struct dirsname *get_fs_dirs_by_weight(get_fs_dirs_by_weight87,2344
+struct dirsname *get_fs_dirs_default(get_fs_dirs_default106,2941
+int find_delete(124,3594
+int _dfile(149,4104
+int release_percent(218,5720
+int moniter(235,6129
+
+test/test1/fs_write_v2/list.h,22
+#define __LIST_H2,17
+
+test/test1/fs_write_v2/main.c,367
+char *l_opt_arg;l_opt_arg23,570
+char *const short_options 24,587
+struct option long_options[long_options25,630
+long file_size 35,851
+int block_size 36,879
+int thread_n 37,902
+int time_s=38,920
+char root_dir[root_dir39,934
+struct dirsname *dirsp=dirsp40,954
+char policy[policy41,983
+pthread_t *pids=pids42,1000
+void sig_int(44,1023
+int main(71,1574
+
+test/test1/fs_write_v2/moniter.h,24
+#define __DO_TEST_2,19
+
+test/test1/fs_write_v2/parse_args.h,27
+#define __PARSE_ARGS_2,22
+
+test/test1/xml/test5.c,43
+xmlDocPtr parseDoc(7,112
+int main(37,774
+
+test/test1/xml/test4.c,67
+void parseStory(7,112
+xmlDocPtr parseDoc(14,266
+int main(48,959
+
+test/test1/xml/test3.c,77
+xmlDocPtr getdoc(4,54
+xmlXPathObjectPtr getnodeset(15,249
+int main(30,598
+
+test/test1/xml/test2.c,70
+void parseStory(7,112
+static void parseDoc(24,429
+int main(58,1099
+
+test/test1/xml/test1.c,40
+#define XML_CONF 7,112
+int main(9,147
+
+test/test1/xml/test7.c,42
+main(6,104
+char *convert(convert24,574
+
+test/test1/xml/test6.c,64
+void getReference(7,112
+void parseDoc(24,404
+int main(52,929
+
+test/test1/json/test4.c,46
+int n=6,83
+int create(7,92
+int main(19,457
+
+test/test1/json/test3.c,15
+int main(6,83
+
+test/test1/json/test2.c,15
+int main(6,83
+
+test/test1/json/test1.c,15
+int main(5,63
+
+test/fcntl/test.c,16
+int main(7,104
+
+test/mem/mem_test.c,17
+int main(15,413
+
+test/netlink/kobject/nl_ker.c,89
+#define UEVENT_BUFFER_SIZE 15,284
+static int init_hotplug_sock(17,317
+int main(45,866
+
+test/netlink/simple/nl_ker.c,207
+#define NETLINK_TEST 15,435
+struct sock *nl_sk nl_sk18,461
+struct netlink_kernel_cfg nlcfg;19,488
+void kernel_fuc(21,522
+static int __init nl_test_init(46,1110
+static void __exit nl_test_exit(61,1406
+
+test/netlink/simple/nl_usr.c,98
+struct netlink_info 19,510
+	struct nlmsghdr nlhdr;20,532
+	char buf[buf21,556
+int main(23,574
+
+test/regex/test3.c,70
+#define REG 7,102
+static char *outstr(outstr8,176
+int main(17,363
+
+test/regex/test2.c,47
+#define REG_MV_DISK_SLOT 6,82
+int main(9,138
+
+test/regex/test1.c,47
+#define REG_MV_DISK_SLOT 6,82
+int main(9,173
+
+test/sqlite/test1.c,40
+int print_record(5,61
+int main(15,254
+
+test/libparted/test.c,15
+int main(4,47
+
+test/libevent/simple_refresh.c,270
+#define RELOAD_TIMEOUT 17,457
+#define DEFAULT_FILE 18,482
+char *filedata;filedata20,518
+time_t lasttime 21,534
+char filename[filename22,555
+int counter 23,574
+void read_file(25,592
+void load_file(60,1252
+void generic_request_handler(77,1530
+int main(86,1757
+
+test/libevent/simple_echo.c,296
+#define SERVER_PORT 19,502
+int debug 20,527
+struct client 22,543
+	int fd;23,559
+	struct bufferevent *buf_ev;buf_ev24,568
+int setnonblock(27,601
+void buf_read_callback(36,728
+void buf_write_callback(52,1078
+void buf_error_callback(57,1145
+void accept_callback(65,1346
+int main(92,1975
+
+test/libevent/simple_http.c,54
+void generic_request_handler(15,412
+int main(26,699
+
+test/socket/srv.c,294
+#define SERVER_IP 11,192
+#define PORT 12,222
+#define MAX_LISTEN 13,240
+#define BUFF_SIZE 14,264
+#define THREAD_N 15,287
+static pthread_t tid[tid21,322
+static pthread_mutex_t lock[lock22,354
+static unsigned int s_thread_para[s_thread_para23,393
+int init_poll(28,581
+int main(51,983
+
+test/wget/wget_test.c,45
+void *thread(thread13,370
+int main(33,754
+
+test/soket/inet/cli.c,17
+int main(11,193
+
+test/soket/inet/srv.c,38
+#define port 11,174
+int main(13,193
+
+test/soket/unix/cli.c,44
+#define UNIX_DOMAIN 9,146
+int main(11,183
+
+test/soket/unix/srv.c,178
+#define UNIX_DOMAIN 9,142
+struct mon_io 11,179
+	ev_io io;12,195
+	int sockfd;13,206
+struct mon_io mon_io;16,223
+static i=17,245
+static void sock_cb(19,258
+int main(34,543
+
+test/shm/server.c,222
+void p(9,149
+void v(19,312
+struct People 29,474
+	char name[name30,490
+	int age;31,506
+int main(34,520
+	union semum{semum58,986
+		int val;59,1000
+		struct semid_ds *buf;buf60,1011
+		ushort *array;array61,1035
+
+test/shm/test1.c,220
+void p(8,129
+void v(19,295
+struct Peopel 30,461
+	char name[name31,477
+	int age;32,493
+int main(35,507
+	union semum{semum59,973
+		int val;60,987
+		struct semid_ds *buf;buf61,998
+		ushort *array;array62,1022
+
+test/shm/client.c,107
+struct People 7,106
+	char name[name8,122
+	int age;9,138
+void p(12,152
+void v(22,312
+int main(33,473
+
+test/libudev/test1.c,52
+#define UEVNET_BUFFER_SIZE 10,171
+int main(12,204
+
+test/libudev/test.c,89
+#define UEVENT_BUFFER_SIZE 10,171
+static int init_hotplug_sock(12,204
+int main(42,947
+
+test/xml/test5.c,43
+xmlDocPtr parseDoc(7,112
+int main(37,774
+
+test/xml/test4.c,67
+void parseStory(7,112
+xmlDocPtr parseDoc(14,266
+int main(48,959
+
+test/xml/test3.c,77
+xmlDocPtr getdoc(4,54
+xmlXPathObjectPtr getnodeset(15,249
+int main(30,598
+
+test/xml/test2.c,70
+void parseStory(7,112
+static void parseDoc(24,429
+int main(58,1099
+
+test/xml/test1.c,40
+#define XML_CONF 7,112
+int main(9,147
+
+test/xml/test7.c,42
+main(6,104
+char *convert(convert24,574
+
+test/xml/test6.c,64
+void getReference(7,112
+void parseDoc(24,404
+int main(52,929
+
+test/my/log.c,468
+int LogInsert(16,268
+ssize_t LogGetQuantity(67,1513
+typedef struct _session_info session_s;87,1956
+struct __session_info 88,1996
+	uint32_t session_id;89,2020
+	int page_size;90,2042
+	uint64_t last_rec;91,2058
+static inline const char *__sessino_file(__sessino_file94,2082
+#define LOG_DEFAULT_PAGE_SIZE 103,2286
+uint64_t __get_header_id(105,2320
+bool __session_update(127,2822
+bool __sessino_info(147,3285
+ssize_t LogGet(167,3711
+#define ROW_MAX 184,3958
+
+test/my/test/test2.c,388
+static PedExceptionOption libudv_exception_handler(5,69
+void libudv_custom_init(18,429
+PedDisk *_create_disk_label(_create_disk_label23,514
+#define _fix_4k(36,731
+udv_info_t *get_udv_by_name(get_udv_by_name38,783
+int udv_forece_init_vg(95,2058
+int udv_create(130,2712
+void free_udv_list(225,4860
+int udv_get_part_list(238,5077
+int udv_delete(297,6539
+int udv_rename(340,7260
+
+test/my/test/test1.c,15
+int main(4,47
+
+test/my/jw/pic_ctl/disk_reset.c,129
+struct option longopts[longopts10,141
+int idx 16,240
+int delay 17,253
+void usage(19,269
+int parser(26,396
+int main(48,721
+
+test/my/jw/pic_ctl/pic_ctl.h,829
+#define PIC_CTL_H2,18
+#define HZ 7,79
+	PERR_SUCCESS 10,103
+	PERR_NODEV 11,122
+	PERR_IOERR 12,142
+	PERR_INVAL 13,162
+	PIC_LED_NUMBER 17,193
+	PIC_LED_OFF 19,217
+	PIC_LED_OFF = 0x00,x0019,217
+	PIC_LED_ON 20,238
+	PIC_LED_ON  = 0x01,x0120,238
+	PIC_LED_BLINK 21,259
+	PIC_LED_BLINK = 0x02,x0221,259
+	PIC_LED_B2 22,282
+	PIC_LED_B2  = 0x03,x0322,282
+	PIC_LED_FREQ_NORMAL 24,304
+	PIC_LED_FREQ_NORMAL = PIC_HZ 24,304
+	PIC_LED_FREQ_SLOW 25,339
+	PIC_LED_FREQ_SLOW   = PIC_HZ,25,339
+	PIC_LED_FREQ_FAST 26,370
+	PIC_LED_FREQ_FAST   = PIC_HZ 26,370
+	PIC_LED_STS_MASK 28,406
+	PIC_LED_STS_MASK   = 0x03,x0328,406
+	PIC_LED_FREQ_SHIFT 29,434
+	PIC_LED_FREQ_MASK 30,459
+	PIC_LED_FREQ_MASK  = 0xfc,xfc30,459
+	PIC_WDT_START 35,499
+	PIC_WDT_START = 0x55,x5535,499
+	PIC_WDT_STOP 36,522
+	PIC_WDT_STOP  = 0xaa,xaa36,522
+
+test/my/jw/pic_ctl/pic_reg.h,498
+#define PIC_REG_H2,18
+	PIC_HZ 5,44
+	PIC_ADDRESS 10,70
+	PIC_ADDRESS = 0x30,x3010,70
+	PIC_VERH	12,93
+	PIC_VERH	= 0x00,x0012,93
+	PIC_VERL	13,111
+	PIC_VERL	= 0x01,x0113,111
+	PIC_WDT	15,130
+	PIC_WDT		= 0x05,x0515,130
+	PIC_LED_START	16,148
+	PIC_LED_START	= 0x10,x1016,148
+	PIC_HDD_RESET_TIMER 18,172
+	PIC_HDD_RESET_TIMER = 0x70,x7018,172
+	PIC_HDD_RESET_START 19,201
+	PIC_HDD_RESET_START = 0x80,x8019,201
+	PIC_HDD_RESET_CLR_START 20,230
+	PIC_HDD_RESET_CLR_START = 0xa0,xa020,230
+
+test/my/jw/pic_ctl/pic_ctl.c,445
+#define I2C_DEV 18,453
+static int pic_is_initialized;20,483
+static int pic_fd;21,514
+static int __pic_read_reg(23,534
+static int __pic_write_reg(34,706
+int pic_init(45,870
+void pic_release(67,1149
+#define PIC_CHECK_INIT(75,1250
+int pic_get_version(82,1351
+int pic_set_led(99,1614
+int pic_start_watchdog(113,1894
+int pic_stop_watchdog(119,1996
+int pic_reset_timer(125,2096
+int pic_reset_hd(131,2205
+int pic_clear_reset_hd(137,2310
+
+test/my/jw/pic_ctl/i2c-dev.h,3131
+#define LIB_I2CDEV_H2,21
+struct i2c_msg 7,92
+	__u16 addr;8,109
+	unsigned short flags;9,122
+#define I2C_M_TEN	10,145
+#define I2C_M_RD	11,168
+#define I2C_M_NOSTART	12,190
+#define I2C_M_REV_DIR_ADDR	13,219
+#define I2C_M_IGNORE_NAK	14,253
+#define I2C_M_NO_RD_ACK	15,285
+	short len;16,317
+	char *buf;buf17,329
+#define I2C_FUNC_I2C	20,345
+#define I2C_FUNC_10BIT_ADDR	21,379
+#define I2C_FUNC_PROTOCOL_MANGLING	22,419
+#define I2C_FUNC_SMBUS_PEC	23,465
+#define I2C_FUNC_SMBUS_BLOCK_PROC_CALL	24,504
+#define I2C_FUNC_SMBUS_QUICK	25,554
+#define I2C_FUNC_SMBUS_READ_BYTE	26,595
+#define I2C_FUNC_SMBUS_WRITE_BYTE	27,639
+#define I2C_FUNC_SMBUS_READ_BYTE_DATA	28,684
+#define I2C_FUNC_SMBUS_WRITE_BYTE_DATA	29,733
+#define I2C_FUNC_SMBUS_READ_WORD_DATA	30,783
+#define I2C_FUNC_SMBUS_WRITE_WORD_DATA	31,832
+#define I2C_FUNC_SMBUS_PROC_CALL	32,882
+#define I2C_FUNC_SMBUS_READ_BLOCK_DATA	33,926
+#define I2C_FUNC_SMBUS_WRITE_BLOCK_DATA	34,976
+#define I2C_FUNC_SMBUS_READ_I2C_BLOCK	35,1027
+#define I2C_FUNC_SMBUS_WRITE_I2C_BLOCK	36,1076
+#define I2C_FUNC_SMBUS_BYTE	38,1127
+#define I2C_FUNC_SMBUS_BYTE_DATA 40,1217
+#define I2C_FUNC_SMBUS_WORD_DATA 42,1323
+#define I2C_FUNC_SMBUS_BLOCK_DATA 44,1429
+#define I2C_FUNC_SMBUS_I2C_BLOCK 46,1539
+#define I2C_FUNC_SMBUS_HWPEC_CALC	50,1682
+#define I2C_SMBUS_BLOCK_MAX	54,1767
+#define I2C_SMBUS_I2C_BLOCK_MAX	56,1799
+union i2c_smbus_data 58,1835
+	__u8 byte;59,1858
+	__u16 word;60,1870
+	__u8 block[block61,1883
+#define I2C_SMBUS_READ	64,1925
+#define I2C_SMBUS_WRITE	65,1950
+#define I2C_SMBUS_QUICK	67,1977
+#define I2C_SMBUS_BYTE	68,2005
+#define I2C_SMBUS_BYTE_DATA	69,2032
+#define I2C_SMBUS_WORD_DATA	70,2063
+#define I2C_SMBUS_PROC_CALL	71,2094
+#define I2C_SMBUS_BLOCK_DATA	72,2125
+#define I2C_SMBUS_I2C_BLOCK_BROKEN	73,2157
+#define I2C_SMBUS_BLOCK_PROC_CALL	74,2194
+#define I2C_SMBUS_I2C_BLOCK_DATA	75,2230
+#define I2C_RETRIES	77,2266
+#define I2C_TIMEOUT	78,2293
+#define I2C_SLAVE	79,2320
+#define I2C_SLAVE_FORCE	80,2345
+#define I2C__TENBIT	81,2376
+#define I2C_FUNC	82,2403
+#define I2C_RDWR	83,2427
+#define I2C_PEC	84,2451
+#define I2C_SMBUS	85,2475
+struct i2c_smbus_ioctl_data88,2502
+	char read_write;90,2532
+	__u8 command;91,2550
+	int size;92,2565
+	union i2c_smbus_data *data;data93,2576
+struct i2c_rdwr_ioctl_data96,2609
+	struct i2c_msg *msgs;msgs98,2638
+	int nmsgs;99,2661
+static inline __s32 i2c_smbus_access(102,2677
+static inline __s32 i2c_smbus_write_quick(117,3003
+static inline _s32 i2c_smbus_read_byte(122,3137
+static inline __s32 i2c_smbus_write_byte(131,3337
+static inline __s32 i2c_smbus_read_byte_data(137,3487
+static inline __s32 i2c_smbus_write_byte_data(147,3726
+static inline __32 i2c_smbus_read_word_data(156,3961
+static inline __s32 i2c_smbus_write_word_data(166,4201
+static inline __32 i2c_smbus_process_call(175,4438
+static inline __s32 i2c_smbus_read_block_data(187,4717
+static inline __s32 i2c_smbus_write_block_data(203,5069
+static inline __s32 i2c_smbus_read_i2c_block_data(218,5439
+static inline __s32 i2c_smbus_write_i2c_block_data(238,5914
+static inline __s32 i2c_smbus_block_process_call(254,6297
+
+test/my/jw/web-iface/sys-manager.c,120
+struct cmd_map cmd_map[cmd_map3,24
+int g_debug 25,550
+void usage(27,568
+void input_wrong(52,1613
+int main(56,1720
+
+test/my/jw/web-iface/exec-new-cmd.c,23
+int exec_new_cmd(6,65
+
+test/my/jw/web-iface/common.c,48
+void error_out(4,40
+void exit_json_msg(16,237
+
+test/my/jw/web-iface/cmd-log.c,719
+struct option log_options[log_options12,189
+	MODE_INSERT 29,798
+	MODE_GET,30,816
+	MODE_GET_NEXT,31,827
+	MODE_UNKNOWN32,843
+void log_usage(35,861
+static char g_ins_user[g_ins_user50,1414
+static char g_ins_module[g_ins_module51,1448
+static char g_ins_category[g_ins_category52,1485
+static char g_ins_event[g_ins_event53,1524
+static char g_ins_content[g_ins_content54,1560
+static uint64_t g_get_begin 56,1599
+static uint64_t g_get_end 57,1633
+static int g_per_page 59,1666
+static uint32_t g_session_id 60,1694
+int mode 64,1750
+#define _STR(66,1776
+int log_insert(69,1832
+int log_get_quantity(93,2336
+void log_print(103,2529
+int log_get(128,3087
+int log_get_next(154,3709
+int log_main(159,3744
+
+test/my/jw/web-iface/common.h,106
+#define __WEB_IFACE_COMMON6,87
+#define _T(9,140
+#define ERROR(11,171
+	MSG_OK 16,272
+	MSG_ERROR17,285
+
+test/my/jw/web-iface/web-iface.h,192
+#define __WEB_IFACE_H__11,187
+#define WEB_USER_NAME	13,212
+#define DUMP_PARM(16,277
+typedef int (*web_cmd)web_cmd23,449
+struct cmd_map26,519
+	char name[name28,536
+	web_cmd cmd;29,553
+
+test/my/jw/common/log-daemon.c,261
+#define ERROR_QUIT(15,262
+int sock_fd 17,308
+static unsigned long long error_counter 18,326
+void daemon_release(20,372
+void sig_int(28,455
+void sig_usr(34,549
+int log_daemon(41,701
+#define MSG_MAX 92,1889
+#define CMD_MAX 93,1909
+int int main(125,2895
+
+test/my/jw/common/config-os.h,429
+#define __CONFIG_OS_H_2,23
+typedef bool _Bool;13,191
+#      define _Bool 15,221
+#  define bool 18,273
+#  define false 19,294
+#  define true 20,312
+#  define __bool_true_false_are_defined 21,330
+#  define __u_char_defined46,729
+typedef unsigned char u_char;47,756
+typedef unsigned short u_short;48,786
+typedef unsigned int u_int;49,818
+typedef unsigned long u_long;50,846
+typedef unsigned long long u_longlong;51,876
+
+test/my/jw/common/log.c,467
+int LogInsert(23,550
+ssize_t LogGetQuantity(70,1557
+typedef struct _session_info session_s;92,2001
+struct _session_info 93,2041
+	uint32_t session_id;94,2064
+	int page_size;95,2086
+	uint64_t last_rec;96,2102
+static inline const char *__session_file(__session_file99,2126
+#define LOG_DEFAULT_PAGE_SIZE 107,2302
+uint64_t __get_header_id(109,2336
+bool __session_update(131,2780
+bool __session_info(150,3134
+ssize_t LogGet(167,3410
+#define ROW_MAX 184,3658
+
+test/my/jw/common/config.h,299
+#define __CONFIG_H2,19
+#define __aligned(9,105
+#define __always_inline 13,158
+#define offsetof(18,241
+#define offsetof(20,312
+#define container_of(25,411
+#undef __END_DELCS31,554
+#define __BEGIN_DECLS 34,599
+#define __END_DECLS 35,634
+#define __BEGIN_DECLS37,662
+#define _END_DECLS38,684
+
+test/my/jw/common/config-gcc.h,100
+#define __CONFIG_GCC_H_2,24
+#define __aligned(4,49
+#define __printf(5,102
+#define __scanf(6,168
+
+test/my/jw/common/debug.h,301
+#define __COMMON_DEBUG_H_2,26
+static inline void __dbg_fprintf(25,365
+#define DBG_INSERT(43,631
+#define DBGP(44,677
+#define DEGE(45,722
+#define DBGVP(46,767
+#define DBGVE(47,812
+#define DBG_INSERT(49,864
+#define DBGP(50,901
+#define DBGVP(54,1016
+#define DBGE(57,1121
+#define DBGVE(60,1235
+
+test/my/jw/common/debug.c,106
+static bool bstamp 18,423
+void set_dbgstamp(20,451
+bool get_dbgstamp(25,503
+void __dbg_vprintf(30,544
+
+test/my/jw/common/log.h,1964
+#define _SYS_LOG_H2,19
+#define LOG_INVALID_ARG 11,158
+#define LOG_FILE 12,185
+#define LOG_TABLE 13,223
+#define LOCAL_ADDR 14,249
+static inline const char *_IntToStr(_IntToStr21,405
+static inline const int _StrToInt(33,576
+typedef enum _module log_module_e;48,842
+enum _module49,877
+	LOG_MOD_WEB 51,892
+	LOG_MOD_DISK,52,910
+	LOG_MOD_VG,53,925
+	LOG_MOD_UDV,54,938
+	LOG_MOD_ISCSI,55,952
+	LOG_MOD_NAS,56,968
+	LOG_MOD_SYSCONF,57,982
+	LOG_MOD_SYSMON,58,1000
+	LOG_MOD_UNKNOWN 59,1017
+static inline const char *LogModuleStr(LogModuleStr62,1043
+static inline const int LogModuleInt(68,1218
+typedef enum _category log_category_e;76,1471
+enum _category77,1510
+	LOG_CATG_AUTO 79,1527
+	LOG_CATG_MANUAL,80,1547
+	LOG_CATG_UNKNOWN 81,1565
+static inline const char *LogCategoryStr(LogCategoryStr84,1592
+static inline const int LogCategoryInt(89,1707
+typedef enum _event log_event_e;96,1899
+enum _event97,1932
+	LOG_EV_INFO 99,1946
+	LOG_EV_WARNING,100,1964
+	LOG_EV_ERROR,101,1981
+	LOG_EV_UNKNOWN 102,1996
+static inline const char *LogEventStr(LogEventStr105,2021
+static inline const int LogEventInt(110,2121
+typedef struct _log_stru log_info_s;117,2301
+struct _log_stru118,2338
+	uint64_t idid;120,2357
+	char datetime[datetime121,2373
+	char module[module122,2393
+	char category[category123,2411
+	char event[event124,2431
+	char content[content125,2448
+#define LOG_MAGIC 129,2474
+struct _msg_header 130,2503
+	uint32_t magic;131,2524
+	int req_mode;132,2541
+	LOG_REQ_WRITE 136,2567
+	LOG_REQ_UNKNOW137,2587
+#define MSG_HEADER_INIT(140,2607
+#define MSG_HEADER_CORRECT(144,2695
+typedef struct _msg_request msg_request_t;147,2758
+struct _msg_request 148,2801
+	struct _msg_header header;149,2823
+#define magic 151,2852
+#define req_mode 152,2879
+	log_module_e module;153,2912
+	log_category_e category;154,2934
+	log_event_e event;155,2960
+	char user[user156,2980
+	int content_length;157,2996
+	char content[content158,3017
+
+test/my/jw/common/jw-unistd.h,36
+#define __YCC_COMMON_UNISTD_H_2,31
+
+test/my/jw/common/mkdir_p.c,20
+int mkdir_p(17,434
+
+test/my/jw/common/log-utils.c,184
+const char *_mod_name[_mod_name12,202
+const char *_mod_category[_mod_category14,319
+const char *_mod_event[_mod_event15,375
+bool log_db_exist(26,585
+bool log_db_create(46,1059
+
+test/my/jw/udv/libudv.h,854
+#define _LIB_UDV_H9,137
+#define PART_START_SECTOR	11,157
+#define MIN_PART_SIZE	12,209
+	E_OK 17,296
+	E_FMT_ERROR 18,307
+	E_VG_NONEXIST 19,326
+	E_UDV_NONEXIST 20,347
+	E_VG_EXIST 21,369
+	E_UDV_EXIST 22,387
+	E_SYS_ERROR 23,406
+	E_NO_FREE_SPACE 24,425
+	E_DEVICE_NOTMD 25,448
+	E_DEVNODE_NOT_EXIST 26,470
+	E_UDV_MOUNTED_ISCSI 27,497
+	E_UDV_MOUNTED_NAS 28,525
+typedef struct _udv_geom{_udv_geom32,610
+	uint64_t start,33,636
+	uint64_t start, end,33,636
+	uint64_t start, end, length;33,636
+}udv_geom_t;udv_geom_t34,666
+typedef struct _udv_info{_udv_info36,680
+	struct list list;37,706
+	char name[name38,725
+	char dev[dev39,741
+	int part_num;41,757
+	int part_used;42,772
+	udv_geom_t geom;43,788
+}udv_info_t;udv_info_t44,806
+#define UDV_PARTITION_ALL	52,1075
+#define UDV_PARTITION_FREE	53,1103
+#define UDV_PARTITION_USED	54,1132
+
+test/my/jw/udv/libudv.c,370
+static PedExceptionOption libudv_exception_handler(6,88
+void libudv_custom_init(19,449
+PedDisk * _create_disk_label(25,575
+#define _fix_4k(39,817
+udv_info_t *get_udv_by_name(get_udv_by_name41,870
+int udv_force_init_vg(101,2220
+int udv_create(138,2936
+void free_udv_list(244,5485
+int udv_get_part_list(257,5702
+int udv_delete(316,7100
+int udv_rename(364,7905
+
+test/my/jw/watchdog/watchdog_lib.c,360
+#define SIO_WDT_ENABLE	13,216
+#define SIO_WDT_DISABLE	14,246
+#define SIO_WDT_SET_TIME	15,277
+#define SIO_WDT_FEED	16,308
+#define SIO_WDT_2_ENABLE	18,337
+#define SIO_WDT_2_DISABLE	19,368
+#define SIO_WDT_DEV_NAME	21,401
+int watchdog_enable(23,443
+int watchdog_disalbe(39,658
+int watchdog_set_timeout(55,877
+int watchdog_feed(71,1121
+int main(89,1339
+
+test/my/jw/watchdog/watchdog_lib.h,31
+#define __JW_WATCHDOG_H__2,26
+
+test/my/jw/watchdog/watchdog.c,52
+#define WATCHDOG_FEED_INTERVAL	4,47
+int main(6,82
+
+test/my/jw/test1.c,100
+struct test 5,58
+	struct list list;6,72
+	int count;7,91
+struct test root;9,106
+int main(10,124
+
+test/my/jw/us/us_ev.c,370
+struct ev_loop *us_main_loop;us_main_loop10,155
+int us_ev_init(12,186
+void us_ev_release(21,292
+#define ev_io_to_usc(26,354
+#define ev_timer_to_usc(27,424
+#define ev_child_to_usc(28,495
+static void us_shell_done(30,567
+static void us_shell_on_read(37,727
+static void us_shell_on_timeout(44,884
+int us_shell_cmd_init(51,1048
+void us_shell_cmd_release(87,1846
+
+test/my/jw/us/us_cmd.c,352
+#define MAX_CMD 7,80
+#define MAX_ARGS 8,102
+struct cmd_tbl 10,124
+	char *name;name11,141
+	int (*cmd)cmd12,154
+static struct cmd_tbl all_cmds[all_cmds17,295
+static int cur_cmds 21,363
+static int do_disk(24,390
+static struct cmd_tbl *find_cmd(find_cmd55,1114
+int us_install_cmd(66,1296
+static int make_argv(83,1567
+int us_do_cmd(107,1895
+
+test/my/jw/us/us_mon.h,324
+#define US_MON__H__2,20
+#define MA_ADD	6,60
+#define MA_REMOVE	7,83
+#define MA_CHANGE	8,111
+#define MA_ONLINE	9,139
+#define MA_MDSYNC	10,167
+#define MA_MDSYNCDONE	11,195
+#define MA_RDKICKED	12,231
+	MA_HANDLED	15,271
+	MA_NONE	16,288
+struct mon_node 19,308
+	struct list list;20,326
+	int (*on_event)on_event21,345
+
+test/my/jw/us/us_mon.c,420
+struct us_mon 17,294
+	struct udev		*udev;udev18,310
+	struct udev_monitor	*mon;mon19,331
+	ev_io			udev_io;21,359
+	struct list		mon_list;22,377
+static struct us_mon us_mon;25,405
+static void us_mon_do_action(27,435
+static void udev_io_cb(39,701
+int us_mon_init(65,1328
+void us_mon_release(112,2391
+int us_mon_register_notifier(119,2525
+void us_mon_unregister_notifier(125,2640
+void us_mon_enum_dev(130,2724
+
+test/my/jw/us/modules.c,263
+#define DECLARE_FUNC(5,58
+#define MODULE(9,157
+struct module 11,216
+	const char *name;name12,232
+	int (*init)init13,251
+	void (*release)release14,271
+static struct module us_modules[us_modules24,442
+void us_mod_init(33,596
+void us_mod_release(46,819
+
+test/my/jw/us/safe_popen.c,65
+#define SHELL 5,65
+int safe_system(7,90
+int safe_popen(22,267
+
+test/my/jw/us/us_mon_test.c,291
+static void sig_child(11,189
+static ev_io dbg_io;20,293
+static void dbg_cb(21,314
+static void dbg_init(27,433
+static void dbg_init(33,549
+static int mon_print_dev(40,600
+static int mon_print(46,734
+static struct mon_node mn 52,852
+static struct mon_node mm1 56,910
+int main(60,973
+
+test/my/jw/us/fd_map.c,51
+static int sock_connect(11,192
+int fd_map(26,527
+
+test/my/jw/us/us_prewarn.c,296
+static struct sockaddr_nl src_addr,21,406
+static struct sockaddr_nl src_addr, dest_addr;21,406
+int nl_open(23,454
+static int nl_write(46,904
+static int nl_read(71,1446
+static void nl_io_cb(103,2184
+ev_io nl_readable;145,3503
+int us_prewarn_init(147,3523
+void us_prewarn_release(169,3948
+
+test/my/jw/us/clog.h,341
+#define __CLOG_H2,17
+#define CLOG_OPT	8,107
+#define CLOG_OPT	10,143
+#define clog_init(13,179
+#define clog_release(14,236
+#define clog	15,271
+#define die(17,292
+	CL_ERROR	25,448
+	CL_WARN,26,463
+	CL_INFO,27,473
+	CL_DEBUG,28,483
+	CL_DEBUG_V,29,494
+	CL_MAX	30,507
+	CL_MAX		= CL_DEBUG_V,30,507
+	CL_NONE	31,530
+#define cdbg(34,550
+
+test/my/jw/us/us_prewarn.h,29
+#define US_PREWARN__H__2,24
+
+test/my/jw/us/vsd_warning.h,465
+#define VSD_WARNING__H__2,25
+#define NETLINK_VSD	4,51
+#define WARNING_AREA_SUPER	6,76
+#define WARNING_AREA_SECT_MAP	7,105
+#define WARNING_AREA_NEW_SECT	8,137
+#define WARNING_AREA_BAD_SECT	9,169
+#define WARNING_LEVEL_1	11,202
+#define WARNING_LEVEL_2	12,229
+#define WARNING_LEVEL_3	13,256
+struct vsd_warning_info 15,284
+	char disk_name[disk_name16,310
+	unsigned long warning_area;17,330
+	unsigned int mapped_cnt;18,359
+	unsigned int max_map_cnt;19,385
+
+test/my/jw/us/us_md.c,765
+struct us_disk 14,222
+	int		ref;15,239
+	int		slot;16,250
+	int		is_exist 17,262
+	int		is_raid 18,282
+	char		dev_node[dev_node19,301
+	struct disk_info di;20,322
+	char		raid_uuid[raid_uuid21,344
+struct us_disk_pool 24,370
+	struct us_disk disks[disks25,392
+static struct us_disk_pool us_dp;31,491
+static int is_usb(33,526
+static int is_sd(40,646
+static int is_sata_sas(47,764
+static void dump_sd(52,848
+static int find_free_slot(86,1708
+static int find_disk(100,1913
+static void do_update_disk(116,2183
+static void update_disk(130,2521
+static void add_disk(145,2808
+static vodi remove_disk(168,3294
+static int us_disk_on_event(184,3601
+static struct mon_node us_disk_mon_node 198,3899
+int us_disk_init(202,3978
+void us_disk_release(209,4098
+
+test/my/jw/us/os_utils.c,22
+int child_read(9,147
+
+test/my/jw/us/script.h,105
+#define SCRIPT__H__2,20
+#define SH_GET_MD_DISK	4,41
+#define DISK_SCRIPT	6,91
+#define MD_SCRIPT	7,140
+
+test/my/jw/us/types.h,2036
+#define TYPES__H__2,19
+#define C_BEGIN_DECL 5,58
+#define C_END_DECL 6,92
+#define C_BEGIN_DECL8,119
+#define C_END_DECL9,140
+#define inline 17,260
+#define typedef 18,284
+#define PACKED 22,345
+#define likely(23,384
+#define unlikely(24,429
+#define PACKED26,482
+#define likely(27,497
+#define unlikely(28,519
+#define __LITTLE_ENDIAN 32,576
+#define __BIG_ENDIAN	33,605
+#define BYTE_ORDER 34,631
+#define EXPORT 35,666
+#define EXPORT38,730
+typedef uint16_t le16;42,781
+typedef uint16_t be16;43,804
+typedef uint32_t le32;44,827
+typedef uint32_t be32;45,850
+typedef uint64_t le64;46,873
+typedef uint64_t be64;47,896
+static inline uint16_t swap_16(49,920
+static inline uint32_t swap_32(54,993
+static inline uint64_t swap_64(61,1144
+#define cpu_to_le16(73,1540
+#define cpu_to_le32(74,1573
+#define cpu_to_le64(75,1606
+#define le16_to_cpu(76,1639
+#define le32_to_cpu(77,1676
+#define le64_to_cpu(78,1713
+#define cpu_to_be16(80,1751
+#define cpu_to_be32(81,1793
+#define cpu_to_be64(82,1835
+#define be16_to_cpu(83,1877
+#define be32_to_cpu(84,1923
+#define be64_to_cpu(85,1969
+#define cpu_to_le16(89,2023
+#define cpu_to_le32(90,2065
+#define cpu_to_le64(91,2107
+#define le16_to_cpu(92,2149
+#define le32_to_cpu(93,2195
+#define le64_to_cpu(94,2241
+#define cpu_to_be16(96,2288
+#define cpu_to_be32(97,2321
+#define cpu_to_be64(98,2354
+#define be16_to_cpu(99,2387
+#define be32_to_cpu(100,2424
+#define be64_to_cpu(101,2461
+#define offsetof(105,2524
+#define container_of(108,2608
+#define BUILD_BUG_ON(111,2704
+#define BUILD_BUG_ON_ZERO(112,2778
+#define ARRAY_SIZE(113,2840
+#define __stringify_1(115,2898
+#define __stringify(116,2926
+typedef uint8_t u8;118,2968
+typedef uint16_t u16;119,2988
+typedef uint32_t u32;120,3010
+typedef uint64_t u64;121,3032
+typedef int8_t s8;122,3054
+typedef int16_t s16;123,3073
+typedef int32_t s32;124,3094
+typedef int64_t s64;125,3115
+#define ALIGN(127,3137
+#define __ALIGN_MASK(128,3213
+#define DIV_ROUND_UP(130,3271
+#define ROUNDUP(131,3321
+#define swap(132,3377
+
+test/my/jw/us/disk_utils.c,336
+static inline void set_value(16,292
+static void smart_cb(22,386
+void disk_get_smart_info(54,1443
+int disk_get_info(87,2088
+static void disk_read_role(125,3088
+static void disk_update_uuid(189,3996
+static int disk_read_mdinfo(200,4244
+int disk_get_raid_info(234,4829
+#define DISK_FAUL_FLAG	248,5102
+void disk_set_fail(250,5154
+
+test/my/jw/us/disk_utils.h,2640
+#define DISK_UTIL__H__2,23
+struct disk_smart_info 13,211
+	int		health_good;14,236
+	uint64_t	read_error;15,275
+	uint64_t	spin_up;16,297
+	uint64_t	reallocate_sectors;17,316
+	uint64_t	pending_sectors;18,346
+	uint64_t	uncorrectable_sectors;19,373
+	uint64_t	power_on;20,406
+	uint64_t	temperature;21,426
+struct disk_warning_info 24,453
+	unsigned long warning_area;25,480
+	unsigned int mapped_cnt;26,509
+	unsigned int max_map_cnt;27,535
+struct disk_info 30,566
+	char		serial[serial31,585
+	char		firmware[firmware32,604
+	char		model[model33,624
+	uint64_t	size;34,642
+	int		is_smart_avail;35,658
+	struct disk_smart_info si;36,680
+	struct disk_warning_info wi;37,708
+struct disk_md_info 40,742
+	int		is_raid 41,764
+	int		is_in_raid 42,783
+	int		is_spare 43,805
+	int		is_fault 44,825
+	char		uuid[uuid46,846
+struct us_disk 49,867
+	int		ref;50,884
+	int		slot;51,895
+	int		is_exist 52,907
+	int		is_fail 53,927
+	int		is_raid 54,946
+	int		is_special 55,965
+	int		is_global 56,1006
+	int		is_removed 57,1046
+	char		dev_node[dev_node58,1126
+	struct disk_info di;59,1147
+	struct disk_md_info ri;60,1169
+#define MAX_SLOT	63,1198
+struct us_disk_pool 64,1221
+	struct us_disk disks[disks65,1243
+static inline const char *disk_get_smart_status(disk_get_smart_status75,1615
+static inline const char *disk_get_md_status(disk_get_md_status88,1898
+static inline void disk_get_warning_info(104,2166
+#define __u32 122,2546
+#define __u8 123,2569
+#define __u64 124,2590
+#define __u16 125,2613
+struct mdp_superblock_1 127,2637
+	__u32	magic;128,2663
+	__u32	major_version;129,2707
+	__u32	feature_map;130,2737
+	__u32	pad0;131,2757
+	__u8	set_uuid[set_uuid133,2771
+	char	set_name[set_name134,2791
+	__u64	ctime;136,2812
+	__u32	level;137,2826
+	__u32	layout;138,2840
+	__64	size;139,2855
+	__u32	chunksize;141,2868
+	__u32	raid_disks;142,2886
+	__u32	bitmap_offset;143,2905
+	__u32	new_level;146,2929
+	__u64	reshape_position;147,2947
+	__u32	delta_disks;148,2972
+	__u32	new_layout;149,2992
+	__u32	new_chunk;150,3011
+	__u8	pad[pad151,3029
+	__u64	data_offset;152,3049
+	__u64	data_size;153,3069
+	__u64	super_offset;154,3087
+	__u64	recovery_offset;155,3108
+	__u32	dev_number;156,3132
+	__u32	cnt_corrected_read;157,3151
+	__u8	device_uuid[device_uuid158,3178
+	__u8	devflags;159,3201
+#define WriteMostly1	160,3217
+	__u8	pad2[pad2161,3240
+	__u64	utime;162,3259
+	__u64	events;163,3273
+	__u64	resync_offset;164,3288
+	__u32	sb_csum;165,3310
+	__u32	max_dev;166,3326
+	__u8	pad3[pad3167,3342
+	__u16	dev_roles[dev_roles169,3362
+static inlin const char *disk_get_raid_name(disk_get_raid_name172,3387
+
+test/my/jw/us/us_disk.c,1559
+#define _GNU_SOURCE1,0
+#define DISK_HOTREP_CONF 22,414
+#define MAP_SLOT_CONF 23,470
+typedef struct slot_map slot_map_t;25,526
+struct slot_map 26,562
+	struct list slot_map_list;27,580
+	int ata_lower;28,608
+	int ata_upper;29,624
+	int slot_lower;30,640
+struct us_disk_pool us_dp;39,825
+struct list _g_slot_map_list;40,852
+static int is_md(43,923
+static int is_usb(49,1023
+static int is_sd(56,1143
+static int is_dom_disk(63,1261
+static int is_sata_sas(71,1398
+static int is_ds_disk(78,1528
+static int to_int(83,1625
+static int find_slot_from_path(103,1822
+static void slot_map_release(128,2356
+static int slot_map_init(141,2629
+ static int map_slot(195,4149
+ static int find_slot(213,4535
+ static int find_free_slot(231,4901
+ struct us_disk *find_disk(find_disk245,5123
+ const char *__disk_get_hotrep(__disk_get_hotrep261,5424
+ static void do_update_disk(304,6617
+ static void update_disk(339,7527
+ static void us_disk_update_all(349,7788
+ ssize_t disk_name2slot(359,7994
+ static void add_disk(374,8264
+ static void remove_disk(406,9074
+ static int us_disk_on_event(423,9453
+static struct mon_node us_disk_mon_node 460,10344
+int us_disk_init(464,10423
+void us_disk_release(474,10584
+static struct us_disk *us_disk_find_by_slot(us_disk_find_by_slot482,10720
+const char *disk_get_state(disk_get_state508,11184
+void us_dump_disk(519,11415
+void us_disk_dump(580,14327
+static int us_disk_dump_slot_name(618,15087
+void us_disk_slot_to_name(632,15342
+void us_disk_name_to_slot(649,15614
+void us_disk_update_slot(672,15981
+
+test/my/jw/us/us_ev.h,411
+#define US_EV_H2,16
+struct us_shell_cmd_ops 7,71
+	const char *cmd;cmd8,97
+	void (*on_read)on_read10,116
+	void (*on_done)on_done11,188
+	int timeout;13,266
+struct us_shell_cmd 16,284
+	int		need_timer 17,306
+	int		need_io 18,328
+	ev_child	child;20,348
+	ev_io		pipe_io;21,365
+	ev_timer	timer;22,382
+	void		(*on_read)on_read23,399
+	void		(*on_done)on_done25,479
+static inline void us_loop(33,667
+
+test/my/jw/us/us_disk.h,168
+#define US_DISK__H__2,21
+	DISK_UPDATE_SMART	14,331
+	DISK_UPDATE_RAID	15,362
+	DISK_UPDATE_STATE 16,392
+	DISK_UPDATE_ALL	18,430
+	DISK_UPDATE_ALL		= 0xff,xff18,430
+
+test/my/jw/us/main.c,131
+static void sig_child(12,213
+static ev_io dbg_io;20,314
+static void dbg_cb(21,335
+static void dbg_init(27,459
+int main(33,500
+
+test/my/jw/us/us_map.c,17
+int main(12,229
+
+test/my/jw/us/us_cl.c,590
+#define TIMEOUT 15,246
+#define MAX_BUF 16,268
+#define US_PORT 17,291
+static ev_io us_server_io;19,315
+struct us_session 21,343
+	ev_io		us_io;22,363
+	ev_timer	us_timer;23,378
+	char		buf[buf24,398
+	int		buf_len;25,419
+static inline int fd_nonblock(28,438
+staitc void us_sess_release(33,521
+static int us_parse(43,751
+static void us_sess_on_io(72,1254
+static void us_sess_on_timeout(97,1707
+struct us_session *us_sess_new(us_sess_new105,1918
+static int new_server(120,2261
+static void us_server_io_cb(151,2860
+int us_session_init(165,3076
+void us_session_release(178,3296
+
+test/my/jw/us/safe_popen.h,82
+#define SAFE_POPEN__H__2,24
+struct sp_child 4,49
+	pid_t pid;5,67
+	int fd;6,79
+
+test/my/jw/us/us_regex.c,430
+#define REG_UDEV_DISK	3,20
+#define REG_UDEV_MD	4,61
+#define REG_UDEV_USB	5,106
+#define REG_MD_DISK_INFO	7,142
+#define REG_ATA_DISK_SLOT	11,280
+#define REG_DOM_DISK	14,345
+regex_t udev_sd_regex;16,412
+regex_t udev_usb_regex;17,435
+regex_t udev_md_regex;18,459
+regex_t md_disk_info_regex;19,482
+regex_t udev_dom_disk_regex;20,510
+regex_t ata_disk_slot_regex;21,539
+it us_regex_init(23,569
+void us_regex_release(35,960
+
+test/my/jw/monitor/pmu-info.h,282
+#define _PMU_INFO_H2,20
+#define PMU_DEV1 4,41
+#define PMU_DEV2 5,86
+struct pmu_info 7,132
+	float vin;8,150
+	float vout;9,162
+	float fan_speed;10,175
+	float temp;11,193
+	int is_vin_fault 13,207
+	    is_vout_fault 14,230
+	    is_fan_fault 15,254
+	    is_temp_fault 16,277
+
+test/my/jw/monitor/libsysmon.c,70
+#define SYSMON_ADDR 8,132
+int sysmon_event(10,184
+int main(52,1336
+
+test/my/jw/monitor/sys-mon.h,72
+#define __SYS_MON_H__2,22
+#define likely(6,94
+#define unlikely(7,137
+
+test/my/jw/monitor/sys-capture.c,798
+#define NCT_ROOT 18,487
+const char *mod_cap_list[mod_cap_list20,541
+const char *mod_ch_name[mod_ch_name22,662
+bool isCaptureSupported(26,803
+const char *__read_file_line(__read_file_line38,965
+int __atoi(59,1320
+int __read_int_value(68,1405
+int capture_cpu_temp(73,1489
+int capture_env_temp(84,1711
+int global_case_temp 93,1856
+int capture_case_temp(95,1884
+int capture_case_fan1(112,2187
+int capture_case_fan2(122,2351
+int capture_cpu_fan(131,2514
+int _power_check(141,2676
+#define POWER_TEMP_CHECK_INTERVAL 155,3119
+int capture_power(157,3158
+capture_func capture_get(197,3912
+void sys_capture_init(221,4456
+void sys_capture_release(226,4510
+sys_capture_t *sys_capture_alloc(sys_capture_alloc238,4709
+void sys_capture_set_handler(257,5049
+void sys_capture_add(263,5181
+
+test/my/jw/monitor/list.c,410
+void list_init(12,323
+void list_add(17,389
+void list_add_h(28,540
+void list_del(40,694
+void list_move(46,778
+int list_empty(52,876
+int list_start(57,946
+int list_end(62,1041
+struct list *list_first(list_first67,1134
+struct list *list_last(list_last72,1232
+struct list *list_prev(list_prev77,1329
+struct list *list_next(list_next82,1458
+unsigned int list_size(87,1584
+void list_splice(99,1725
+
+test/my/jw/monitor/debug.h,301
+#define __COMMON_DEBUG_H_2,26
+static inline void __dbg_fprintf(25,375
+#define DBG_INSERT(43,641
+#define DBGP(44,687
+#define DEGE(45,732
+#define DBGVP(46,777
+#define DBGVE(47,822
+#define DBG_INSERT(49,874
+#define DBGP(50,911
+#define DBGVP(54,1026
+#define DBGE(57,1131
+#define DBGVE(60,1245
+
+test/my/jw/monitor/sys-module.h,185
+#define __SYS_MODULE_H__6,91
+typedef struct _sys_module sys_module_t;8,117
+struct _sys_module 9,158
+	struct list list;10,179
+	struct list event_list;11,198
+	char name[name12,223
+
+test/my/jw/monitor/sys-event.c,124
+void sys_event_zero(11,331
+sys_event_conf_t *sys_event_conf_alloc(sys_event_conf_alloc18,452
+void sys_event_fill(34,738
+
+test/my/jw/monitor/sys-global.c,85
+sys_global_t gconf;11,333
+void sys_global_init(13,354
+void dump_sys_global(22,499
+
+test/my/jw/monitor/sys-action.h,406
+#define __SYS_ACTION_H__5,68
+typedef void (*sys_alarm_handler)sys_alarm_handler7,94
+typedef struct _sys_alarm sys_alarm_t;9,143
+struct _sys_alarm 10,182
+	struct list alarm_list;11,202
+	char name[name12,227
+	sys_alarm_handler handler;13,244
+typedef struct _sys_action sys_action_t;16,276
+struct _sys_action 17,317
+	struct list list;18,338
+	struct list alarm_list;19,357
+	char name[name20,382
+
+test/my/jw/monitor/debug.c,106
+static bool bstamp 17,422
+void set_dbgstamp(19,450
+bool get_dbgstamp(24,502
+void __dbg_vprintf(29,543
+
+test/my/jw/monitor/sys-tmpfs.c,552
+#define TMPFS_MSG_ROOT 24,618
+#define _SORTED_ROOT 25,653
+#define TMPFS_ALARM_ROOT 26,703
+#define ACCESSPERMS 28,753
+int mkdir_p(29,778
+#define DIRPTR 55,1191
+#define STAT 56,1211
+#define _DIR_LIST_BEGIN(57,1230
+#define _DIR_LIST_END	70,1536
+int tmpfs_msg_count(78,1610
+int _dir_max_file_num(97,1916
+const char *tmpfs_msg_insert(tmpfs_msg_insert113,2182
+const char *tmpfs_msg_remove_oldest(tmpfs_msg_remove_oldest138,2776
+ssize_t tmpfs_msg_sorted_link(174,3408
+void tmpfs_write_alarm(186,3639
+ssize_t tmpfs_msg_sorted_unlink(207,4042
+
+test/my/jw/monitor/sys-event.h,596
+#define __SYS_EVENT_H__6,91
+struct _sys_event_global 8,116
+	char module[module9,143
+	char event[event10,162
+	char level[level11,180
+typedef struct _sys_event_conf sys_event_conf_t;14,202
+struct _sys_event_conf 15,251
+	struct list event_list;16,276
+	char module[module17,301
+	char event[event18,320
+	char level[level19,338
+	sys_action_t *action;action20,356
+	int count;21,379
+typedef struct _sys_event sys_event_t;24,395
+struct _sys_event 25,434
+	char module[module26,454
+	char event[event27,473
+	char *level;level28,491
+	char param[param29,505
+	char msg[msg30,523
+
+test/my/jw/monitor/list.h,418
+#define LIB_DEVICE_MAPPER_H2,28
+#	define __typeof__ 18,267
+struct list 25,342
+	struct list *n,n26,356
+	struct list *n, *p;p26,356
+#define LIST_INIT(29,381
+#define list_struct_base(66,1541
+#define list_item(69,1641
+#define struct_field(72,1770
+#define list_head(75,1862
+#define list_iterate(78,1933
+#define list_uniterate(82,2039
+#define list_iterate_safe(86,2149
+#define list_iterate_items_gen(89,2250
+
+test/my/jw/monitor/util-gpio.c,84
+#define GPIO_BASE_ADDR 9,148
+#define GPIO_VALUE(11,180
+bool sb_gpio28_set(17,301
+
+test/my/jw/monitor/sys-conf.c,395
+#define _XML_STR_VAL(16,459
+#define _XML_IGN_CHECK(17,531
+#define _XML_NODE_NAME(19,651
+#define _XML_ATTR_EQU(20,729
+void _xml_self_run_parse(23,813
+void _xml_global_parse(54,1616
+void _xml_module_event_parse(80,2264
+void _xml_module_parse(95,2703
+void _xml_action_alarm_parse(105,2910
+void _xml_action_parse(117,3273
+void sys_mon_conf_check(127,3480
+void sys_mon_load_conf(132,3519
+
+test/my/jw/monitor/sys-alarm.c,892
+#define SHELL 17,473
+#define BUZZER_ON_CMD 18,497
+#define BUZZER_OFF_CMD 19,576
+struct event_record 21,657
+	char param[param22,679
+	struct list list_entry;23,697
+int _safe_system(26,726
+int _gconf_level_count(42,905
+void sys_alarm_default(58,1174
+void sys_alarm_buzzer_on(77,1549
+void sys_alarm_buzzer_off(97,1973
+void sys_alarm_notify_tmpfs(115,2341
+char *_get_next_disk_slot(_get_next_disk_slot127,2518
+void sys_alarm_diskled_on(166,3217
+void sys_alarm_diskled_off(178,3462
+void sys_alarm_diskled_blink1s1(190,3707
+void sys_alarm_diskled_blink1s4(202,3977
+void sys_alarm_diskled_blink2s1(214,4252
+static int sysled_cnt 229,4559
+void sys_alarm_sysled_on(231,4587
+void sys_alarm_sysled_off(257,5105
+struct _handler_map 283,5596
+	char name[name284,5618
+	sys_alarm_handler handler;285,5635
+struct _handler_map _map[_map288,5667
+void sys_alarm_set_handler(304,6185
+
+test/my/jw/monitor/pmu-info.c,578
+#define VOUT_EXP 17,449
+#define CHECK_FAULT(19,472
+	REG_STATUS	27,581
+	REG_STATUS	 = 0x79,x7927,581
+	REG_VIN	28,602
+	REG_VIN		 = 0x88,x8828,602
+	REG_VOUT	29,621
+	REG_VOUT	 = 0x8b,x8b29,621
+	REG_TEMP	30,640
+	REG_TEMP	 = 0x8e,x8e30,640
+	REG_FAN	31,659
+	REG_FAN		 = 0x90,x9031,659
+	STS_TEMP_FAULT	33,679
+	STS_VIN_FAULT	34,708
+	STS_VOUT_FAULT	35,736
+	STS_FAN_FAULT	36,765
+static float pmu_linear_to_real(39,797
+int pmu_get_info(53,1023
+#define POWER_TEMP_HI 94,2239
+#define POWER_TEMP_MI 95,2264
+#define POWER_TEMP_LO 96,2289
+#define POWER_FAN_LO 97,2314
+
+test/my/jw/monitor/sys-mon.c,299
+struct mon_io 20,535
+	ev_io io;21,551
+	int sockfd;22,562
+static struct mon_io mon_io;27,655
+static struct ev_loop *mon_loop mon_loop28,684
+void mon_release(30,725
+static void mon_io_cb(42,923
+int mon_serv_create(73,1566
+void usage(102,2219
+int global_print_on 108,2292
+int main(110,2318
+
+test/my/jw/monitor/sys-utils.h,26
+#define _SYS_UTILS_H4,43
+
+test/my/jw/monitor/sys-interval-check.h,653
+#define _SYS_INTERVAL_CHECK__5,73
+enum CAPTURE_RESULT 7,104
+	VAL_NORMAL,8,126
+	VAL_WARNING,9,139
+	VAL_ERROR,10,153
+	VAL_CRIT,11,165
+	VAL_EMERG,12,176
+#define isExecutable(15,192
+#define isExpried(16,236
+#define update(17,316
+#define execute(18,369
+#define CHECK_INTVAL 20,409
+typedef int (*capture_func)capture_func22,433
+typedef struct _sys_capture_conf sys_capture_t;27,565
+struct _sys_capture_conf 28,613
+	struct list list;29,640
+	char name[name30,659
+	int check_intval;31,675
+	int min_thr,32,694
+	int min_thr, max_thr;32,694
+	time_t _last_update;33,717
+	capture_func _capture;34,739
+	int _error;35,763
+	bool _preset;36,776
+
+test/my/jw/monitor/sys-action.c,557
+struct list _gaction_list;12,353
+void sys_action_init(14,381
+void _action_alarm_release(20,438
+void sys_action_release(32,620
+sys_action_t *sys_action_alloc(sys_action_alloc48,854
+void _sys_action_default_alarm_add(63,1164
+bool sys_action_add(81,1545
+sys_action_t *sys_action_get(sys_action_get99,1910
+sys_alarm_t *sys_alarm_alloc(sys_alarm_alloc115,2182
+bool sys_action_alarm_add(130,2484
+sys_alarm_t *sys_action_alarm_get(sys_action_alarm_get144,2798
+void do_sys_action(164,3245
+void _dump_alarm(180,3530
+void dump_action_alarm(193,3819
+
+test/my/jw/monitor/sys-global.h,486
+#define __SYS_GLOBAL_H__11,172
+#define SYSMON_CONF 13,198
+#define SYSMON_ADDR 14,256
+#define _LOG_OPT 16,310
+#define log_init(17,338
+#define log_release(18,398
+typedef struct _sys_global sys_global_t;21,433
+struct _sys_global 22,474
+	bool tmpfs;23,495
+		int info,25,518
+		int info, warning,25,518
+		int info, warning, error;25,518
+	}msg_buff_size;msg_buff_size26,546
+	int power_cnt;27,563
+#define info_size 30,583
+#define warning_size 31,620
+#define error_size 32,663
+
+test/my/jw/monitor/sys-interval-check.c,320
+struct list _g_capture;16,459
+static const char *MOD_NAME(MOD_NAME18,484
+void alarm_email_send(30,697
+#define CPU_TEMP_REBOOT 39,943
+#define CPU_TEMP_POWEROFF 40,970
+int _value_check_error(42,1001
+void _capture(72,1685
+void _check_interval(150,3798
+void do_interval_check(190,4852
+void dump_self_run(200,5025
+
+test/my/jw/monitor/sys-module.c,414
+struct list _gmodule_list;11,333
+void sys_module_init(13,361
+void _module_event_release(18,417
+void sys_module_release(30,655
+bool sys_module_add(45,891
+sys_module_t *sys_module_get(sys_module_get69,1401
+bool sys_module_event_add(84,1672
+sys_event_conf_t *sys_module_event_get(sys_module_event_get98,2029
+void sys_module_event_update(123,2604
+void _dump_event(129,2684
+void dump_module_event(141,2995
+
+test/my/jw/log.h,1380
+#define _SYS_LOG_H2,19
+#define LOG_INVALID_ARG 11,158
+#define LOG_FILE 12,185
+#define LOG_TABLE 13,215
+#define LOCAL_ADDR 14,241
+static inline const char *_IntToStr(_IntToStr20,392
+static inline const int _StrToInt(32,566
+typedef enum _module log_module_e;46,751
+enum _module 47,786
+	LOG_MOD_WEB 48,801
+	LOG_MOD_DISK,49,819
+	LOG_MOD_VG,50,834
+	LOG_MOD_UDV,51,847
+	LOG_MOD_ISCSI,52,861
+	LOG_MOD_NAS,53,877
+	LOG_MOD_SYSCONF,54,891
+	LOG_MOD_SYSMON,55,909
+	LOG_MOD_UNKNOWN 56,926
+static inline const char *LogModuleStr(LogModuleStr59,951
+static inline const int LogModuleInt(65,1126
+typedef enum _category log_category_e;73,1299
+enum _category 74,1338
+	LOG_CATG_AUTO 76,1356
+	LOG_CATG_MANUAL,77,1376
+	LOG_CATG_UNKNOWN 78,1394
+static inline const char *LogCategoryStr(LogCategoryStr81,1421
+static inline const int LogCategoryInt(86,1537
+typedef enum _event log_event_e;92,1648
+enum _event 93,1681
+	LOG_EV_INFO 94,1695
+	LOG_EV_WARNING,95,1713
+	LOG_EV_ERROR,96,1730
+	LOG_EV_UNKNOWN 97,1745
+static inline const char *LogEventStr(LogEventStr100,1770
+static inline const int LogEventInt(105,1870
+typedef struct _log_stu log_info_s;111,1969
+struct _log_stru 112,2005
+	uint64_t idid;113,2024
+	char datetime[datetime114,2040
+	char module[module115,2060
+	char category[category116,2078
+	char event[event117,2098
+	char content[content118,2115
+
+test/my/jw/list.h,1457
+#define _LIST_H2,16
+#define offsetof(8,94
+#define container_of(12,186
+struct list 16,288
+	struct list *next,next17,302
+	struct list *next, *prev;prev17,302
+#define LIST_INIT(20,333
+#define LIST(21,379
+#define list_entry(24,437
+static inline void init_list(27,533
+static inline void __list_add(33,626
+static inline void list_add(43,858
+static inline void list_add_tail(49,994
+static inline void __list_del(55,1140
+static inline void list_del(62,1283
+static inline void list_del_init(69,1412
+static inline void list_move(75,1528
+static inline void list_move_tail(81,1660
+static inline int list_empty(87,1802
+static inline void __list_splice(92,1889
+static inline void list_splice(106,2207
+static inline void list_splice_tail(113,2383
+#define list_for_each(120,2563
+#define list_for_each_safe(123,2664
+struct hlist_node 131,2828
+	struct hlist_node *next,next132,2848
+	struct hlist_node *next, **pprev;pprev132,2848
+struct hlist 135,2887
+	struct hlist_node *first;first136,2902
+#define HLIST_INIT 139,2933
+#define HLIST(140,2970
+static inline void init_hlist(141,3021
+static inline void init_hlist_node(146,3091
+static inline int hlist_unhashed(152,3188
+static inline int hlist_empty(157,3273
+static inline void hlist_del(162,3350
+static inline void hlist_del_init(172,3532
+static inline void hlist_add_head(180,3661
+#define hlist_entry(191,3873
+#define hlist_for_each(192,3944
+#define hlist_for_each_safe(194,4029
+
+test/json/test4.c,46
+int n=6,83
+int create(7,92
+int main(19,457
+
+test/json/test3.c,15
+int main(6,83
+
+test/json/test2.c,15
+int main(6,83
+
+test/json/test1.c,15
+int main(5,63
+
+test/test.c,38
+#define _fix_4k(6,87
+int main(7,138
+
+kernel/fs/ext4/ext4.h,9726
+#define EXT4__H__2,18
+#undef EXT4FS_DEBUG22,460
+#define ext4_debug(25,501
+#define ext4_debu(32,696
+#define EXT_DEBUG__35,761
+#define ext_debug(37,798
+#define ext_debug(39,859
+#define EXT4_ERROR_INODE(42,924
+#define EXT4_ERROR_INODE_BLOCK(44,1035
+#define EXT4_ERROR_FILE(46,1164
+typedef int ext4_grpblk_t;49,1285
+typedef unsigned long long exit4_fsblk_t;50,1312
+typedef __u32 ext4_lblk_t;51,1354
+typedef unsigned int ext4_group_t;52,1381
+#define EXT4_MB_HINT_MERGE	54,1417
+#define EXT4_MB_HINT_RESERVED	55,1452
+#define EXT4_MB_HINT_METADATA	56,1490
+#define EXT4_MB_HINT_FIRST	57,1528
+#define EXT4_MB_HINT_BEST	58,1563
+#define EXT4_MB_HINT_DATA	59,1597
+#define EXT4_MB_HINT_NOPREALLOC	60,1631
+#define EXT4_MB_HINT_GROUP_ALLOC	61,1671
+#define EXT4_MB_HINT_GOAL_ONLY	62,1711
+#define EXT4_MB_HINT_TRY_GOAL	63,1750
+#define EXT4_MB_DELALLOC_RESERVED	64,1788
+#define EXT4_MB_STREAM_ALLOC	65,1829
+#define EXT4_MB_USE_ROOT_BLOOKS	66,1866
+#define EXT4_MB_USE_RESERVED	67,1906
+struct ext4_allocation_request 69,1944
+	struct inode *inode;inode70,1977
+	unsigned int len;71,1999
+	ext4_lblk_t logical;72,2018
+	ext4_lblk_t lleft;73,2040
+	ext4_lblk_t lright;74,2060
+	ext4_fsblk_t goal;75,2081
+	ext4_fsblk_t pleft;76,2101
+	ext4_fsblk_t pright;77,2122
+	unsigned int flags;78,2144
+#define EXT4_MAP_NEW	81,2169
+#define EXT4_MAP_MAPPED	82,2205
+#define EXT4_MAP_UNWRITTEN	83,2247
+#define EXT4_MAP_BOUNDARY	84,2294
+#define EXT4_MAP_UNINIT	85,2339
+#define EXT4_MAP_FROM_CLUSTER	87,2382
+#define EXT4_MAP_FLAGS	88,2439
+struct ext4_map_blocks 92,2593
+	ext4_fsblk_t m_pblk;93,2618
+	ext4_lblk_t m_lblk;94,2640
+	unsigned int m_len;95,2661
+	unsigned int m_flags;96,2682
+#define EXT4_IO_END_UNWRITTEN	99,2709
+typedef struct ext4_io_end 101,2747
+	struct list_head	list;102,2776
+	handle_t		*handle;handle103,2800
+	struct inode		*inode;inode104,2820
+	struct bio		*bio;bio105,2843
+	unsigned int		flag;107,2863
+	loff_t			offset;108,2884
+	ssize_t			size;109,2902
+	atomic_t		count;110,2919
+} ext4_io_end_t;111,2937
+struct ext4_io_submit 113,2955
+	int			io_op;114,2979
+	struct bio		*io_bio;io_bio115,2993
+	ext4_io_end_t		*io_end;io_end116,3015
+	sector_t		io_next_block;117,3040
+#define EXT4_BAD_INO	120,3070
+#define EXT4_ROOT_INO	121,3094
+#define EXT4_USR_QUOTA_INO	122,3119
+#define EXT4_GRP_QUOTA_INO	123,3148
+#define EXT4_BOOT_LOADER_INO	124,3177
+#define EXT4_UNDEL_DIR_INO	125,3208
+#define EXT4_RESIZE_INO	126,3237
+#define EXT4_JOURNAL_INO	127,3264
+#define EXT4_GOOD_OLD_FIRST_INO 128,3291
+#define EXT4_LINK_MAX	130,3327
+#define EXT4_MIN_BLOCK_SIZE	133,3358
+#define EXT4_MAX_BLOCK_SIZE	134,3392
+#define EXT4_MIN_BLOCK_LOG_SIZE	135,3427
+#define EXT4_MAX_BLOCK_LOG_SIZE	136,3463
+#define EXT4_BLOCK_SIZE(138,3517
+#define EXT4_BLOCK_SIZE(140,3569
+#define EXT4_ADDR_PER_BLOCK(143,3665
+#define EXT4_CLUSTER_SIZE(144,3733
+# define EXT4_BLOCK_SIZE_BITS(147,3836
+# define EXT4_CLUSTER_BITS(148,3893
+# define EXT4_BLOCK_SIZE_BITS(150,3959
+#define EXT4_ADDR_PER_BLOCK_BITS(153,4058
+#define EXT4_INODE_SIZE(154,4130
+#define EXT4_FIRST_INO(155,4185
+#define EXT4_INODE_SIZE(157,4244
+#define EXT4_FIRST_INO(160,4379
+#define EXT4_BLOCK_ALIGN(164,4527
+#define EXT4_B2C(166,4601
+#define EXT4_C2B(167,4661
+#define EXT4_NUM_B2C(168,4729
+struct ext4_group_desc 171,4833
+	__le32 bg_block_bitmap_lo;172,4858
+	__le32 bg_inode_bitmap_lo;173,4886
+	__le32 bg_block_bitmap_lo;174,4914
+	__le32 bg_inode_bitmap_lo;175,4942
+	__le32 bg_inode_table_lo;176,4970
+	__le16 bg_free_blocks_count_lo;177,4997
+	__le16 bg_free_inodes_count_lo;178,5030
+	__le16 bg_used_dirs_count_lo;179,5063
+	__le16 bg_flags;180,5094
+	__le32 bg_exclude_bitmap_lo;182,5113
+	__le16 bg_block_bitmap_csum_lo;183,5143
+	__le16 bg_inode_bitmap_csum_lo;185,5177
+	__le16 bg_itable_unused_lo;187,5211
+	__le16 bg_checksum;188,5240
+	__le32 bg_block_bitmap_hi;189,5261
+	__le32 bg_inode_bitmap_hi;190,5289
+	__le32 bg_inode_table_hi;191,5317
+	__le16 bg_free_blocks_count_hi;192,5344
+	__le16 bg_free_inodes_count_hi;193,5377
+	__le16 bg_used_dirs_count_hi;194,5410
+	__le16 bg_itable_unused_hi;195,5441
+	__le32 bg_exclude_bitmap_hi;196,5470
+	__le16 bg_block_bitmap_csum_hi;197,5500
+	__le16 bg_inode_bitmap_csum_hi;199,5534
+	__u32 bg_reserved;201,5568
+#define EXT4_BG_INODE_BITMAP_CSUM_HI_END	204,5592
+#define EXT4_BG_BLOCK_BITMAP_CSUM_HI_END	207,5716
+struct flex_groups 211,5841
+	atomic64_t	free_clusters;212,5862
+	atomic_t	free_inodes;213,5889
+	atomic_t	used_dirs;214,5912
+#define EXT4_BG_INODE_UNINIT	217,5937
+#define EXT4_BG_BLOCK_UNINIT	218,5973
+#define EXT4_BG_INODE_ZEROED	219,6009
+#define EXT4_MIN_DESC_SIZE	222,6047
+#define EXT4_MIN_DESC_SIZE_64BIT	223,6078
+#define EXT4_MAX_DESC_SIZE	224,6114
+#define EXT4_DESC_SIZE(225,6162
+# define EXT4_BLOCKS_PER_GROUP(227,6233
+# define EXT4_CLUSTERS_PER_GROUP(228,6300
+# define EXT4_DESC_PER_BLOCK(229,6370
+# define EXT4_INODES_PER_GROUP(230,6434
+# define EXT4_DESC_PER_BLOCK_BITS(231,6501
+# define EXT4_BLOCKS_PER_GROUP(233,6580
+# define EXT4_DESC_PER_BLOCK(234,6640
+# define EXT4_INODES_PER_GROUP(235,6714
+#define EXT4_NDIR_BLOCKS	238,6796
+#define EXT4_IND_BLOCK	239,6825
+#define EXT4_DIND_BLOCK	240,6867
+#define EXT4_TIND_BLOCK	241,6914
+#define EXT4_N_BLOCKS	242,6962
+#define EXT4_SECRM_FL	245,7010
+#define EXT4_UNRM_FL	246,7045
+#define EXT4_COMPR_FL	247,7079
+#define EXT4_SYNC_FL	248,7114
+#define EXT4_IMMUTABLE_FL	249,7148
+#define EXT4_APPEND_FL	250,7186
+#define EXT4_NODUMP_FL	251,7222
+#define EXT4_NOATIME_FL	252,7258
+#define EXT4_DIRTY_FL	253,7295
+#define EXT4_COMPRBLK_FL	254,7330
+#define EXT4_NOCOMPR_FL	255,7367
+#define EXT4_ECOMPR_FL	256,7404
+#define EXT4_INDEX_FL	257,7440
+#define EXT4_IMAGIC_FL	258,7475
+#define EXT4_JOURNAL_DATA_FL	259,7511
+#define EXT4_NOTAIL_FL	260,7552
+#define EXT4_DIRSYNC_FL	261,7588
+#define EXT4_TOPDIR_FL	262,7625
+#define EXT4_HUGE_FILE_FL	263,7661
+#define EXT4_EXTENTS_FL	264,7699
+#define EXT4_EA_INODE_FL	265,7736
+#define EXT4_EOFBLOCKS_FL	266,7773
+#define EXT4_INLINE_DATA_FL	267,7811
+#define EXT4_RESERVED_FL	268,7851
+#define EXT4_FL_USER_VISIBLE	270,7889
+#define EXT4_FL_USER_MODIFIABLE	271,7930
+#define EXT4_FL_INHERITED 273,7975
+#define EXT4_REG_FLMASK	278,8198
+#define EXT4_OTHER_FLMASK 280,8261
+static inline __u32 ext4_mask_flags(282,8323
+	EXT4_INODE_SECRM	294,8536
+	EXT4_INODE_UNRM	295,8559
+	EXT4_INODE_COMPR	296,8582
+	EXT4_INODE_SYNC	297,8605
+	EXT4_INODE_IMMUTABLE	298,8628
+	EXT4_INODE_APPEND	299,8655
+	EXT4_INODE_NODUMP	300,8679
+	EXT4_INODE_NOATIME	301,8703
+	EXT4_INODE_DIRTY	302,8728
+	EXT4_INODE_COMPRBLK	303,8751
+	EXT4_INODE_UNCOMPR	304,8777
+	EXT4_INODE_ECOMPR	305,8803
+	EXT4_INODE_INDEX	306,8828
+	EXT4_INODE_IMAGIC	307,8852
+	EXT4_INODE_JOURNAL_DATA 308,8877
+	EXT4_INODE_NOTAIL	309,8908
+	EXT4_INODE_DIRSYNC	310,8933
+	EXT4_INODE_TOPDIR	311,8959
+	EXT4_INODE_HUGE_FILE	312,8984
+	EXT4_INODE_EXTENTS	313,9012
+	EXT4_INODE_EA_INODE	314,9038
+	EXT4_INODE_EOFBLOCKS	315,9065
+	EXT4_INODE_INLINE_DATA	316,9093
+	EXT4_INODE_RESERVED	317,9123
+#define TEST_FLAG_VALUE(320,9154
+#define CHECK_FLAG_VALUE(321,9231
+static inline void ext4_check_flag_values(323,9300
+struct ext4_new_group_input 351,10023
+	__u32 group;352,10053
+	__u64 block_bitmap;353,10067
+	__u64 inode_bitmap;354,10088
+	__u64 inode_table;355,10109
+	__u32 blocks_count;356,10129
+	__u16 reserved_blocks;357,10150
+	__u16 unused;358,10174
+struct compat_ext4_new_group_input 362,10244
+	u32 group;363,10281
+	compat_u64 block_bitmap;364,10293
+	compat_u64 inode_bitmap;365,10319
+	compat_u64 inode_table;366,10345
+	u32 blocks_count;367,10370
+	u16 reserved_blocks;368,10389
+	u16 unused;369,10411
+struct ext4_new_group_data 373,10435
+	__u32 group;374,10464
+	__u64 block_bitmap;375,10478
+	__u64 inode_bitmap;376,10499
+	__u64 inode_table;377,10520
+	__u32 blocks_count;378,10540
+	__u16 reserverd_blocks;379,10561
+	__u16 unused;380,10586
+	__u32 free_blocks_count;381,10601
+	BLOCK_BITMAP	385,10638
+	INODE_BITMAP,386,10657
+	INODE_TALBE,387,10672
+	GROUP_TABLE_COUNT,388,10686
+#define EXT4_GET_BLOCKS_CREATE	391,10710
+#define EXT4_GET_BLOCKS_UNINIT_EXT	392,10750
+#define EXT4_GET_BLOCKS_CREATE_UNINIT_EXT	393,10793
+#define EXT4_GET_BLOCKS_DELALLOC_RESERVE	395,10897
+#define EXT4_GET_BLOCKS_PER_IO	396,10945
+#define EXT4_GET_BLOCKS_CONVERT	397,10985
+#define EXT4_GET_BLOCKS_IO_CREATE_EXT	398,11026
+#define EXT4_GET_BLOCKS_IO_CONVERT_EXT	400,11137
+#define EXt4_GET_BLOCKS_METADATA_NOFAIL	402,11251
+#define EXT4_GET_BLOCKS_NO_NORMALLIZE	403,11299
+#define EXT4_GET_BLOCKS_KEEP_SIZE	404,11345
+#define EXT4_GET_BLOCKS_NO_LOCK	405,11387
+#define EXT4_GET_BLOCKS_NO_PUT_HOLE	406,11428
+#define EXT4_EX_NOCACHE	408,11473
+#define EXT4_EX_FORCE_CACHE	409,11507
+#define EXT4_FREE_BLOCKS_MEATDATA	412,11546
+#define EXT4_FREE_BLOCKS_FORGET	413,11588
+#define EXT4_FREE_BLOCKS_VALIDATED	414,11629
+#define EXT4_FREE_BLOCKS_NO_QUOT_UPDATE	415,11672
+#define EXT4_FREE_BLOCKS_NOFREE_FIRST_CLUSTER	416,11720
+#define EXT4_FREE_BLOCKS_NOFREE_LAST_CLUSTER	417,11773
+#define EXT4_FREE_BLOCKS_RESERVE	418,11825
+#define EXT4_IOC_GETFLAGS	421,11868
+#define EXT4_IOC_SETFLAGS	422,11911
+#define EXT4_IOC_GETVERSION	423,11954
+#define EXT4_IOC_SETVERSION	424,12002
+#define EXT4_IOC_GETVERSION_OLD	425,12050
+#define EXT4_IOC_SETVERSION_OLD	426,12101
+#define EXT4_IOC_GETRSVSZ	427,12152
+#define EXT4_IOC_SET_RSVSZ	428,12198
+#define EXT4_IOC_GROUP_EXTEND	429,12245
+#define EXT4_IOC_GROUP_ADD	430,12304
+#define EXT4_IOC_MIGRATE	431,12374
+#define EXT4_IOC_ALLOC_DA_BLKS	432,12412
+#define EXT4_IOC_MOVE_EXT	433,12457
+#define EXT4_IOC_RESIZE_FS	434,12519
+#define EXT4_IOC_SWAP_BOOT	435,12568
+#define EXT4_IOC_PRECACHE_EXTENTS	436,12609
+#define EXT4_IOC32_GETFLAGS	439,12709
+
+kernel/fs/ext4/balloc.c,526
+ext4_group_5 ext4_get_group_number(16,361
+void ext4_get_group_no_and_offset(31,728
+static inline int ext4_block_in_group(48,1174
+unsigned ext4_num_overhead_clusters(58,1433
+static unsigned int num_clusters_in_group(114,2991
+void ext4_init_block_bitmap(127,3355
+unsigned ext4_free_clusters_after_init(178,5052
+struct ext4_group_desc *ext4_get_group_desc(ext4_get_group_desc187,5299
+static ext4_fsblk_t ext4_valid_block_bitmap(210,5954
+void ext4_validata_block_bitmap(243,6903
+ext4_read_block_bitmap_nowait(275,7854
+
+kernel/fs/fs.c,1018
+#define BlockSize 5,60
+#define DirSize 6,82
+#define RootSize 7,101
+struct ReserveBlock9,121
+	int sysblocknum;11,143
+	int resblocknum;12,193
+	int fatblocknum;13,239
+	int rootblocknum;14,279
+	char fillchar[fillchar15,323
+struct DirBlock18,389
+	char filename[filename20,407
+	char fillchar[fillchar21,455
+	long filelen;26,591
+	int year,27,626
+	int year, month,27,626
+	int year, month, day;27,626
+	int firstblockaddr;28,662
+struct FCBBlock	31,716
+	int fileid;33,758
+	struct DirBlock fileinfo;34,791
+	long filpos;35,838
+	int fdtblockaddr;36,880
+	int fdtblockindex;37,929
+	struct FCBBlock *next;next38,985
+struct ReserveBlock sys1;41,1043
+struct FCBBlock *fcb;fcb42,1069
+struct DirBlock fil[fil43,1091
+struct DirBlock fil[32], *dir;dir43,1091
+int *fat1;fat144,1139
+char *str,str45,1150
+char *str, *ptr;ptr45,1150
+char fillchar[fillchar46,1167
+FILE *fp;fp47,1193
+FILE *OPENSYS(OPENSYS49,1204
+int CLOSESYS(67,1726
+void LISTDIR(78,1990
+int FCREATE(92,2266
+int FDELETE(175,4035
+
+kernel/my-hello/my_hello.c,74
+static int __init hello_init(7,104
+static void __exit hello_exit(13,196
+
+kernel/kobject/kobject/test.c,368
+struct attribute test_attr 16,467
+static struct attribute *def_attrs[def_attrs21,545
+struct sysfs_ops obj_test_sysops 26,610
+struct kobj_type ktype 31,703
+void obj_test_release(37,825
+ssize_t kobj_test_show(42,911
+ssize_t kobj_test_store(50,1129
+struct kobject kobj;58,1311
+static int __init kobj_test_init(60,1333
+static void __exit kobj_test_exit(67,1481
+
+kernel/kobject/kobject/test.mod.c,62
+struct module __this_module7,124
+__used18,399
+__used30,850
+
+kernel/kobject/device/driver.c,216
+static int my_probe(12,218
+static int my_remove(18,336
+struct device_driver my_driver 24,437
+static ssize_t mydriver_show(31,559
+static int __init my_driver_init(38,741
+static void __exit my_driver_exit(48,895
+
+kernel/kobject/device/device.c,283
+static char *Version Version10,181
+static int my_match(12,224
+static void my_bus_release(17,368
+struct device my_bus 22,460
+struct bus_type my_bus_type 27,542
+static ssize_t show_bus_version(35,669
+static int __init my_bus_init(42,850
+static void __exit my_bus_exit(60,1194
+
+kernel/kobject/device/my_dev.c,174
+static void my_dev_release(13,247
+struct device my_dev 18,301
+static ssize_t mydev_show(25,424
+static int __init my_device_init(33,623
+static void my_device_exit(42,767
+
+kernel/kobject/cdev/cdev.c,376
+static struct device *firstdrv_class_dev;firstdrv_class_dev12,279
+volatile unsigned long *gpfcon gpfcon14,322
+volatile unsigned long *gpfdat gpfdat15,361
+static int first_drv_open(17,401
+static ssize_t first_drv_write(28,674
+static struct file_operations first_drv_fops 44,997
+int major;51,1203
+static int first_drv_init(53,1215
+static void first_drv_exit(66,1559
+
+kernel/kobject/cdev/cdev.mod.c,63
+struct module __this_module7,124
+__used18,399
+__used35,1132
+
+kernel/kobject/cdev/test.c,15
+int main(6,84
+
+kernel/kobject/kset/kset_test.c,585
+struct kset *kset_p;kset_p13,257
+struct kset kset_c;14,278
+static struct attribute test_attr 21,498
+static struct attribute *def_attrs[def_attrs26,584
+static struct sysfs_ops obj_test_sysops 31,649
+static struct kobj_type ktype 36,749
+void obj_test_release(42,878
+ssize_t kobj_test_show(47,964
+ssize_t kobj_test_store(55,1184
+static int kset_filter(63,1367
+static const char *kset_name(kset_name69,1490
+static int kset_uevent(77,1672
+static struct kset_uevent_ops uevent_ops 91,1911
+static int __init kset_test_init(97,2029
+static void __exit kset_test_exit(117,2362
+
+kernel/kobject/bus/bus_basic.c,218
+static char *Version Version10,181
+static int my_match(13,225
+struct bus_type my_bus_type 18,370
+static ssize_t show_bus_version(23,445
+static int __init my_bus_init(30,626
+static void __exit my_bus_exit(44,868
+
+kernel/kdb/kdb_hello.c,122
+static int kdb_hello_cmd(4,50
+static int __init kdb_hello_cmd_init(17,241
+static void __exit kdb_hello_cmd_exit(24,398
+
+kernel/cdev/memdev.mod.c,63
+struct module __this_module7,124
+__used18,399
+__used43,1558
+
+kernel/cdev/memdev.c,578
+#define MEMDEV_MAJOR 15,298
+#define MEMDEV_NR_DEVS 16,323
+#define MEMDEV_SIZE 17,348
+struct mem_dev 19,374
+	struct cdev cdev;20,391
+	int size;21,410
+	void *data;data22,421
+static int mem_major 25,438
+struct mem_dev *mem_devp;mem_devp26,475
+static struct device *memdev_device;memdev_device28,536
+int mem_open(31,599
+int mem_release(48,981
+static ssize_t mem_read(54,1069
+static ssize_t mem_write(82,1851
+static loff_t mem_llseek(110,2480
+static const struct file_operations mem_fops 135,2948
+static int memdev_init(145,3168
+static void memdev_exit(197,4571
+
+kernel/cdev/test.c,15
+int main(3,39
+
+kernel/my-jiffies/my_jiffies.mod.c,62
+struct module __this_module7,124
+__used18,399
+__used26,579
+
+kernel/my-jiffies/my_jiffies.c,79
+static int __init jiffies_init(10,171
+static void __exit jiffies_exit(16,279
+
+kernel/prog/1/hello.mod.c,62
+struct module __this_module7,124
+__used18,399
+__used25,591
+
+kernel/prog/1/hello.c,74
+static int __init hello_init(7,105
+static void __exit hello_exit(13,184
+
+kernel/my-timer/my-timer.c,79
+static int __init my_timer_init(6,75
+static void __exit my_timer_exit(12,159
+
+kernel/my-timer/my-timer.mod.c,62
+struct module __this_module7,124
+__used18,399
+__used25,591
+
+c/8_process_control/test_fork.c,70
+#define  MAX 5,60
+int glob 7,79
+char buf[buf8,93
+int main(10,130
+
+c/8_process_control/test_lock.c,37
+#define FILE 8,123
+int main(10,158
+
+c/8_process_control/test_vfork.c,34
+int glob 11,329
+int main(13,344
+
+c/8_process_control/test_jmp.c,115
+static jmp_buf jmp;6,80
+static int globval;9,158
+int main(11,179
+static void f1(42,847
+static void f2(51,1036
+
+c/8_process_control/test_1.c,37
+#define FILE 8,123
+int main(10,158
+
+c/8_process_control/test_rlimit.c,15
+int main(4,46
+
+c/8_process_control/test_uname.c,15
+int main(7,85
+
+c/8_process_control/test_abort.c,43
+static void my_exit(6,61
+int main(11,112
+
+c/10_signal/sigtstp.c,73
+ #define BUFFSIZE	9,151
+ int main(13,204
+ static void sig_tstp(30,541
+
+c/10_signal/1.c,45
+static void my_alarm(8,185
+int main(23,517

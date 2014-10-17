@@ -36,4 +36,6 @@ geoclue:x:110:993:added by portage for geoclue:/var/lib/geoclue:/sbin/nologin
 gdm:x:111:992:added by portage for gdm:/var/lib/gdm:/sbin/nologin
 ftp:x:21:21:added by portage for ftpbase:/home/ftp:/sbin/nologin
 nginx:x:112:991:added by portage for nginx:/var/lib/nginx:/sbin/nologin
-lyt:x:1000:1000:liyunteng:/home/lyt:/bin/bash
+lyt:x:1000:1000:lyt:/home/lyt:/bin/bash
+transmission:x:113:990:added by portage for transmission:/dev/null:/sbin/nologin
+p2p:x:114:100:added by portage for mldonkey:/home/p2p:/sbin/nologin

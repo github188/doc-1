@@ -40,7 +40,7 @@ lpadmin:x:106:
 ldap:x:439:
 postmaster:x:105:
 nullmail:x:88:
-mysql:x:60:
+mysql:x:60:lyt
 colord:x:104:
 cron:x:16:
 crontab:x:103:

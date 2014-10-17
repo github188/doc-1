@@ -59,3 +59,4 @@ gdm:x:992:lyt
 ftp:x:21:lyt
 nginx:x:991:lyt
 lyt:x:1000:
+transmission:x:990:

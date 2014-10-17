@@ -18,12 +18,12 @@
 # ssh_config(5) man page.
 
 # Host *
-   ForwardAgent yes
-   ForwardX11 yes
-   RhostsRSAAuthentication yes
+#   ForwardAgent yes
+#   ForwardX11 yes
+#   RhostsRSAAuthentication yes
 #   RSAAuthentication yes
 #   PasswordAuthentication yes
-   HostbasedAuthentication yes
+#   HostbasedAuthentication yes
 #   GSSAPIAuthentication no
 #   GSSAPIDelegateCredentials no
 #   BatchMode no
