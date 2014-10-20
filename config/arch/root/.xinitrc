@@ -10,12 +10,15 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   done
   unset f
 fi
-export XIM=fcitx
-export XMODIFIERS=@im=fcitx
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-
-# exec gnome-session
+#export XIM=fcitx
+#export XMODIFIERS=@im=fcitx
+#export GTK_IM_MODULE=fcitx
+#export QT_IM_MODULE=fcitx
+export XIM=ibus
+export XMODIFIERS=@im=ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+ exec gnome-session
 # exec startkde
- exec startxfce4
+# exec startxfce4
 # ...or the Window Manager of your choice
