@@ -1,5 +1,5 @@
 /*
- *更新时间: < 修改人[liyunteng] 2014/10/15 12:20:11 >
+ *更新时间: < 修改人[liyunteng] 2014/10/27 10:59:53 >
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,7 +30,7 @@
  static void sig_tstp(int signo)
  {
 	 sigset_t mask;
-	 psignal()
+	 
 	 sigemptyset(&mask);
 	 sigprocmask(SIG_UNBLOCK, &mask, NULL);
 
