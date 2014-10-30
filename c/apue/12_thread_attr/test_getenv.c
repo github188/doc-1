@@ -4,7 +4,7 @@
  * Copyright (C) 2014,2015,  <li_yunteng@163.com>
  * Auther: liyunteng  
  * License: GPL 
- * Update time:  2014/10/29 00:19:14
+ * Update time:  2014/10/29 11:51:25
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -36,7 +36,7 @@ char *getenv(const char *);
 void *work(void *arg)
 {
 	//char buf[MAXLINE+1];
-	int err;
+	//int err;
 	char *buf;
 	
 	/* err = getenv_r("PWD", buf, MAXLINE); */
