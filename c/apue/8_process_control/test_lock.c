@@ -4,6 +4,8 @@
 #include <sys/utsname.h>
 #include <errno.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define FILE "/run/lock/lyt.lock"
 
@@ -78,7 +80,7 @@ int main(int argc, char *argv[])
 				strerror(errno));
 			return(-1);
 		}
-		waitpid(pid, NULL, NULL);
+		waitpid(pid, NULL, 0);
 		unlink(FILE);
 	}
 	

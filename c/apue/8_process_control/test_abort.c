@@ -11,7 +11,7 @@ static void my_exit(void)
 int main(int argc, char *argv[])
 {
 	char *p = NULL;
-	char *n = "TEST=lyt";
+	//char *n = "TEST=lyt";
 	if (atexit(my_exit) != 0 ){
 		fprintf(stderr, "atexit register failed!\n");
 		return -1;

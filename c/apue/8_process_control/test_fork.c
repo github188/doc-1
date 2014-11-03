@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 
 #define  MAX (10)
 
@@ -13,8 +15,7 @@ int main(int argc, char *argv[])
 	pid_t pid;
 
 	var = 88;
-	MAX;
-
+	
         if ( write(STDOUT_FILENO, buf, sizeof(buf)-1) != sizeof(buf)-1) {
 		fprintf(stderr,"write error!\n");
 	}
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
 		glob ++;
 		var ++;
 	} else {
-		waitpid(pid, NULL, NULL);
+		waitpid(pid, NULL, 0);
 	}
 
 	printf("pid=%d, glob=%d, var=%d\n", getpid(), glob, var); 

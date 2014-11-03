@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	printf("release: %s\n", name.release);
 	printf("version: %s\n", name.version);
 	printf("machine: %s\n", name.machine);
-	printf("domainname: %s\n", name.__domainname);
+	
 	
 	return 0;
 }

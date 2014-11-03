@@ -9,4 +9,4 @@ daemon_reconfig : $(OBJECTS)
 
 .PHONE : clean
 clean:
-	rm -rf $(OBJECTS)
+	rm -rf $(OBJECTS) daemon_reconfig
