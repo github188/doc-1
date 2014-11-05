@@ -4,7 +4,7 @@
  * Copyright (C) 2014,2015,  <li_yunteng@163.com>
  * Auther: liyunteng  
  * License: GPL 
- * Update time:  2014/11/02 00:41:11
+ * Update time:  2014/11/04 13:48:17
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -57,8 +57,8 @@
 
 
 	 signal(SIGTSTP, SIG_DFL);
-
+	 
 	 kill(getpid(), SIGTSTP);
-
+         
 	 signal(SIGTSTP, sig_tstp);
 }
