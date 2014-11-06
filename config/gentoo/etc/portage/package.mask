@@ -1,0 +1,2 @@
+dev-java/oracle-jdk-bin
+dev-java/oracle-jre-bin

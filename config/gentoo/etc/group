@@ -27,7 +27,7 @@ nobody:x:65534:
 sshd:x:22:lyt
 man:x:15:
 input:x:249:
-mail:x:12:
+mail:x:12:postfix
 ntp:x:123:
 systemd-journal:x:122:lyt
 systemd-bus-proxy:x:121:
@@ -60,3 +60,6 @@ ftp:x:21:lyt
 nginx:x:991:lyt
 lyt:x:1000:
 transmission:x:990:
+other:x:1001:
+postfix:x:207:
+postdrop:x:208:

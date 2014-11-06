@@ -20,10 +20,6 @@
 #/dev/cdrom		/mnt/cdrom	auto		noauto,ro	0 0
 #/dev/fd0		/mnt/floppy	auto		noauto		0 0
 
-#UUID=007ff650-145b-4ca5-a35c-f6c9deb0fc96  /boot 	ext4  	noatime 	1 2 
-#UUID=eb6fddff-f1b9-490f-968a-ae824ee2627f  /		ext4 	noatime 	0 1
-#UUID=e9e49a14-1a86-4bbe-a4f9-1e50df1a3cb5  none 	swap 	sw 		0 0
-
-UUID=a098498a-5a64-49d3-b4bf-cc812a4481c3	/boot	ext4	noatime		1 2
-UUID=f39d7517-b095-4c0a-a839-a1de722afc44	/	ext4	noatime		0 1
-UUID=e6f37918-e70e-4c67-a7d8-7d4794c8df87	/usr	ext4	defaults	0 1
+UUID=007ff650-145b-4ca5-a35c-f6c9deb0fc96  /boot 	ext4  	noatime 	1 2 
+UUID=eb6fddff-f1b9-490f-968a-ae824ee2627f  /		ext4 	noatime 	0 1
+UUID=e9e49a14-1a86-4bbe-a4f9-1e50df1a3cb5  none 	swap 	sw 		0 0
