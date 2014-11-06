@@ -1,5 +1,5 @@
 /*
- * mqnotifysig4.c--
+ * mqnotifysig5.c--
  *
  * Copyright (C) 2014,2015,  <li_yunteng@163.com>
  * Auther: liyunteng
@@ -25,20 +25,22 @@
 #include <mqueue.h>
 #include "../unpipc.h"
 
+static void sig_usr1(int);
+static int fd[2];
+
 int main(int argc, char *argv[])
 {
-	int		signo, err;
-	mqd_t		mqd;
-	void		*buf;
-	ssize_t		n;
-	sigset_t	newmask;
-	struct mq_attr	attr;
-	struct sigevent	sigev;
+	int     c, n, err;
+	mqd_t	mqd;
+	void	*buf;
+	fd_set	rfd;
+	struct mq_attr attr;
+	struct sigevent sigev;
 
-	if (argc != 2)
-		err_quit("usage: mqnotifysig4 <name>\n");
-
-	if ((mqd = mq_open(argv[1], O_RDONLY | O_NONBLOCK)) < 0) {
+	if (argc != 2) {
+		err_quit("usage: mqnotifysig5 <name>\n");
+	}
+	if ((mqd = mq_open(argv[1] , O_RDONLY|O_NONBLOCK)) < 0) {
 		err_sys("mq_open error: ");
 	}
 	if (mq_getattr(mqd, &attr) < 0) {
@@ -49,41 +51,59 @@ int main(int argc, char *argv[])
 		err_sys("malloc error: ");
 	}
 
-	if (sigemptyset(&newmask) < 0) {
-		err_sys("sigemptyset error: ");
+	if (pipe(fd) < 0) {
+		err_sys("pipe error: ");
 	}
-	if (sigaddset(&newmask, SIGUSR1) < 0) {
-		err_sys("sigaddset error: ");
+	
+	if (signal(SIGUSR1, sig_usr1) == SIG_ERR) {
+		err_sys("signal error: ");
 	}
-	if (sigprocmask(SIG_BLOCK, &newmask, NULL) < 0) {
-		err_sys("sigprocmask error: ");
-	}
-
+	
 	sigev.sigev_notify = SIGEV_SIGNAL;
 	sigev.sigev_signo = SIGUSR1;
 	if (mq_notify(mqd, &sigev) < 0) {
-		err_sys("mq_notfiy error: ");
+		err_sys("mq_notify error: ");
 	}
 
-	for (;;) {
-		if ((err=sigwait(&newmask, &signo)) != 0) {
-			fprintf(stderr, "sigwait error: %s\n",
-				strerror(errno));
-			exit(err);
+	FD_ZERO(&rfd);
+	for(;;) {
+		FD_SET(fd[0], &rfd);
+		/* 不能根据是否小于0来进行判断，系统调用被中断后，返
+		 * 回-1, errno赋值为EINTR,此时并没有错误。 */
+		err = select(fd[0]+1, &rfd, NULL, NULL, NULL);
+		if (err < 0 && errno != EINTR) {
+			err_sys("select error: ");
 		}
-		if (signo == SIGUSR1) {
-			if (mq_notify(mqd, &sigev) < 0) {
-				err_sys("mq_notify error: ");
+		
+		if (FD_ISSET(fd[0], &rfd)) {
+			if (read(fd[0], &c, 1) != 1) {
+				err_sys("read error: ");
 			}
-			while ((n = mq_receive(mqd, buf, attr.mq_msgsize, NULL)) >= 0) {
+			if (mq_notify(mqd, &sigev) < 0) {
+				err_sys("mq_notfiy error: ");
+			}
+			while((n=mq_receive(mqd, buf, attr.mq_msgsize, NULL)) >= 0) {
 				printf("read %ld bytes\n", (long)n);
 			}
-			if (errno != EAGAIN){
+			if (errno != EAGAIN) {
 				err_sys("mq_receive error: ");
 			}
-		}
-	}
 		
+		}
+	}	
 	return 0;
 }
+
+static void sig_usr1(int signo)
+{
+	/* 
+         * if (write(fd[1], "", 1) != 1) {
+	 * 	err_sys("write error: ");
+	 * }
+	 * return;
+         */
+	write(fd[1], "", 1);
+}
+
+
 
