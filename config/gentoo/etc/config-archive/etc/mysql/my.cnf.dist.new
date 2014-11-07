@@ -67,7 +67,7 @@ lc_messages			= en_US
 # security:
 # using "localhost" in connects uses sockets by default
 # skip-networking
-#bind-address				= 127.0.0.1
+bind-address				= 127.0.0.1
 
 log-bin
 server-id 					= 1

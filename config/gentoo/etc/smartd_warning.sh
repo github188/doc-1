@@ -2,7 +2,7 @@
 #
 # smartd warning script
 #
-# Copyright (C) 2012-13 Christian Franke <smartmontools-support@lists.sourceforge.net>
+# Copyright (C) 2012-14 Christian Franke <smartmontools-support@lists.sourceforge.net>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,22 +12,23 @@
 # You should have received a copy of the GNU General Public License
 # (for example COPYING); If not, see <http://www.gnu.org/licenses/>.
 #
-# $Id: smartd_warning.sh.in 3784 2013-03-06 22:02:54Z chrfranke $
+# $Id: smartd_warning.sh.in 3932 2014-06-29 19:02:38Z chrfranke $
 #
 
 set -e
 
 # Set by config.status
 PACKAGE="smartmontools"
-VERSION="6.1"
+VERSION="6.3"
 prefix="/usr"
 sysconfdir="/etc"
+smartdscriptdir="${sysconfdir}"
 
 # Default mailer
 os_mailer="mail"
 
-# Plugin directory
-plugindir="$sysconfdir/smartd_warning.d"
+# Plugin directory (disabled if empty)
+plugindir="${smartdscriptdir}/smartd_warning.d"
 
 # Parse options
 dryrun=
@@ -45,7 +46,7 @@ Usage:
   export SMARTD_MESSAGE='Error Message'
   export SMARTD_FAILTYPE='Type of failure, "EMailTest" for tests'
   export SMARTD_TFIRST='Date of first message sent, empty if none'
-  export SMARTD_TFIRSTEPOCH='time_t format of above'
+  #export SMARTD_TFIRSTEPOCH='time_t format of above'
   export SMARTD_PREVCNT='Number of previous messages, 0 if none'
   export SMARTD_NEXTDAYS='Number of days until next message, empty if none'
   export SMARTD_DEVICEINFO='Device identify information'
@@ -63,7 +64,7 @@ if [ -z "${SMARTD_ADDRESS}${SMARTD_MAILER}" ]; then
 fi
 
 # Get host and domain names
-for cmd in 'hostname' 'uname -n' 'echo "${HOSTNAME?unset}"' 'echo "[Unknown]"'; do
+for cmd in 'hostname' 'echo "[Unknown]"'; do
   hostname=`eval $cmd 2>/dev/null` || continue
   test -n "$hostname" || continue
   break
@@ -71,26 +72,21 @@ done
 
 dnsdomain=${hostname#*.}
 if [ "$dnsdomain" != "$hostname" ]; then
-  # BSD 'hostname' prints FQDN
+  # hostname command printed FQDN
   hostname=${hostname%%.*}
 else
-  #           Linux           Cygwin
-  for cmd in 'dnsdomainname' 'echo "${USERDNSDOMAIN?unset}"' 'echo'; do
+  for cmd in 'dnsdomainname' 'hostname -d' 'echo'; do
     dnsdomain=`eval $cmd 2>/dev/null` || continue
     break
   done
+  test "$dnsdomain" != "(none)" || dnsdomain=
 fi
 
-for cmd in 'nisdomainname' 'ypdomainname' 'domainname' 'echo'; do
+for cmd in 'nisdomainname' 'hostname -y' 'domainname' 'echo'; do
   nisdomain=`eval $cmd 2>/dev/null` || continue
   break
 done
 test "$nisdomain" != "(none)" || nisdomain=
-
-case $OS in
-  Windows*) windomain=$USERDOMAIN ;;
-  *)        windomain= ;;
-esac
 
 # Format subject
 export SMARTD_SUBJECT="SMART error (${SMARTD_FAILTYPE-[SMARTD_FAILTYPE]}) detected on host: $hostname"
@@ -103,8 +99,8 @@ fullmessage=`
   echo "   DNS domain: ${dnsdomain:-[Empty]}"
   test -z "$nisdomain" ||
     echo "   NIS domain: $nisdomain"
-  test -z "$windomain" ||
-    echo "   Win domain: $windomain"
+  #test -z "$USERDOMAIN" ||
+  #  echo "   Win domain: $USERDOMAIN"
   echo
   echo "The following warning/error was logged by the smartd daemon:"
   echo
@@ -132,7 +128,8 @@ export SMARTD_FULLMESSAGE="$fullmessage
 "
 
 # Run plugin scripts if requested
-case " $SMARTD_ADDRESS" in
+if test -n "$plugindir"; then
+ case " $SMARTD_ADDRESS" in
   *\ @*)
     if [ -n "$dryrun" ]; then
       echo "export SMARTD_SUBJECT='$SMARTD_SUBJECT'"
@@ -182,7 +179,8 @@ case " $SMARTD_ADDRESS" in
     # Send email to remaining addresses
     test -n "$SMARTD_ADDRESS" || exit 0
     ;;
-esac
+ esac
+fi
 
 # Send mail or run command
 if [ -n "$SMARTD_ADDRESS" ]; then
