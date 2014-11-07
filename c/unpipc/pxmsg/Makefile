@@ -1,11 +1,11 @@
 OBJECTS := mqcreate1.o mqunlink.o mqgetattr.o mqcreate.o mqsend.o \
 	mqreceive.o mqsysconf.o mqnotifysig1.o mqnotifysig2.o  \
-	mqnotifysig3.o mqnotifysig4.o mqnotifysig5.o
+	mqnotifysig3.o mqnotifysig4.o mqnotifysig5.o mqnotifythread1.o
 CFLAGS += -Wall -g
 LIBS += -lrt
 TARGETS := mqunlink mqgetattr mqcreate mqcreate1 mqsend mqreceive \
 	mqsysconf mqnotifysig1 mqnotifysig2 mqnotifysig3 mqnotifysig4 \
-	mqnotifysig5
+	mqnotifysig5 mqnotifythread1
 
 all: $(TARGETS)
 
@@ -33,6 +33,8 @@ mqnotifysig4 : mqnotifysig4.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 mqnotifysig5 : mqnotifysig5.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+mqnotifythread1 : mqnotifythread1.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS) -lpthread
 
 .PHONE : clean
 clean:

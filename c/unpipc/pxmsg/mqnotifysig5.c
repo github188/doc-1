@@ -96,13 +96,11 @@ int main(int argc, char *argv[])
 
 static void sig_usr1(int signo)
 {
-	/* 
-         * if (write(fd[1], "", 1) != 1) {
-	 * 	err_sys("write error: ");
-	 * }
-	 * return;
-         */
-	write(fd[1], "", 1);
+	if (write(fd[1], "", 1) != 1) {
+		err_sys("write error: ");
+	}
+	return;
+
 }
 
 
