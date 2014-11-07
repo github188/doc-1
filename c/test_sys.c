@@ -26,243 +26,247 @@
 int main(int argc, char *argv[])
 {
 
-#define __STRICT_ANSI__
+#ifdef __STRICT_ANSI__
 	
 	printf("__STRICT_ANSI__\n");
 	
-// // __STRICT_ANSI__
+#endif // __STRICT_ANSI__
 
-#define _ISOC99_SOURCE
+#ifdef _ISOC99_SOURCE
 	
 	printf("_ISOC99_SOURCE\n");
 	
-// // _ISOC99_SOURCE
+#endif // _ISOC99_SOURCE
 
-#define _ISOC11_SOURCE
+#ifdef _ISOC11_SOURCE
 	
 	printf("_ISOC11_SOURCE\n");
 	
-// // _ISOC11_SOURCE
+#endif // _ISOC11_SOURCE
 
-#define _POSIX_SOURCE
+#ifdef _POSIX_SOURCE
 	
 	printf("_POSIX_SOURCE\n");
 	
-// // _POSIX_SOURCE
+#endif // _POSIX_SOURCE
 
-#define _POSIX_C_SOURCE
+#ifdef _POSIX_C_SOURCE
 	
 	printf("_POSIX_C_SOURCE\n");
 	
-// // _POSIX_C_SOURCE
+#endif // _POSIX_C_SOURCE
 
-#define _XOPEN_SOURCE
+#ifdef _XOPEN_SOURCE
 	
 	printf("_XOPEN_SOURCE\n");
 	
-// // _XOPEN_SOURCE
+#endif // _XOPEN_SOURCE
 
-#define _XOPEN_SOURCE_EXTENDED
+#ifdef _XOPEN_SOURCE_EXTENDED
 	
 	printf("_XOPEN_SOURCE_EXTENDED\n");
 	
-// // _XOPEN_SOURCE_EXTENDED
+#endif // _XOPEN_SOURCE_EXTENDED
 
-#define _LARGEFILE_SOURCE
+#ifdef _LARGEFILE_SOURCE
 	
 	printf("_LARGEFILE_SOURCE\n");
 	
-// // _LARGEFILE_SOURCE
+#endif // _LARGEFILE_SOURCE
 
-#define _LARGEFILE64_SOURCE
+#ifdef _LARGEFILE64_SOURCE
 
 	printf("_LARGEFILE64_SOURCE\n");
 	
-// // _LARGEFILE64_SOURCE
+#endif // _LARGEFILE64_SOURCE
 
-#define _BSD_SOURCE
+#ifdef _BSD_SOURCE
 	
 	printf("_BSD_SOURCE\n");
 	
-// // _BSD_SOURCE
+#endif // _BSD_SOURCE
 
-#define _SVID_SOURCE
+#ifdef _SVID_SOURCE
 	
 	printf("_SVID_SOURCE\n");
 	
-// // _SVID_SOURCE
+#endif // _SVID_SOURCE
 
-#define _ATFILE_SOURCE
+#ifdef _ATFILE_SOURCE
 	
 	printf("_ATFILE_SOURCE\n");
 	
-// // _ATFILE_SOURCE
+#endif // _ATFILE_SOURCE
 
-#define _GNU_SOURCE
+#ifdef _GNU_SOURCE
 	
 	printf("_GNU_SOURCE\n");
 	
-// // _GNU_SOURCE
+#endif // _GNU_SOURCE
 
-#define _DEFAULT_SOURCE
+#ifdef _DEFAULT_SOURCE
 	
 	printf("_DEFUALT_SOURCE\n");
 	
-// // _DEFAULT_SOURCE
+#endif // _DEFAULT_SOURCE
 
-#define _REENTRANT
+#ifdef _REENTRANT
 	
 	printf("_REENTRANT\n");
 	
-// // _REENTRANT
+#endif // _REENTRANT
 
-#define _THREAD_SAFE
+#ifdef _THREAD_SAFE
 	
 	printf("_THREAD_SAFE\n");
 	
-// // _THREAD_SAFE
+#endif // _THREAD_SAFE
 
-#define _FORTIFY_SOURCE
+#ifdef _FORTIFY_SOURCE
 	
 	printf("_FORTIFY_SOURCE\n");
 	
-// // _FORTIFY_SOURCE
+#endif // _FORTIFY_SOURCE
 
-#define __USE_ISOC11
+#ifdef __USE_ISOC11
 	
 	printf("__USE_ISOC11\n");
 	
-// // __USE_ISOC11
+#endif // __USE_ISOC11
 
-#define __USE_ISOC99
+#ifdef __USE_ISOC99
 	
 	printf("__USE_ISOC99\n");
 	
-// // __USE_ISOC99
+#endif // __USE_ISOC99
 
-#define __USE_ISOC95
+#ifdef __USE_ISOC95
 	
 	printf("__USE_ISOC95\n");
 	
-// // __USE_ISOC95
+#endif // __USE_ISOC95
 	
-#define __USE_POSIX
+#ifdef __USE_POSIX
 	
 	printf("__USE_POSIX\n");
 	
-// // __USE_POXIS	
+#endif // __USE_POXIS	
 
-#define __USE_POSIX2
+#ifdef __USE_POSIX2
 	
 	printf("__USE_POSIX2\n");
 	
-// // __USE_POSIX2
+#endif // __USE_POSIX2
 
-#define __USE_POSIX199309
+#ifdef __USE_POSIX199309
 	
 	printf("__USE_POSIX199309\n");
 	
-// // __USE_POSIX199309
-#define __USE_POSIX199506
+#endif // __USE_POSIX199309
+#ifdef __USE_POSIX199506
 	
 	printf("__USE_POSIX199506\n");
 	
-// // __USE_POSIX199506
+#endif // __USE_POSIX199506
 
-#define __USE_XOPEN
+#ifdef __USE_XOPEN
 	
 	printf("__USE_XOPEN\n");
 	
-// // __USE_XOPEN
+#endif // __USE_XOPEN
 
-#define __USE_XOPEN_EXTENDED
+#ifdef __USE_XOPEN_EXTENDED
 	
 	printf("__USE_XOPEN_EXTENDED\n");
 	
-// // __USE_XOPEN_EXTENDED
+#endif // __USE_XOPEN_EXTENDED
 
-#define __USE_UNIX98
+#ifdef __USE_UNIX98
 	
 	printf("__USE_UNI98\n");
 	
-// // __USE_UNIX98
+#endif // __USE_UNIX98
 
-#define __USE_XOPEN2K
+#ifdef __USE_XOPEN2K
 	
 	printf("__USE_XOPEN2K\n");
 	
-// // __USE_XOPEN2K
+#endif // __USE_XOPEN2K
 
-#define __USE_XOPEN2KXSI
+#ifdef __USE_XOPEN2KXSI
 	
 	printf("__USE_XOPEN2KXSI\n");
 	
-// // __USE_XOPEN2KXSI
-#define __USE_XOPEN2K8
+#endif // __USE_XOPEN2KXSI
+#ifdef __USE_XOPEN2K8
 	
 	printf("__USE_XOPEN2K8\n");
 	
-// // __USE_XOPEN2K8
+#endif // __USE_XOPEN2K8
 
-#define __USE_XOPEN2K8XSI
+#ifdef __USE_XOPEN2K8XSI
 	
 	printf("__USE_XOPEN2K8XSI\n");
 	
-// // __USE_XOPEN2K8XSI
+#endif // __USE_XOPEN2K8XSI
 
-#define __USE_LARGEFILE
+#ifdef __USE_LARGEFILE
 	
 	printf("__USE_LARGEFILE\n");
 	
-// // __USE_LARGEFILE
+#endif // __USE_LARGEFILE
 
-#define __USE_LARGEFILE64
+#ifdef __USE_LARGEFILE64
 	
 	printf("__USE_LARGEFILE64\n");
 	
-// // __USE_LARGEFILE64
+#endif // __USE_LARGEFILE64
 
-#define __USE_FILE_OFFSET64
+#ifdef __USE_FILE_OFFSET64
 	
 	printf("__USE_FILE_OFFSET64\n");
 	
-// // __USE_FILE_OFFSET64
+#endif // __USE_FILE_OFFSET64
 
-#define __USE_BSD
+#ifdef __USE_BSD
 	
 	printf("__USE_BSD\n");
 	
-// // __USE_BSD
+#endif // __USE_BSD
 
-#define __USE_SVID
+#ifdef __USE_SVID
 	
 	printf("__USE_SVID\n");
 	
-// // __USE_SVID
+#endif // __USE_SVID
 
-#define __USE_MISC
+#ifdef __USE_MISC
 	
 	printf("__USE_MISC\n");
 	
-// // __USE_MISC
-#define __USE_ATFILE
+#endif // __USE_MISC
+#ifdef __USE_ATFILE
 	
 	printf("__USE_ATFILE\n");
 	
-// // __USE_ATFILE
-#define __USE_GNU
+#endif // __USE_ATFILE
+#ifdef __USE_GNU
 	
 	printf("__USE_GNU\n");
 	
-// // __USE_GNU
-#define __USE_REENTRANT
+#endif // __USE_GNU
+#ifdef __USE_REENTRANT
 	
 	printf("__USE_REENTRANT\n");
 	
-#define __USE_FORTIFY_LEVEL
+#endif // __USE_REENTRANT
+#ifdef __USE_FORTIFY_LEVEL
+	
+	printf("__USE_FORTIFY_LEVEL\n");
+	
+#endif // __USE_FORTIFY_LEVEL
 
-#include <signal.h>
-	sigqueue(__pid_t __pid, int __sig, const union sigval __val);
+	
 	return 0;
 }
 
