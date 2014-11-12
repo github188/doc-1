@@ -1,9 +1,9 @@
 CFLAGS += -Wall -O2 -I../
-LDFLAGS += -lpthread -lrt
+LDFLAGS += -lpthread
 STRIP = strip
 ifdef debug
 	STRIP =
-	CFLAGS = -Wall -g -DDEBUG 
+	CFLAGS = -Wall -g -DDEBUG  -I../
 endif
 
 SRC = $(wildcard *.c)
@@ -30,4 +30,4 @@ test : LDFLAGS=
 .PHONY: clean 
 clean:
 	@echo "cleanning..."
-	@rm -rf $(OBJECTS) $(TARGETS) $(DEP)
+	@rm -rf $(OBJECTS) $(TARGETS) $(DEP) *.d.*

@@ -1,13 +1,34 @@
-OBJECTS := test1.o signal_rt.o
-CFLAGS += -Wall
-LIBS += -lrt
-TARGETS := test1
+CFLAGS += -Wall -O2 -I../
+LDFLAGS += -lpthread -lrt
+STRIP = strip
+ifdef debug
+	STRIP =
+	CFLAGS = -Wall -g -DDEBUG 
+endif
 
-all: $(TARGETS)
+SRC = $(wildcard *.c)
+OBJECTS = $(SRC:%.c=%.o)
+DEP = $(SRC:%.c=%.d)
+TARGETS = test1
 
-test1: test1.o signal_rt.o
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+all : $(TARGETS)
+test1 : signal_rt.o
+$(TARGETS) : % : %.o
+	$(CC) $(CFLAGS) -o $@ $^  $(LDFLAGS)
+ifneq ($(STRIP),)
+	$(STRIP) $@
+endif
 
-.PHONE: clean
+%.d : %.c
+	@set -e; rm -rf $@; \
+	$(CC) -MM $(CFLAGS) $< > $@.$$$$; \
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $;$@; \
+	rm -rf $@.$$$$
+-include $(DEP)
+
+test : LDFLAGS=
+
+.PHONY: clean 
 clean:
-	rm -rf $(OBJECTS) $(TARGETS)
+	@echo "cleanning..."
+	@rm -rf $(OBJECTS) $(TARGETS) $(DEP)

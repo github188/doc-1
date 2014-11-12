@@ -1,35 +1,32 @@
-OBJECTS := client_main.o server_main.o mainfifo.o mainpopen.o \
-mainpipe.o comm.o mainserver.o mainclient.o
-TARGETS := client_main server_main mainfifo mainpopen mainpipe \
-mainserver mainclient
-CFLAGS += -Wall -g
+CFLAGS += -Wall -O2 -I../
+LDFLAGS += -lpthread
+STRIP = strip
+ifdef debug
+	STRIP =
+	CFLAGS = -Wall -g -DDEBUG 
+endif
 
-all:  $(TARGETS) $(OBJECTS)
+SRC = $(wildcard *.c)
+OBJECTS = $(SRC:%.c=%.o)
+DEP = $(SRC:%.c=%.d)
+TARGETS = $(filter-out comm,$(OBJECTS:%.o=%))
 
-comm.o : comm.c comm.h ../unpipc.h
-	$(CC) -c  $^ $(CFLAGS)
+all : $(TARGETS)
+$(TARGETS) : comm.o
+$(TARGETS) : % : %.o
+	$(CC) $(CFLAGS) -o $@ $^  $(LDFLAGS)
+ifneq ($(STRIP),)
+	$(STRIP) $@
+endif
 
-client_main : comm.o client_main.o
-	$(CC) -o $@ $^  $(CFLAGS)
+%.d : %.c
+	@set -e; rm -rf $@;\
+	$(CC) -MM $(CFLAGS) $< > $@.$$$$; \
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $;$@; \
+	rm -rf $@.$$$$
+-include $(DEP)
 
-server_main: comm.o server_main.o
-	$(CC) -o $@ $^ $(CFLAGS)
-
-mainfifo: comm.o mainfifo.o
-	$(CC) -o $@ $^ $(CFLAGS)
-
-mainpopen: comm.o mainpopen.o
-	$(CC) -o $@ $^ $(CFLAGS)
-
-mainpipe: comm.o mainpipe.o
-	$(CC) -o $@ $^ $(CFLAGS)
-
-mainserver: comm.o mainserver.o
-	$(CC) -o $@ $^ $(CFLAGS)
-
-mainclient: comm.o mainclient.o
-	$(CC) -o $@ $^ $(CFLAGS)
-
-.PHONY : clean
-clean :
-	rm -rf *.o $(OBJECTS) $(TARGETS)
+.PHONY: clean 
+clean:
+	@echo "cleanning..."
+	@rm -rf $(OBJECTS) $(TARGETS) $(DEP)
