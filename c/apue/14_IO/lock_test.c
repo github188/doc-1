@@ -4,7 +4,7 @@
  * Copyright (C) 2014,2015,  <li_yunteng@163.com>
  * Auther: liyunteng  
  * License: GPL 
- * Update time:  2014/10/30 12:07:30
+ * Update time:  2014/11/12 14:59:44
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -58,8 +58,9 @@ int main(int argc, char *argv[])
 	lock.l_whence = SEEK_SET;
 	lock.l_len = 0;
 	
-	
-	if ((fd = open("./tmplock", O_RDWR|O_CREAT, 2604)) < 0) {
+	/* 注意是5604 而不是2604 g+s,g-x, 设置T，S位的时候取掩码 */
+	/* 需要挂载时，指定 -o mand选项 */
+	if ((fd = open("./tmplock", O_RDWR|O_CREAT, 5604)) < 0) {
 		fprintf(stderr, "open file error: %s\n", strerror(errno));
 		return (errno);
 	}
