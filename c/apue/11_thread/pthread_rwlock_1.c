@@ -2,9 +2,9 @@
  * pthread_rwlock_1.c--
  *
  * Copyright (C) 2014,2015,  <li_yunteng@163.com>
- * Auther: liyunteng  
- * License: GPL 
- * Update time:  2014/10/28 17:30:49
+ * Auther: liyunteng
+ * License: GPL
+ * Update time:  2014/11/14 17:20:10
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -18,8 +18,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
- * 
- */ 
+ *
+ */
 
 #include <stdlib.h>
 #include <pthread.h>
@@ -49,7 +49,7 @@ int queue_init(struct queue *qp)
 
 	qp->q_head = NULL;
 	qp->q_tail = NULL;
-	err = pthread_rwlock_init(&qp->q_lock, NULL); 
+	err = pthread_rwlock_init(&qp->q_lock, NULL);
 	if (err != 0)
 		return (err);
 	/* ... continue Initializetion ... */
@@ -133,4 +133,3 @@ struct job *job_find(struct queue *qp, pthread_t id)
 	pthread_rwlock_unlock(&qp->q_lock);
 	return(jp);
 }
- 

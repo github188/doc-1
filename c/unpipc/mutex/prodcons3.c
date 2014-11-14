@@ -1,3 +1,4 @@
+
 /*
  * prodcons2.c--
  *
@@ -21,7 +22,7 @@
  *
  */
 
-#include "../unpipc.h"
+#include "unpipc.h"
 #include <pthread.h>
 
 #define MAXITEMS	1000000
@@ -54,7 +55,7 @@ int main(int argc, char *argv[])
 	nitems = min(atoi(argv[1]), MAXITEMS);
 	nthreads = min(atoi(argv[2]), MAXTHREADS);
 
-	if (pthread_setconcurrency(nthreads) < 0)
+	if (pthread_setconcurrency(nthreads+1) < 0)
 		err_sys("pthread_setconcurrency error: ");
 
 	for (i=0; i<nthreads; i++) {
@@ -62,15 +63,14 @@ int main(int argc, char *argv[])
 		if (pthread_create(&tid_produce[i], NULL, produce, &count[i]) < 0)
 			err_sys("pthread_create produce %ld error: ", i);
 	}
-
+	if (pthread_create(&tid_consume, NULL, consume, NULL) < 0)
+		err_sys("pthread_create consume error: ");
+	
 	for (i=0; i<nthreads; i++) {
 		if (pthread_join(tid_produce[i], NULL) < 0)
 			err_sys("pthread_join %ld error: ", i);
 		printf("count[%d] = %d\n", i, count[i]);
 	}
-
-	if (pthread_create(&tid_consume, NULL, consume, NULL) < 0)
-		err_sys("pthread_create consume error: ");
 	if (pthread_join(tid_consume, NULL) < 0)
 		err_sys("pthread_join consume error: ");
 	return 0;
@@ -98,15 +98,29 @@ void *produce(void *arg)
 		*((int *)arg) += 1;
 	}
 }
-
+void consume_wait(int i)
+{
+	for (;;) {
+		if (pthread_mutex_lock(&shared.mutex) < 0)
+			err_sys("pthread_mutex_lock consume error: ");
+		if (i < shared.nput) {
+			if (pthread_mutex_unlock(&shared.mutex) < 0)
+				err_sys("thread_mutex_unlock consume error: ");
+			return;
+		}
+		pthread_mutex_unlock(&shared.mutex);
+	}
+}
 void *consume(void *arg)
 {
 	int	i;
 
 	for (i=0; i < nitems; i++) {
+		consume_wait(i);
 		if (shared.buf[i] != i)
 			printf("buf[%d] = %d\n", i, shared.buf[i]);
 	}
 	return (NULL);
 }
+
 

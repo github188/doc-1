@@ -2,9 +2,9 @@
  * pthread_mutex_2.c--
  *
  * Copyright (C) 2014,2015,  <li_yunteng@163.com>
- * Auther: liyunteng  
- * License: GPL 
- * Update time:  2014/10/28 16:51:10
+ * Auther: liyunteng
+ * License: GPL
+ * Update time:  2014/11/14 17:19:56
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -18,8 +18,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
- * 
- */ 
+ *
+ */
 
 #include <stdlib.h>
 #include <pthread.h>
@@ -61,14 +61,14 @@ struct foo *foo_alloc(void)	/* allocat the object */
 	return(fp);
 }
 
-void foo_hold(struct foo *fp) 	/* add a reference to the object */
+void foo_hold(struct foo *fp)	/* add a reference to the object */
 {
 	pthread_mutex_lock(&hashlock);
 	fp->f_count++;
 	pthread_mutex_unlock(&hashlock);
 }
 
-struct foo *foo_find(int id) 	/* find a existing object */
+struct foo *foo_find(int id)	/* find a existing object */
 {
 	struct foo	*fp;
 	int		idx;
@@ -110,4 +110,3 @@ void foo_rele(struct foo *fp) /* relesase a reference to the object */
 		pthread_mutex_unlock(&hashlock);
 	}
 }
-	

@@ -2,9 +2,9 @@
  * pthread_mutex_1.c--
  *
  * Copyright (C) 2014,2015,  <li_yunteng@163.com>
- * Auther: liyunteng  
- * License: GPL 
- * Update time:  2014/10/28 16:28:20
+ * Auther: liyunteng
+ * License: GPL
+ * Update time:  2014/11/14 17:14:05
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -18,8 +18,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
- * 
- */ 
+ *
+ */
 
 
 #include <stdlib.h>
@@ -31,7 +31,7 @@ struct foo
 	pthread_mutex_t f_lock;
 };
 
-struct foo *fool_alloc(void) 	/* allocate the object */
+struct foo *fool_alloc(void)	/* allocate the object */
 {
 
 	struct foo *fp;
