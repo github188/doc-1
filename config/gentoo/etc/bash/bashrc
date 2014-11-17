@@ -23,6 +23,7 @@ shopt -s checkwinsize
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
 
+
 # Change the window title of X terminals 
 case ${TERM} in
 	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
@@ -64,23 +65,27 @@ if ${use_color} ; then
 	else
 		PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
 	fi
-
-	alias ls='ls --color=auto'
-	alias grep='grep --colour=auto'
-	alias egrep='egrep --colour=auto'
-	alias fgrep='fgrep --colour=auto'
-
-	alias ll='ls -alF'
-	alias la='ls -A'
-	alias l.='ls -d .*'
-	alias l='ls -CF'
+	
 else
 	if [[ ${EUID} == 0 ]] ; then
 		# show root@ when we don't have colors
-		PS1='\u@\h \W \$ '
+		PS1='\u@\h \w \$ '
 	else
 		PS1='\u@\h \w \$ '
 	fi
+fi
+alias ls='ls --color=auto'
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l.='ls -d .*'
+alias l='ls -CF'
+
+if [ "$TERM" = "eterm-color" ]; then
+   alias eix='eix --nocolor'
 fi
 
 # Try to keep environment pollution down, EPA loves us.

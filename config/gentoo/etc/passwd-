@@ -38,4 +38,7 @@ ftp:x:21:21:added by portage for ftpbase:/home/ftp:/sbin/nologin
 nginx:x:112:991:added by portage for nginx:/var/lib/nginx:/sbin/nologin
 lyt:x:1000:1000:lyt:/home/lyt:/bin/bash
 transmission:x:113:990:added by portage for transmission:/dev/null:/sbin/nologin
-other:x:1001:1001:other:/home/other:/bin/bash
+oprofile:x:114:989:added by portage for oprofile:/dev/null:/sbin/nologin
+postfix:x:207:207:added by portage for postfix:/var/spool/postfix:/sbin/nologin
+dovecot:x:97:97:added by portage for dovecot:/dev/null:/sbin/nologin
+dovenull:x:115:115:added by portage for dovecot:/dev/null:/sbin/nologin
