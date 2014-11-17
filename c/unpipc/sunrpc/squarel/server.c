@@ -30,8 +30,7 @@
 square_out * squareproc_1_svc(square_in *inp, struct svc_req *rqstp)
 {
 	static square_out	out;
-	
-
+	out.resl = inp->argl * inp->argl;
 	return(&out);
 }
 
@@ -44,26 +43,26 @@ square_out * squareproc_2_svc(square_in *inp, struct svc_req *rqstp)
 	       (long)pthread_self(), inp->argl);
 	sleep(5);
 	out.resl = inp->argl * inp->argl;
-	printf("thread %ld done\n", (long)pthread_self);
+	printf("thread %ld done\n", (long)pthread_self());
 	return(&out);
 }
 
 
-/* 
+/*
  * bool_t squareproc_3_svc(square_in *inp, square_out *outp, struct svc_req *rqstp)
  * {
- * 	printf("thread %ld started ,arg = %ld\n",
- * 	       (long)pthread_self(), inp->argl);
- * 	sleep(5);
- * 	outp->resl = inp->argl * inp->argl;
- * 	printf("thread %ld done\n", (long)pthread_self());
- * 	return(TRUE);
+ *	printf("thread %ld started ,arg = %ld\n",
+ *	       (long)pthread_self(), inp->argl);
+ *	sleep(5);
+ *	outp->resl = inp->argl * inp->argl;
+ *	printf("thread %ld done\n", (long)pthread_self());
+ *	return(TRUE);
  * }
- * 
+ *
  * int square_prog_3_freeresult(SVCXPRT *transp, xdrproc_t xdr_result,
- * 			     caddr_t result)
+ *			     caddr_t result)
  * {
- * 	xdr_free(xdr_result, result);
- * 	return (1);
+ *	xdr_free(xdr_result, result);
+ *	return (1);
  * }
  */
