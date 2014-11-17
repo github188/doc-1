@@ -79,7 +79,6 @@ CONSOLE		/etc/securetty
 # be displayed upon login.
 #
 #MOTD_FILE 
-#MOTD_FILE 
 
 #
 # If defined, this file will be output before each login prompt.

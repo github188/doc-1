@@ -9,7 +9,7 @@
 # See the grub info page for documentation on possible variables and
 # their associated values.
 
-GRUB_DISTRIBUTOR="Gentoo"
+GRUB_DISTRIBUTOR="Gentoo Moveable"
 
 # Default menu entry
 #GRUB_DEFAULT=0
@@ -27,13 +27,13 @@ GRUB_TIMEOUT=3
 # GRUB_CMDLINE_LINUX="net.ifnames=0"
 #
 # Boot with systemd instead of sysvinit (openrc)
- GRUB_CMDLINE_LINUX="init=/usr/lib/systemd/systemd rd.shell"
+ GRUB_CMDLINE_LINUX="rootdelay=3 init=/usr/lib/systemd/systemd rd.shell net.ifnames=0 quiet"
 
 # Append parameters to the linux kernel command line for non-recovery entries
 #GRUB_CMDLINE_LINUX_DEFAULT=""
 
 # Uncomment to disable graphical terminal (grub-pc only)
-#GRUB_TERMINAL=console
+GRUB_TERMINAL=console
 
 # The resolution used on graphical terminal.
 # Note that you can use only modes which your graphic card supports via VBE.

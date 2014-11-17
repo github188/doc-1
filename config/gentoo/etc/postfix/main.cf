@@ -73,7 +73,7 @@ mail_owner = postfix
 # other configuration parameters.
 #
 #myhostname = host.domain.tld
-#myhostname = virtual.domain.tld
+myhostname = lyt.gentoo.localdomain
 
 # The mydomain parameter specifies the local internet domain name.
 # The default is to use $myhostname minus the first component.
@@ -656,3 +656,4 @@ sample_directory = /etc/postfix
 readme_directory = no
 inet_protocols = ipv4
 home_mailbox = .maildir/
+alias_maps = hash:/etc/aliases

@@ -18,18 +18,19 @@
 # ssh_config(5) man page.
 
 # Host *
-   ForwardAgent yes
-   ForwardX11 yes
-   RhostsRSAAuthentication yes
+#   ForwardAgent yes
+#   ForwardX11 no
+#   ForwardX11Trusted yes
+#   RhostsRSAAuthentication yes
 #   RSAAuthentication yes
-   PasswordAuthentication yes
+#   PasswordAuthentication yes
 #   HostbasedAuthentication yes
 #   GSSAPIAuthentication no
 #   GSSAPIDelegateCredentials no
 #   BatchMode no
 #   CheckHostIP yes
 #   AddressFamily any
-#   ConnectTimeout 0
+   ConnectTimeout 10
 #   StrictHostKeyChecking ask
 #   IdentityFile ~/.ssh/identity
 #   IdentityFile ~/.ssh/id_rsa

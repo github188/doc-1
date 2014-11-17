@@ -18,3 +18,16 @@ dev-python/virtualenv ~amd64
 dev-jav/oracle-jre-bin ~amd64
 virtual/jre ~amd64
 sys-fs/ntfs3g ~amd64
+sys-kernel/git-sources ~amd64
+=sys-devel/patch-2.7.1-r3 ~amd64
+app-i18n/ibus-table-code ~amd64
+app-i18n/ibus-table-chinese ~amd64
+app-i18n/ibus-table-extraphrase ~amd64
+app-editors/emacs ~amd64
+app-editors/gvim ~amd64
+app-editors/vim-core ~amd64
+app-benchmarks/bootchart2 ~amd64
+www-client/firefox ~amd64
+=x11-libs/libdrm-2.4.58 ~amd64
+=dev-libs/nss-3.17.2 ~amd64
+=media-libs/mesa-10.3.1 ~amd64
