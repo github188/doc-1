@@ -1,0 +1,94 @@
+QWidget#MainWindow{
+    background-color:rgb(12,23,42);
+}
+
+QWidget#VideoWindow{
+    background-color:rgb(100,100,100);
+}
+
+QWidget#blueWindow{
+    background-color:rgb(13,230,230);
+}
+
+QWidget#greenWindow{
+    background-color:rgb(192,192,192);
+}
+
+QWidget#blackWindow{
+    background-color:rgb(64,64,64);
+}
+
+QTreeWidget#DeviceTree{
+    background-color:rgb(12,23,42);
+    color:rgb(255,255,255);
+}
+
+QTreeWidget#DeviceTree QHeaderView::section
+{
+
+  background-color:rgb(12,23,42);
+  border: 1px solid #6c6c6c;
+  color:rgb(255,255,255);
+  height:25px;
+  font-size:20px;
+}
+
+QLabel{
+       color:rgb(255,255,255);
+}
+
+QMenu#menu{
+    background:rgb(12,23,42);
+        border:1px solid lightgray;
+        color:rgb(255,255,255);
+        font:18pt;
+}
+QMenu#menu::item{
+        padding:0px 40px 0px 30px;
+        height:25px;
+}
+QMenu#menu::item:selected:enabled{
+    background:lightgray;
+        color:white;
+}
+QMenu#menu::item:selected:!enabled{
+    background:transparent;
+}
+QMenu#menu::separator{
+    height:1px;
+    background:lightgray;
+        margin:2px 0px 2px 0px;
+}
+QMenu#menu::indicator {
+    padding:10px;
+}
+
+QPushButton#blueButton{
+        color:rgb(0, 120, 230);
+        background:transparent;
+}
+QPushButton#blueButton:hover{
+        color:rgb(50, 150, 255);
+}
+
+QPushButton#whiteButton{
+        color:rgb(255, 255, 255);
+        background:transparent;
+}
+QPushButton#whiteButton:hover{
+        color:rgb(0, 120, 230);
+}
+
+QTableWidget#CameraList{
+    color:rgb(255, 255, 255);
+    background-color:rgb(12,23,42);
+    alternate-background-color:rgb(22,42,60);
+    gridline-color:rgb(210,210,210);
+}
+
+QTableWidget#CameraList QHeaderView::section{
+    background-color:rgb(22,42,60);
+    color: white;
+    padding-left: 4px;
+    border: 1px solid #6c6c6c
+}

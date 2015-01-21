@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/img">
+        <file alias="temp">Resource/img/gongNeng.png</file>
+        <file alias="four">Resource/img/screen_four.png</file>
+        <file alias="nine">Resource/img/screen_nine.png</file>
+        <file alias="one">Resource/img/screen_one.png</file>
+        <file alias="sixteen">Resource/img/screen_sixteen.png</file>
+        <file alias="alarm">Resource/img/alarmio_normal.png</file>
+        <file alias="network">Resource/img/bodycount_normal.png</file>
+        <file alias="camera">Resource/img/devcfg_normal.png</file>
+        <file alias="disk">Resource/img/devshowctrl_normal.png</file>
+        <file alias="record">Resource/img/playback_normal.png</file>
+        <file alias="system">Resource/img/systemcfg_normal.png</file>
+        <file alias="user">Resource/img/userconfig_normal.png</file>
+        <file alias="menualarm">Resource/img/alarmio.png</file>
+        <file alias="body">Resource/img/bodycount.png</file>
+        <file alias="devcfg">Resource/img/devcfg.png</file>
+        <file alias="fullscreen">Resource/img/fullscreen01.png</file>
+        <file alias="back">Resource/img/back01.png</file>
+    </qresource>
+    <qresource prefix="/qss">
+        <file>Resource/SmartPss.qss</file>
+    </qresource>
+    <qresource prefix="/videobottom">
+        <file alias="replay">Resource/img/instantplayback01.png</file>
+        <file alias="camera">Resource/img/PTZ01.png</file>
+        <file alias="audio">Resource/img/slice_redo01.png</file>
+        <file alias="snapshot">Resource/img/snapshot01.png</file>
+        <file alias="sound">Resource/img/sound01.png</file>
+        <file alias="talk">Resource/img/target.png</file>
+        <file alias="tool">Resource/img/toolbarback2.png</file>
+        <file alias="zoom">Resource/img/zoomin01.png</file>
+    </qresource>
+</RCC>
