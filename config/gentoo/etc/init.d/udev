@@ -13,33 +13,34 @@ udevmonitor_pid=/run/udevmonitor.pid
 
 depend()
 {
-	# we depend on udev-mount explicitly, not dev-mount generic as we don't
-	# want mdev as a dev-mount provider to come in.
 	provide dev
-	need sysfs udev-mount
+	need sysfs dev-mount
 	before checkfs fsck
 
 	# udev does not work inside vservers
 	keyword -vserver -lxc
 }
 
-disable_oldnet_hotplug()
-{
-	if is_service_enabled network; then
-		# disable network hotplugging
-		local d="/run/udev/rules.d"
-		mkdir -p "${d}"
-		local f="${d}/90-network.rules"
-		echo "# This file disables network hotplug events calling" >> "${f}"
-		echo "# old-style openrc net scripts" >> "${f}"
-		echo "# as we use /etc/init.d/network to set up our network" >> "${f}"
-	fi
-}
-
 start_pre()
 {
-	if [ -e /proc/sys/kernel/hotplug ]; then
-		echo "" >/proc/sys/kernel/hotplug
+	# make sure devtmpfs is in the kernel
+	if ! grep -qs devtmpfs /proc/filesystems; then
+		eerror "CONFIG_DEVTMPFS=y is required in your kernel configuration"
+		eerror "for this version of udev to run successfully."
+		eerror "This requires immediate attention."
+		if ! mountinfo -q /dev; then
+			mount -n -t tmpfs dev /dev
+			busybox mdev -s
+			mkdir /dev/pts
+		fi
+		return 1
+	fi
+
+	# make sure /dev is a mounted devtmpfs
+	if ! mountinfo -q -f devtmpfs /dev; then
+		eerror "Udev requires /dev to be a mounted devtmpfs."
+		eerror "Please reconfigure your system."
+		return 1
 	fi
 
 	# load unix domain sockets if built as module, Bug #221253
@@ -49,10 +50,6 @@ start_pre()
 			eerror "Cannot load the unix domain socket module"
 			return 1
 		fi
-	fi
-
-	if yesno "${udev_debug:-NO}"; then
-		command_args="${command_args} --debug 2> /run/udevdebug.log"
 	fi
 
 	bins="/sbin/udevd /lib/systemd/systemd-udevd /usr/lib/systemd/systemd-udevd"
@@ -66,21 +63,15 @@ start_pre()
 		return 1
 	fi
 
-	# Need to do this before starting udev so it will load the rules.
-	disable_oldnet_hotplug
+	if [ -e /proc/sys/kernel/hotplug ]; then
+		echo "" >/proc/sys/kernel/hotplug
+	fi
+
+	if yesno "${udev_debug:-NO}"; then
+		command_args="${command_args} --debug 2> /run/udevdebug.log"
+	fi
 
 	return 0
-}
-
-is_service_enabled()
-{
-	local svc="$1"
-
-	[ ! -e "/etc/init.d/${svc}" ] && return 1
-
-	[ -e "/etc/runlevels/${RC_BOOTLEVEL}/${svc}" ] && return 0
-	[ -e "/etc/runlevels/${RC_DEFAULTLEVEL}/${svc}" ] && return 0
-	return 1
 }
 
 start_udevmonitor()
@@ -93,11 +84,28 @@ start_udevmonitor()
 		--background --exec /bin/udevadm -- monitor ${udev_monitor_opts}
 }
 
+# This is here because some software expects /dev/root to exist.
+# For more information, see this bug:
+# https://bugs.gentoo.org/show_bug.cgi?id=438380
+dev_root_link()
+{
+	local RULESDIR=/run/udev/rules.d
+	[ -d $RULESDIR ] || mkdir -p $RULESDIR
+	eval $(udevadm info --export --export-prefix=ROOT_ --device-id-of-file=/ ||
+		true)
+	[ "$ROOT_MAJOR" -a "$ROOT_MINOR" ] || return 0
+
+	# btrfs filesystems have bogus major/minor numbers
+	[ "$ROOT_MAJOR" != 0 ] || return 0
+
+	echo 'ACTION=="add|change", SUBSYSTEM=="block", ENV{MAJOR}=="'$ROOT_MAJOR'", ENV{MINOR}=="'$ROOT_MINOR'", SYMLINK+="root"' > $RULESDIR/61-dev-root-link.rules
+}
+
 populate_dev()
 {
 	if yesno ${rc_dev_root_symlink:-yes}; then
 		ebegin "Generating a rule to create a /dev/root symlink"
-		/lib/udev/dev-root-link.sh
+		dev_root_link
 		eend $?
 	fi
 

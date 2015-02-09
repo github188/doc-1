@@ -56,7 +56,7 @@ else
 	# understand sequences such as \h, don't put anything special in it.
 	PS1="${USER:-$(whoami 2>/dev/null)}@$(uname -n 2>/dev/null) \$ "
 fi
-
+export lyt="abc"
 for sh in /etc/profile.d/*.sh ; do
 	[ -r "$sh" ] && . "$sh"
 done

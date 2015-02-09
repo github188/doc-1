@@ -1,4 +1,4 @@
-#!/sbin/runscript
+#!/sbin/openrc-run
 # Copyright (c) 2007-2009 Roy Marples <roy@marples.name>
 # Released under the 2-clause BSD license.
 
@@ -6,7 +6,7 @@ depend()
 {
 	need localmount
 	before logger
-	after clock sysctl
+	after clock root sysctl
 	keyword -prefix -timeout
 }
 
@@ -68,7 +68,7 @@ cleanup_var_run_dir()
 	do
 		# Clean stale sockets
 		if [ -S "$x" ]; then
-			if type fuser >/dev/null 2>&1; then
+			if command -v fuser >/dev/null 2>&1; then
 				fuser "$x" >/dev/null 2>&1 || rm -- "$x"
 			else
 				rm -- "$x"
@@ -117,7 +117,7 @@ migrate_to_run()
 
 clean_run()
 {
-	[ "$RC_SYS" = VSERVER ] && return 0
+	[ "$RC_SYS" = VSERVER -o "$RC_SYS" = LXC ] && return 0
 	local dir
 	dir=$(mktemp -d)
 	mount --bind / $dir
@@ -129,7 +129,9 @@ clean_run()
 start()
 {
 	# Remove any added console dirs
-	rm -rf "$RC_LIBEXECDIR"/console/*
+	if checkpath -W "$RC_LIBEXECDIR"; then
+		rm -rf "$RC_LIBEXECDIR"/console/*
+	fi
 
 	local logw=false runw=false extra=
 	# Ensure that our basic dirs exist

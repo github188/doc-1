@@ -27,7 +27,7 @@ nobody:::
 sshd:x::lyt
 man:!::
 input:!::
-mail:!::
+mail:!::postfix
 ntp:!::
 systemd-journal:!::lyt
 systemd-bus-proxy:!::
@@ -60,3 +60,4 @@ transmission:!::
 other:!::
 postfix:!::
 postdrop:!::
+systemd-journal-remote:!::

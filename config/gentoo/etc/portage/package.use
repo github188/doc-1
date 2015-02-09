@@ -1,6 +1,5 @@
 >=dev-libs/DirectFB-1.4.9-r1 -sdl
 >=app-editors/emacs-24.4 X gtk gtk3 Xaw3d athena gconf gsettings gzip-el hesiod imagemagick kerberos libxml2 motif toolkit-scroll-bars wide-int xft gfile inotify
->=app-editors/gvim-7.4 acl gnome gtk nls python session cscope motif neXt netbeans perl ruby tcl
 >=dev-vcs/git-1.8.5.5 highlight mediawiki 
 >=net-misc/networkmanager-0.9.8 -nss
 >=app-misc/tracker-1 -gstreamer
@@ -16,9 +15,9 @@ net-p2p/mldonkey bittorrent fasttrack gd gtk
 gnome-base/gnome-extra-apps -games
 sys-libs/zlib minizip
 net-misc/tigervnc server
-sys-devel/llvm clang
-media-video/vlc **
-www-client/firefox custom-cflags custom-optimization libnotify startup-nitification system-cairo system-icu system-jpeg system-sqlite wifi
-dev-db/sqlite secure-delete
->=media-libs/mesa-10.3.1 xa
->=x11-libs/libdrm-2.4.58 libkms
+net-misc/networkmanager -dhclient
+media-libs/mesa xa
+x11-libs/libdrm libkms
+sys-kernel/dracut device-mapper net systemd
+sys-fs/aufs3 inotify fuse kernel-patch ramfs
+net-libs/gnutls pkcs11

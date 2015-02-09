@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "x$lyt" = "x" ];then
+	echo "null" > /tmp/lyt
+else
+	echo $lyt > /tmp/lyt
+fi
