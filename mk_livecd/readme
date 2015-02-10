@@ -1,0 +1,14 @@
+
+1.建立临时的root, ramroot目录，将要安装的linux目录rsync过去,删除无用的文件，创建缺少的目录
+2.使用mk_squashfs.sh脚本来建立ext3文件系统，会将临时ramdroot/目录中的文件拷贝到目标文件系统，
+  生成squashfs文件
+3.将生成的的squashfs文件放到new_root目录中， 在new_root目录中的目录结构为
+ boot/
+ boot/initrd.gz
+ boot/vmlinuz
+ boot/isolinux/
+ boot/isolinux/isolinux.bin
+ boot/isolinux/isolinux.cfg
+ LiveOS/
+ LiveOS/squashfs.img
+ 4.使用mkiso.sh脚本，对new_root目录进行处理，生成iso文件
