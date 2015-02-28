@@ -20,6 +20,67 @@ virtual/jre ~amd64
 sys-fs/ntfs3g ~amd64
 app-benchmarks/bootchart2 ~amd64
 app-editors/emacs ~amd64
-sys-fs/aufs ~amd64
-# required by aufs3 (argument)
-=sys-fs/aufs3-3_p20150126 ~amd64
+app-emacs/emacs-common-gentoo ~amd64
+sys-fs/aufs3 ~amd64
+gnome-base/gnome-shell ~amd64
+# required by gnome-base/gnome-shell-3.14.3
+# required by gnome-base/gnome-3.12.0
+# required by @selected
+# required by @world (argument)
+=x11-wm/mutter-3.14.3 ~amd64
+# required by media-libs/clutter-gst-2.0.12
+# required by gnome-extra/sushi-3.12.0
+# required by gnome-base/gnome-extra-apps-3.12.0-r1
+# required by gnome-base/gnome-3.12.0[extras]
+# required by @selected
+# required by @world (argument)
+=dev-libs/glib-2.42.2 ~amd64
+# required by dev-libs/gobject-introspection-1.42.0-r1
+# required by gnome-base/gnome-shell-3.14.3
+# required by gnome-base/gnome-3.12.0
+# required by @selected
+# required by @world (argument)
+=dev-libs/gobject-introspection-common-1.42.0 ~amd64
+# required by media-libs/libchamplain-0.12.9
+# required by net-im/empathy-3.12.7[map]
+# required by gnome-base/gnome-core-apps-3.12.0
+# required by gnome-base/gnome-3.12.0
+# required by @selected
+# required by @world (argument)
+=media-libs/cogl-1.18.2-r1 ~amd64
+# required by app-accessibility/caribou-0.4.16
+# required by gnome-base/gnome-shell-3.14.3
+# required by gnome-base/gnome-3.12.0
+# required by @selected
+# required by @world (argument)
+=media-libs/clutter-1.20.0 ~amd64
+# required by sys-apps/systemd-216-r3
+# required by x11-wm/mutter-3.14.3[kms]
+# required by gnome-base/gnome-shell-3.14.3
+# required by gnome-base/gnome-3.12.0
+# required by @selected
+# required by @world (argument)
+=dev-libs/gobject-introspection-1.42.0-r1 ~amd64
+# required by x11-libs/gtk+-3.14.9
+# required by gnome-base/gnome-shell-3.14.3
+# required by gnome-base/gnome-3.12.0
+# required by @selected
+# required by @world (argument)
+=x11-themes/adwaita-icon-theme-3.14.1 ~amd64
+# required by x11-wm/mutter-3.14.3[kms]
+# required by gnome-base/gnome-shell-3.14.3
+# required by gnome-base/gnome-3.12.0
+# required by @selected
+# required by @world (argument)
+=dev-libs/libinput-0.9.0 ~amd64
+# required by gnome-base/gnome-shell-3.14.3
+# required by gnome-base/gnome-3.12.0
+# required by @selected
+# required by @world (argument)
+=gnome-base/gsettings-desktop-schemas-3.14.1 ~amd64
+# required by gnome-extra/gucharmap-3.12.1
+# required by gnome-base/gnome-extra-apps-3.12.0-r1
+# required by gnome-base/gnome-3.12.0[extras]
+# required by @selected
+# required by @world (argument)
+=x11-libs/gtk+-3.14.9 ~amd64

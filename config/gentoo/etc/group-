@@ -64,3 +64,4 @@ other:x:1001:
 postfix:x:207:
 postdrop:x:208:
 systemd-journal-remote:x:989:
+systemd-journal-upload:x:988:

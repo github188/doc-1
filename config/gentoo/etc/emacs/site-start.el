@@ -2,8 +2,8 @@
 
 ;;; Commentary:
 ;; This is the site startup file for GNU Emacs. It is loaded before
-;; the user's init file. You may modify this file or replace or it
-;; by your own site initialisation.
+;; the user's init file. You may modify this file or replace it by
+;; your own site initialisation.
 
 ;;; Code:
 ;; Load site initialisation for Gentoo installed packages.

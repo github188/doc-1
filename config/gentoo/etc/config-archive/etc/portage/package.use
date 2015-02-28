@@ -15,8 +15,9 @@ net-p2p/mldonkey bittorrent fasttrack gd gtk
 gnome-base/gnome-extra-apps -games
 sys-libs/zlib minizip
 net-misc/tigervnc server
-net-misc/networkmanager -dhclient
 media-libs/mesa xa
 x11-libs/libdrm libkms
 sys-kernel/dracut device-mapper net systemd
 sys-fs/aufs3 inotify fuse kernel-patch ramfs
+net-libs/gnutls pkcs11
+net-misc/networkmanager -dhcpcd

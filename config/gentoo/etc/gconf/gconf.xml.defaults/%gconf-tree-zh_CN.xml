@@ -510,13 +510,13 @@
 					</dir>
 					<dir name="terminal">
 						<entry name="exec_arg">
-							<local_schema short_desc="执行参数">
-								<longdesc>在“执行”键定义的终端里执行程序的参数。</longdesc>
+							<local_schema short_desc="默认终端的执行参数">
+								<longdesc>为默认终端应用程序所使用的执行参数。</longdesc>
 							</local_schema>
 						</entry>
 						<entry name="exec">
-							<local_schema short_desc="终端应用程序">
-								<longdesc>当启动需要终端的应用程序时使用的终端程序。</longdesc>
+							<local_schema short_desc="默认终端应用程序">
+								<longdesc>为需要终端的应用程序所使用的默认终端应用程序。</longdesc>
 							</local_schema>
 						</entry>
 					</dir>

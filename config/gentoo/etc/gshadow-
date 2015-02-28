@@ -61,3 +61,4 @@ other:!::
 postfix:!::
 postdrop:!::
 systemd-journal-remote:!::
+systemd-journal-upload:!::

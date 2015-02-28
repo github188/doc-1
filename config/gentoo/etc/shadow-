@@ -39,3 +39,4 @@ transmission:!:16356::::::
 other:$6$msm7HCB8$V5a6.kqa19rYE8OBy.uKQV5hdxvRGdg57W1vBY7/ka0fFagTdqtx7nNrjpl086F20oC9xgncGbY8O.zbKlYzz1:16367:0:99999:7:::
 postfix:!:16379::::::
 systemd-journal-remote:!:16468::::::
+systemd-journal-upload:!:16468::::::
