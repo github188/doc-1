@@ -19,7 +19,7 @@ set -e
 
 # Set by config.status
 PACKAGE="smartmontools"
-VERSION="6.3"
+VERSION="6.4"
 prefix="/usr"
 sysconfdir="/etc"
 smartdscriptdir="${sysconfdir}"

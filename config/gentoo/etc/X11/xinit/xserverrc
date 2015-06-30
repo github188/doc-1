@@ -4,3 +4,4 @@ if [ -z "$XDG_VTNR" ]; then
 else
   exec /usr/bin/X -nolisten tcp "$@" vt$XDG_VTNR
 fi
+

@@ -1,0 +1,2 @@
+dev-lang/php -sharedmem fpm cgi ftp mysqli
+app-admin/eselect-php fpm

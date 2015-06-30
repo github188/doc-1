@@ -29,7 +29,3 @@
 # Registration date: March 2001
 # Hostname: linux
 # InitiatorName=iqn.2001-03.local.foobar.linux:openiscsi-29b48ad602d5f83dd9cd9aa3ef741216
-
-InitiatorName=iqn.2005-09.tld.localdomain.gentoo:openiscsi-initiator
-InitiatorAlias=gentoo
-

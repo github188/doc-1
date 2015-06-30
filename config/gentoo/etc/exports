@@ -1,0 +1,2 @@
+# /etc/exports: NFS file systems being exported.  See exports(5).
+/mnt/share 172.16.1.221/255.255.255.0(rw,sync,root_squash,no_subtree_check)

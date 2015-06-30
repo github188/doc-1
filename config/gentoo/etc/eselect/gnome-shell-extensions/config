@@ -1,2 +1,2 @@
 # Generated and used by eselect gnome-shell-extensions; do not edit manually
-declare -a enabled_saved='([0]="")'
+declare -a enabled_saved='([0]="alternate-tab@gnome-shell-extensions.gcampax.github.com" [1]="systemMonitor@gnome-shell-extensions.gcampax.github.com")'

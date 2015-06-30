@@ -5,12 +5,15 @@
 depend()
 {
 	before bootmisc logger
-	keyword -prefix -vserver
+	keyword -prefix -systemd-nspawn -vserver
 }
 
 start()
 {
+	local quiet
+	yesno $rc_verbose || quiet=-q
+
 	ebegin "Configuring kernel parameters"
-	sysctl --system
+	sysctl ${quiet} --system
 	eend $? "Unable to configure some kernel parameters"
 }

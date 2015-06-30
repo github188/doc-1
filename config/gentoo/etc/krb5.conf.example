@@ -1,19 +1,27 @@
 [libdefaults]
-	default_realm = ATHENA.MIT.EDU
-
+        default_realm = MY.REALM
+#	clockskew = 300
+#	v4_instance_resolve = false
+#	v4_name_convert = {
+#		host = {
+#			rcmd = host
+#			ftp = ftp
+#		}
+#		plain = {
+#			something = something-else
+#		}
+#	}
+	
 [realms]
-# use "kdc = ..." if realm admins haven't put SRV records into DNS
-	ATHENA.MIT.EDU = {
-		admin_server = kerberos.mit.edu
+	MY.REALM = {
+		kdc = MY.COMPUTER
 	}
-	ANDREW.CMU.EDU = {
-		admin_server = kdc-01.andrew.cmu.edu
-	}
+#	OTHER.REALM = {
+#		v4_instance_convert = {
+#			kerberos = kerberos
+#			computer = computer.some.other.domain
+#		}
+#	}
 
 [domain_realm]
-	mit.edu = ATHENA.MIT.EDU
-	csail.mit.edu = CSAIL.MIT.EDU
-	.ucsc.edu = CATS.UCSC.EDU
-
-[logging]
-#	kdc = CONSOLE
+	.my.domain = MY.REALM

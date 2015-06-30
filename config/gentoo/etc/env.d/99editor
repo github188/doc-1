@@ -1,4 +1,4 @@
 # Configuration file for eselect
 # This file has been automatically generated.
-VISUAL="/usr/bin/vi"
 EDITOR="/usr/bin/vi"
+VISUAL="/usr/bin/vi"

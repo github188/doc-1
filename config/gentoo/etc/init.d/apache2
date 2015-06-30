@@ -58,6 +58,7 @@ checkconfd() {
 }
 
 checkconfig() {
+	checkpath --directory /run/apache_ssl_mutex
 	checkconfd || return 1
 
 	${APACHE2} ${APACHE2_OPTS} -t 1>/dev/null 2>&1

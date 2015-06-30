@@ -13,32 +13,38 @@ portage:x:250:250:portage:/var/tmp/portage:/bin/false
 nobody:x:65534:65534:nobody:/var/empty:/bin/false
 sshd:x:22:22:added by portage for openssh:/var/empty:/sbin/nologin
 man:x:13:15:added by portage for man-db:/usr/share/man:/sbin/nologin
-ntp:x:123:123:added by portage for ntp:/dev/null:/sbin/nologin
-systemd-bus-proxy:x:101:121:added by portage for systemd:/dev/null:/sbin/nologin
-systemd-network:x:102:120:added by portage for systemd:/dev/null:/sbin/nologin
-systemd-resolve:x:103:119:added by portage for systemd:/dev/null:/sbin/nologin
-systemd-timesync:x:104:118:added by portage for systemd:/dev/null:/sbin/nologin
-polkitd:x:105:117:added by portage for polkit:/var/lib/polkit-1:/sbin/nologin
-messagebus:x:106:116:added by portage for dbus:/dev/null:/sbin/nologin
 ldap:x:439:439:added by portage for openldap:/usr/lib64/openldap:/sbin/nologin
-mail:x:8:12:added by portage for mailbase:/var/spool/mail:/sbin/nologin
-postmaster:x:14:105:added by portage for mailbase:/var/spool/mail:/sbin/nologin
-nullmail:x:88:88:added by portage for nullmailer:/var/nullmailer:/sbin/nologin
-mysql:x:60:60:added by portage for mariadb:/dev/null:/sbin/nologin
-colord:x:107:104:added by portage for colord:/var/lib/colord:/sbin/nologin
+systemd-bus-proxy:x:101:246:added by portage for systemd:/dev/null:/sbin/nologin
+systemd-journal-gateway:x:102:245:added by portage for systemd:/dev/null:/sbin/nologin
+systemd-journal-remote:x:103:244:added by portage for systemd:/dev/null:/sbin/nologin
+systemd-journal-upload:x:104:243:added by portage for systemd:/dev/null:/sbin/nologin
+systemd-network:x:105:242:added by portage for systemd:/dev/null:/sbin/nologin
+systemd-resolve:x:106:241:added by portage for systemd:/dev/null:/sbin/nologin
+systemd-timesync:x:107:240:added by portage for systemd:/dev/null:/sbin/nologin
+messagebus:x:108:239:added by portage for dbus:/dev/null:/sbin/nologin
+polkitd:x:109:238:added by portage for polkit:/var/lib/polkit-1:/sbin/nologin
+colord:x:110:105:added by portage for colord:/var/lib/colord:/sbin/nologin
 cron:x:16:16:added by portage for cronbase:/var/spool/cron:/sbin/nologin
-systemd-journal-gateway:x:997:997:systemd Journal Gateway:/:/sbin/nologin
-tcpdump:x:108:102:added by portage for tcpdump:/dev/null:/sbin/nologin
-games:x:36:35:added by portage for games-envd:/usr/games:/bin/bash
+mysql:x:60:60:added by portage for mariadb:/dev/null:/sbin/nologin
+mail:x:8:12:added by portage for mailbase:/var/spool/mail:/sbin/nologin
+postmaster:x:14:104:added by portage for mailbase:/var/spool/mail:/sbin/nologin
 apache:x:81:81:added by portage for apache:/var/www:/sbin/nologin
-avahi:x:109:994:added by portage for avahi:/dev/null:/sbin/nologin
-geoclue:x:110:993:added by portage for geoclue:/var/lib/geoclue:/sbin/nologin
-gdm:x:111:992:added by portage for gdm:/var/lib/gdm:/sbin/nologin
-ftp:x:21:21:added by portage for ftpbase:/home/ftp:/sbin/nologin
-nginx:x:112:991:added by portage for nginx:/var/lib/nginx:/sbin/nologin
-lyt:x:1000:1000:lyt:/home/lyt:/bin/bash
-transmission:x:113:990:added by portage for transmission:/dev/null:/sbin/nologin
-other:x:1001:1001:other:/home/other:/bin/bash
 postfix:x:207:207:added by portage for postfix:/var/spool/postfix:/sbin/nologin
-systemd-journal-remote:x:114:989:added by portage for systemd:/dev/null:/sbin/nologin
-systemd-journal-upload:x:115:988:added by portage for systemd:/dev/null:/sbin/nologin
+tcpdump:x:111:102:added by portage for tcpdump:/dev/null:/sbin/nologin
+ftp:x:21:21:added by portage for ftpbase:/home/ftp:/sbin/nologin
+ntp:x:123:123:added by portage for ntp:/dev/null:/sbin/nologin
+games:x:36:35:added by portage for games-envd:/usr/games:/bin/bash
+avahi:x:112:997:added by portage for avahi:/dev/null:/sbin/nologin
+geoclue:x:113:996:added by portage for geoclue:/var/lib/geoclue:/sbin/nologin
+gdm:x:114:993:added by portage for gdm:/var/lib/gdm:/sbin/nologin
+nginx:x:115:992:added by portage for nginx:/var/lib/nginx:/sbin/nologin
+dictd:x:116:991:added by portage for dictd:/dev/null:/sbin/nologin
+lyt:x:1000:1000:lyt:/home/lyt:/bin/bash
+other:x:1001:1001:other:/home/other:/bin/bash
+memcached:x:117:2:added by portage for memcached:/dev/null:/sbin/nologin
+openvpn:x:118:990:added by portage for openvpn:/dev/null:/sbin/nologin
+distcc:x:240:2:added by portage for distcc:/dev/null:/sbin/nologin
+dnsmasq:x:119:988:added by portage for dnsmasq:/dev/null:/sbin/nologin
+dhcp:x:120:987:added by portage for dhcp:/var/lib/dhcp:/sbin/nologin
+pcscd:x:121:983:added by portage for pcsc-lite:/run/pcscd:/sbin/nologin
+qemu:x:77:77:added by portage for libvirt:/dev/null:/sbin/nologin
