@@ -1,5 +1,5 @@
-# Application profiles for the NVIDIA Linux graphics driver, version 352.21
-# Last modified: Tue Jun  9 21:26:53 PDT 2015
+# Application profiles for the NVIDIA Linux graphics driver, version 355.06
+# Last modified: Tue Jul 28 20:55:54 PDT 2015
 # These profiles were provided by NVIDIA and should not be modified.  If you
 # wish to change the defaults provided here, you can override them by creating
 # custom rules in /etc/nvidia/nvidia-application-profiles-rc (which will apply

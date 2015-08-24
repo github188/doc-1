@@ -75,3 +75,4 @@ openct:!::pcscd
 pcscd:!::
 qemu:!::
 android:!::
+lighttpd:!::

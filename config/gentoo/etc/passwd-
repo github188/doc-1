@@ -39,7 +39,7 @@ geoclue:x:113:996:added by portage for geoclue:/var/lib/geoclue:/sbin/nologin
 gdm:x:114:993:added by portage for gdm:/var/lib/gdm:/sbin/nologin
 nginx:x:115:992:added by portage for nginx:/var/lib/nginx:/sbin/nologin
 dictd:x:116:991:added by portage for dictd:/dev/null:/sbin/nologin
-lyt:x:1000:1000:lyt:/home/lyt:/bin/bash
+lyt:x:1000:1000:lyt:/home/lyt:/bin/zsh
 other:x:1001:1001:other:/home/other:/bin/bash
 memcached:x:117:2:added by portage for memcached:/dev/null:/sbin/nologin
 openvpn:x:118:990:added by portage for openvpn:/dev/null:/sbin/nologin
@@ -48,3 +48,5 @@ dnsmasq:x:119:988:added by portage for dnsmasq:/dev/null:/sbin/nologin
 dhcp:x:120:987:added by portage for dhcp:/var/lib/dhcp:/sbin/nologin
 pcscd:x:121:983:added by portage for pcsc-lite:/run/pcscd:/sbin/nologin
 qemu:x:77:77:added by portage for libvirt:/dev/null:/sbin/nologin
+lighttpd:x:122:981:added by portage for lighttpd:/var/www/localhost/htdocs:/sbin/nologin
+hsqldb:x:124:980:added by portage for hsqldb:/dev/null:/bin/sh

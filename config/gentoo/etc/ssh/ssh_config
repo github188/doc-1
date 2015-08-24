@@ -21,7 +21,7 @@
    ForwardAgent yes
    ForwardX11 yes
    RhostsRSAAuthentication yes
-#   RSAAuthentication yes
+   RSAAuthentication yes
    PasswordAuthentication yes
 #   HostbasedAuthentication yes
 #   GSSAPIAuthentication no

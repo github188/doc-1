@@ -76,3 +76,4 @@ pcscd:x:983:
 qemu:x:77:
 android:x:982:
 lighttpd:x:981:
+hsqldb:x:980:

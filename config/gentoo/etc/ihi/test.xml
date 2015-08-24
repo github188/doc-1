@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<dev_id>bjqlxhuiyishi</dev_id>
+	<dev_id>85a33ce3-0745-4458-ae05-4ea170a42e9f</dev_id>
 	<user_id></user_id>
 	<user_account></user_account>
 	<vsp_url><![CDATA[]]></vsp_url>
 	<code>200</code>
 	<msg>success</msg>
 	<user>
-		<user_id>bff9e29a1798640d8e1144eced689dcc_7512a42333b99c585c78e3b2655d7b3c</user_id>
-		<user_account>北京清流迅演示室</user_account>
-		<user_name>北京清流迅演示室</user_name>
+		<user_id>bff9e29a1798640d8e1144eced689dcc_daa6c70f31e56165bf850d3249fea65c</user_id>
+		<user_account>qlxtest</user_account>
+		<user_name>test</user_name>
 		<big_visit_num>4</big_visit_num>
 		<vsp_id>bff9e29a1798640d8e1144eced689dcc</vsp_id>
 		<vsp_name>北京清流迅</vsp_name>
@@ -21,26 +21,31 @@
 			<user_name>北京清流迅会议室</user_name>
 		</contact>
 		<contact>
-			<user_id>bff9e29a1798640d8e1144eced689dcc_436740a4d45e2812a5a224d6cfb633d2</user_id>
-			<user_account>北京清流迅演示室3</user_account>
-			<user_name>北京清流迅演示室3</user_name>
-		</contact>
-		<contact>
-			<user_id>bff9e29a1798640d8e1144eced689dcc_7142ddc809ca0349c3bd9660aec079fb</user_id>
-			<user_account>北京清流迅演示室2</user_account>
-			<user_name>北京清流迅演示室2</user_name>
-		</contact>
-		<contact>
 			<user_id>bff9e29a1798640d8e1144eced689dcc_b273fb8b90cdf8bf9d22e5e04325e715</user_id>
 			<user_account>广州鹏创</user_account>
 			<user_name>广州鹏创</user_name>
 		</contact>
-		<contact>
-			<user_id>bff9e29a1798640d8e1144eced689dcc_c78b4ed2154a61af041ccad8f5e35a58</user_id>
-			<user_account>广州维海德</user_account>
-			<user_name>广州-维海德</user_name>
-		</contact>
 	</contacts>
+	<meetings>
+		<meeting>
+			<meeting_id>bb22a90f0f5ef0f5f08ea011c1d6b715</meeting_id>
+			<meeting_name>test_1</meeting_name>
+			<start_time>2015-07-10 10:20:05</start_time>
+			<end_time>2015-07-11 10:20:10</end_time>
+			<meeting_conferrees>
+				<meeting_conferree>
+					<user_id>bff9e29a1798640d8e1144eced689dcc_2273b1fa006c3e0a30fb1342044b9aed</user_id>
+					<user_account>北京清流迅会议室</user_account>
+					<user_name>北京清流迅会议室</user_name>
+				</meeting_conferree>
+				<meeting_conferree>
+					<user_id>bff9e29a1798640d8e1144eced689dcc_b273fb8b90cdf8bf9d22e5e04325e715</user_id>
+					<user_account>广州鹏创</user_account>
+					<user_name>广州鹏创</user_name>
+				</meeting_conferree>
+			</meeting_conferrees>
+		</meeting>
+	</meetings>
 	<msms>
 		<msm>
 			<msm_ip>172.16.3.137</msm_ip>

@@ -35,6 +35,7 @@ shell_escape = p
 % 
 shell_escape_commands = \
 bibtex,bibtex8,\
+extractbb,\
 kpsewhich,\
 makeindex,\
 mpost,\
@@ -121,6 +122,9 @@ file_line_error_style = f
 % Used by makempx to run TeX.  We use "etex" because MetaPost is
 % expecting DVI, and not "tex" because we want first line parsing.
 TEX = etex
+#
+# Use Japanese eptex for Japanese pmpost.
+TEX.pmpost = eptex
 
 % These variables specify the external program called for the
 % interactive `e' option.  %d is replaced by the line number and %s by

@@ -4,6 +4,7 @@
 #
 # By default, just test that it works in loopback mode.
 172.16.1.64/4
+172.16.1.53/4
 #172.16.240.108/4 
 localhost/2
 #172.16.1.64

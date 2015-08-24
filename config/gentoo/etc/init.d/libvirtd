@@ -66,54 +66,30 @@ start() {
 }
 
 stop() {
-    local policy=
     local counter=
-    local net_policy=
     local vm_name=
     local net_name=
     local dom_id=
 
     ebegin "Stopping libvirtd"
-
-    if [ "${RC_CMD}" = "restart" -a -n "${LIBVIRTD_KVM_RESTART}" ] ; then
-        policy="${LIBVIRTD_KVM_RESTART}"
-    else
-        policy="${LIBVIRTD_KVM_SHUTDOWN}"
-    fi
-
-    # sanitize policy:
-    if [ "${policy}" != "none" -a "${policy}" != "managedsave" -a "${policy}" != "shutdown" ] ; then
-        if [ -n "${policy}" ] ; then
-            eerror " !!! Invalid policy \"${policy}\" specified in LIBVIRTD_KVM_SHUTDOWN/RESTART"
-        fi
-        einfo "  Using default policy \"managedsave\" for domains"
-        policy="managedsave"
-    fi
-
-    if [ -n "${LIBVIRTD_KVM_SHUTDOWN_MAXWAIT}" ] ; then
-        counter="${LIBVIRTD_KVM_SHUTDOWN_MAXWAIT}"
-    else
-        counter=500
-    fi
-
-    if [ "${RC_CMD}" = "restart" -a -n "${LIBVIRTD_KVM_NET_RESTART}" ] ; then
-        net_policy="${LIBVIRTD_KVM_NET_RESTART}"
-    else
-        net_policy="${LIBVIRTD_KVM_NET_SHUTDOWN}"
-    fi
-
     # try to shutdown all (KVM/Qemu) domains
-    if [ "${policy}" != "none" ] \
+    if [ "${LIBVIRTD_KVM_SHUTDOWN}" != "none" ] \
         && [ "$(libvirtd_dom_count qemu)" != "0" ] ; then
 
         einfo " Shutting down domain(s):"
         for dom_id in $(libvirtd_dom_list qemu) ; do
             vm_name="$(libvirtd_virsh qemu domname ${dom_id} | head -n 1)"
             einfo "   ${vm_name}"
-            libvirtd_virsh qemu ${policy} ${dom_id} > /dev/null
+            libvirtd_virsh qemu ${LIBVIRTD_KVM_SHUTDOWN} ${dom_id} > /dev/null
         done
 
-        if [ "${policy}" = "shutdown" ]; then
+        if [ -n "${LIBVIRTD_KVM_SHUTDOWN_MAXWAIT}" ] ; then
+            counter="${LIBVIRTD_KVM_SHUTDOWN_MAXWAIT}"
+        else
+            counter=500
+        fi
+
+        if [ "${LIBVIRTD_KVM_SHUTDOWN}" = "shutdown" ]; then
             einfo " Waiting ${counter} seconds while domains shutdown ..."
             DOM_COUNT="$(libvirtd_dom_count qemu)"
             while [ ${DOM_COUNT} -gt 0 ] && [ ${counter} -gt 0 ] ; do
@@ -127,10 +103,10 @@ stop() {
         if [ "$(libvirtd_dom_count qemu)" != "0" ] ; then
             eerror " !!! Some guests are still running, stopping anyway"
         fi
+
     fi
 
-    # try to shutdown all networks
-    if [ "${net_policy}" != "no" ] \
+    if [ "${LIBVIRTD_KVM_NET_SHUTDOWN}" != "no" ] \
         && [ "$(libvirtd_net_count qemu)" != "0" ]; then
 
         einfo " Shutting down network(s):"
