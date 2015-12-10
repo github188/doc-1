@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 	ev_signal_init(&signal_watcher, sigint_cb, SIGINT);
 	ev_signal_start(loop, &signal_watcher);
 
-	ev_stat_init(&file, file_cb, "/root/libev/test", 0.);
+	ev_stat_init(&file, file_cb, "test", 0.);
 	ev_stat_start(loop, &file);
 
 	ev_run(loop, 0);
