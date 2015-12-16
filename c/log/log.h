@@ -4,7 +4,7 @@
  * Copyright (C) 2015 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2015/12/15 17:28:56
+ * Update time:  2015/12/16 08:28:02
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -25,22 +25,25 @@
 #define LOG_H
 #include <stdio.h>
 #include <pthread.h>
+
+#define VERBOSE_TIMEFORMAT "%Y-%m-%d %H:%M:%S"
+
 #define DEBUG(handle, format, ...) \
-        LOG(handle, LOGLEVEL_DEBUG, format, ##__VA_ARGS__);
+        LOG(handle, LOGLEVEL_DEBUG,"%s %s() <%5d> "format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
 #define INFO(handle, format, ...) \
-        LOG(handle, LOGLEVEL_INFO, format, ##__VA_ARGS__);
+        LOG(handle, LOGLEVEL_INFO, "%s %s() <%5d> "format, __FILE__, __FUNCTION__,  __LINE__,  ##__VA_ARGS__);
 #define WARNING(handle, format, ...) \
-        LOG(handle, LOGLEVEL_WARNING, format, ##__VA_ARGS__);
+        LOG(handle, LOGLEVEL_WARNING, "%s %s() <%5d> "format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
 #define ERROR(handle, format, ...) \
-        LOG(handle, LOGLEVEL_ERROR, format, ##__VA_ARGS__);
+        LOG(handle, LOGLEVEL_ERROR, "%s %s() <%5d> "format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
 #define FATAL(handle, format, ...) \
-        LOG(handle, LOGLEVEL_FATAL, format, ##__VA_ARGS__);
+        LOG(handle, LOGLEVEL_FATAL, "%s %s() <%5d> "format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
 
-#define MAX_BAK 2
-#define MAX_FILESIZE 10*1024*1024
+#define MAX_BAK 4
+#define MAX_FILESIZE 100*1024*1024
 
 
-#define VERBOSE
+// #define VERBOSE
 // #define SYSLOG
 // #define SOCKLOG
 // #define STDERRLOG
@@ -59,16 +62,16 @@
 #endif
 
 typedef enum {
-        LOGLEVEL_EMERG,
-        LOGLEVEL_ALERT,
-        LOGLEVEL_CRIT,
-#define LOGLEVEL_FATAL LOGLEVEL_CRIT
-        LOGLEVEL_ERROR,
-#define LOGLEVEL_ERR LOGLEVEL_ERROR
-        LOGLEVEL_WARNING,
-        LOGLEVEL_NOTICE,
-        LOGLEVEL_INFO,
         LOGLEVEL_DEBUG,
+        LOGLEVEL_INFO,
+        LOGLEVEL_NOTICE,
+        LOGLEVEL_WARNING,
+        LOGLEVEL_ERROR,
+        LOGLEVEL_CRIT,
+        LOGLEVEL_ALERT,
+        LOGLEVEL_EMERG,
+#define LOGLEVEL_FATAL LOGLEVEL_CRIT
+#define LOGLEVEL_ERR LOGLEVEL_ERROR
 } LOGLEVEL;
 
 typedef struct {
@@ -80,17 +83,12 @@ typedef struct {
 
 typedef struct _loger loger;
 struct _loger {
-        char logfile[256];
         LOGLEVEL loglevel;
         logfp *lfp;
-        size_t count;
-        // pthread_mutex_t mutex;
 #ifdef SOCKLOG
         int sockfd;
         struct sockaddr_in addr;
 #endif
-        loger *self;
-        void (*LOG)(loger *handle, LOGLEVEL level,const char *format, ...);
 };
 
 extern pthread_mutex_t logmutex;

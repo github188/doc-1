@@ -4,7 +4,7 @@
  * Copyright (C) 2015 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2015/12/15 17:57:09
+ * Update time:  2015/12/16 08:20:51
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -33,40 +33,38 @@
 #include "log.h"
 static logfp lfps[256];
 pthread_mutex_t logmutex = PTHREAD_MUTEX_INITIALIZER;
-/* char logfile[256] = "default.log"; */
-/* static LOGLEVEL loglevel = LOG_DEBUG; */
+
 static const char * const LOGLEVELSTR[] = {
-        "FATAL",
-        "ALERT",
-        "CRIT",
-        "ERROR",
-        "WARNING",
-        "NOTICE",
-        "INFO",
         "DEBUG",
+        "INFO",
+        "NOTICE",
+        "WARN",
+        "ERROR",
+        "CRIT",
+        "ALERT",
+        "FATAL",
 };
 
-/* static FILE *fp = NULL; */
 static inline void makebak(loger *handle)
 {
         int bakcnt;
         char old_bakfile[256];
         char new_bakfile[256];
         for (bakcnt = MAX_BAK - 1; bakcnt >=0 ; bakcnt--) {
-                snprintf(old_bakfile, sizeof(old_bakfile), "%s.%d", handle->logfile, bakcnt);
+                snprintf(old_bakfile, sizeof(old_bakfile), "%s.%d", handle->lfp->logfile, bakcnt);
                 if (!access(old_bakfile, F_OK)) {
                         if (bakcnt == MAX_BAK - 1) {
                                 unlink(old_bakfile);
                                 continue;
                         } else {
-                                snprintf(new_bakfile, sizeof(new_bakfile), "%s.%d", handle->logfile, bakcnt + 1);
+                                snprintf(new_bakfile, sizeof(new_bakfile), "%s.%d", handle->lfp->logfile, bakcnt + 1);
                                 rename(old_bakfile, new_bakfile);
                         }
                 }
         }
 
-        snprintf(new_bakfile, sizeof(new_bakfile), "%s.0", handle->logfile);
-        rename(handle->logfile, new_bakfile);
+        snprintf(new_bakfile, sizeof(new_bakfile), "%s.0", handle->lfp->logfile);
+        rename(handle->lfp->logfile, new_bakfile);
 }
 
 loger *log_init(const char *file, LOGLEVEL level)
@@ -74,12 +72,10 @@ loger *log_init(const char *file, LOGLEVEL level)
         loger *handler = NULL;
 
         handler = (loger *)calloc(1, sizeof(loger));
-        /* pthread_mutex_init(&handler->mutex, NULL); */
 
         if (!strlen(file)) {
                 file = "default.log";
         }
-
 
         int i;
         pthread_mutex_lock(&logmutex);
@@ -113,7 +109,7 @@ loger *log_init(const char *file, LOGLEVEL level)
                 exit(-1);
         }
 
-        if (level >= LOGLEVEL_DEBUG && level <= LOGLEVEL_FATAL) {
+        if (level >= LOGLEVEL_DEBUG && level <= LOGLEVEL_EMERG) {
                 handler->loglevel = level;
         } else {
                 handler->loglevel = LOGLEVEL_DEBUG;
@@ -141,23 +137,14 @@ loger *log_init(const char *file, LOGLEVEL level)
 #ifdef SYSLOG
         openlog("test", LOG_CONS | LOG_PID, 0);
 #endif
-        handler->self = handler;
-        handler->LOG = LOG;
+        /* handler->self = handler; */
+        /* handler->LOG = LOG; */
+        fprintf(stderr, "init done\n");
         return handler;
 }
 
-static inline void get_time(char *buf, size_t len)
-{
-        time_t t= time(NULL);
-        struct tm now;
-        localtime_r(&t, &now);
-        snprintf(buf, len, "%04d-%02d-%02d %02d:%02d:%02d", now.tm_year+1990,
-                now.tm_mon+1, now.tm_mday, now.tm_hour,
-                now.tm_min, now.tm_sec);
-}
-
 void LOG(loger *handle,  LOGLEVEL level,const char *format, ...) {
-        if (handle == NULL || handle->loglevel < level)
+        if (handle == NULL || handle->loglevel > level)
                 return;
 
         char buf[1024];
@@ -167,8 +154,11 @@ void LOG(loger *handle,  LOGLEVEL level,const char *format, ...) {
         va_start(args, format);
 #ifdef VERBOSE
         char timebuf[24];
-        get_time(timebuf, sizeof(timebuf));
-        idx = snprintf(buf, sizeof(buf) - 1, "%s [%5.5s] ", timebuf,  LOGLEVELSTR[level]);
+        time_t t= time(NULL);
+        struct tm now;
+        localtime_r(&t, &now);
+        strftime(timebuf, sizeof(timebuf), VERBOSE_TIMEFORMAT, &now);
+        idx = snprintf(buf, sizeof(buf) - 1, "%s [%-5.5s] ", timebuf, LOGLEVELSTR[level]);
 #endif
         vsnprintf(buf + idx, sizeof(buf) - 1 - idx, format, args);
         va_end(args);
@@ -183,22 +173,18 @@ void LOG(loger *handle,  LOGLEVEL level,const char *format, ...) {
         /* close(sockfd); */
 #endif
 
-
-        pthread_mutex_lock(&handle->lfp->mutex);
+        /* pthread_mutex_lock(&handle->lfp->mutex); */
+        pthread_mutex_lock(&logmutex);
         struct stat st;
-        if (stat(handle->logfile, &st) == 0) {
+        if (stat(handle->lfp->logfile, &st) == 0) {
                 if (st.st_size + len  >= MAX_FILESIZE) {
                         makebak(handle);
                         fclose(handle->lfp->fp);
-                        handle->lfp->fp = fopen(handle->logfile, "a+");
+                        handle->lfp->fp = fopen(handle->lfp->logfile, "a+");
                 }
         }
 
-        size_t a;
-        if ((a = fprintf(handle->lfp->fp, "%s", buf)) != len) {
-                fprintf(stderr, "fprintf write fail: %lu,  should be: %lu\n",
-                        (unsigned long)a, (unsigned long)len);
-        }
+        fprintf(handle->lfp->fp, "%s", buf);
         /* fflush(handle->fp); */
         /* fclose(handle->fp); */
 
@@ -209,7 +195,7 @@ void LOG(loger *handle,  LOGLEVEL level,const char *format, ...) {
 #ifdef SYSLOG
         syslog(level, "%s", buf);
 #endif
-        handle->count++;
-        /* pthread_mutex_unlock(&handle->mutex); */
-        pthread_mutex_unlock(&handle->lfp->mutex);
+        /* handle->lfp->count++; */
+        pthread_mutex_unlock(&logmutex);
+        /* pthread_mutex_unlock(&handle->lfp->mutex); */
 }
