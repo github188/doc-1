@@ -4,7 +4,7 @@
  * Copyright (C) 2015 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2015/12/16 08:28:02
+ * Update time:  2015/12/16 12:16:01
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -28,22 +28,11 @@
 
 #define VERBOSE_TIMEFORMAT "%Y-%m-%d %H:%M:%S"
 
-#define DEBUG(handle, format, ...) \
-        LOG(handle, LOGLEVEL_DEBUG,"%s %s() <%5d> "format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#define INFO(handle, format, ...) \
-        LOG(handle, LOGLEVEL_INFO, "%s %s() <%5d> "format, __FILE__, __FUNCTION__,  __LINE__,  ##__VA_ARGS__);
-#define WARNING(handle, format, ...) \
-        LOG(handle, LOGLEVEL_WARNING, "%s %s() <%5d> "format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#define ERROR(handle, format, ...) \
-        LOG(handle, LOGLEVEL_ERROR, "%s %s() <%5d> "format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-#define FATAL(handle, format, ...) \
-        LOG(handle, LOGLEVEL_FATAL, "%s %s() <%5d> "format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
-
 #define MAX_BAK 4
 #define MAX_FILESIZE 100*1024*1024
+#define MAX_OPENFILE 256
 
-
-// #define VERBOSE
+#define VERBOSE
 // #define SYSLOG
 // #define SOCKLOG
 // #define STDERRLOG
@@ -68,11 +57,19 @@ typedef enum {
         LOGLEVEL_WARNING,
         LOGLEVEL_ERROR,
         LOGLEVEL_CRIT,
-        LOGLEVEL_ALERT,
-        LOGLEVEL_EMERG,
-#define LOGLEVEL_FATAL LOGLEVEL_CRIT
-#define LOGLEVEL_ERR LOGLEVEL_ERROR
+        // LOGLEVEL_ALERT,
+        // LOGLEVEL_EMERG,
+#define LOGLEVEL_FATAL  LOGLEVEL_CRIT
+#define LOGLEVEL_ERR    LOGLEVEL_ERROR
+#define LOG_DEBUG       LOGLEVEL_DEBUG
+#define LOG_INFO        LOGLEVEL_INFO
+#define LOG_WARNING     LOGLEVEL_WARNING
+#define LOG_NOTICE      LOGLEVEL_NOTICE
+#define LOG_ERROR       LOGLEVEL_ERROR
+#define LOG_CRIT        LOGLEVEL_CRIT
+#define LOG_FATAL       LOGLEVEL_FATAL
 } LOGLEVEL;
+
 
 typedef struct {
         FILE *fp;
@@ -92,7 +89,28 @@ struct _loger {
 };
 
 extern pthread_mutex_t logmutex;
-loger *log_init(const char *file, LOGLEVEL level);
-void LOG(loger *handle, LOGLEVEL level,const char *format, ...);
+extern loger sloger;
+loger *log_create(const char *file, LOGLEVEL level);
+void mlog(loger *handle, LOGLEVEL level, const char * file, size_t filelen, const char * function, size_t functionlen, long line, const char *format, ...);
 
+
+
+#define DEBUG(handle, format, ...)                                      \
+        mlog(handle, LOGLEVEL_DEBUG,   __FILE__, sizeof(__FILE__), __FUNCTION__, sizeof(__FUNCTION__), __LINE__, format, __VA_ARGS__);
+#define INFO(handle, format, ...)                                       \
+        mlog(handle, LOGLEVEL_INFO,    __FILE__, sizeof(__FILE__), __FUNCTION__, sizeof(__FUNCTION__), __LINE__, format, __VA_ARGS__);
+#define WARNING(handle, format, ...)                                    \
+        mlog(handle, LOGLEVEL_WARNING, __FILE__, sizeof(__FILE__), __FUNCTION__, sizeof(__FUNCTION__), __LINE__, format, __VA_ARGS__);
+#define ERROR(handle, format, ...)                                      \
+        mlog(handle, LOGLEVEL_ERROR,   __FILE__, sizeof(__FILE__), __FUNCTION__, sizeof(__FUNCTION__), __LINE__, format, __VA_ARGS__);
+#define FATAL(handle, format, ...)                                      \
+        mlog(handle, LOGLEVEL_FATAL,   __FILE__, sizeof(__FILE__), __FUNCTION__, sizeof(__FUNCTION__), __LINE__, format, __VA_ARGS__);
+
+
+int slog_init(const char *file, LOGLEVEL level);
+void slog(LOGLEVEL level, const char * file, size_t filelen, const char * function, size_t functionlen, long line, const char *format, ...);
+#define LOG(level, format, ...)                                         \
+        slog(level, __FILE__, sizeof(__FILE__), __FUNCTION__, sizeof(__FUNCTION__), __LINE__, format, __VA_ARGS__);
+#define LOG_INIT(file, level)                                           \
+        slog_init(file, level);
 #endif
