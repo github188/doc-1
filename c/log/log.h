@@ -4,7 +4,7 @@
  * Copyright (C) 2015 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2015/12/16 18:58:53
+ * Update time:  2015/12/16 21:50:01
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -30,7 +30,7 @@
 
 #define VERBOSE_TIMEFORMAT "%Y-%m-%d %H:%M:%S"
 
-#define MAX_BAK 2
+#define MAX_BAK 4
 #define MAX_FILESIZE 10*1024*1024
 #define MAX_OPENFILE 256
 #define BUFSZ 4096
@@ -56,7 +56,7 @@
 #endif
 
 typedef enum {
-LOGLEVEL_NONE,
+        LOGLEVEL_NONE,
         LOGLEVEL_EMERG,
         LOGLEVEL_ALERT,
         LOGLEVEL_CRIT,
@@ -81,27 +81,36 @@ LOGLEVEL_NONE,
 #define LOG_INFO        LOGLEVEL_INFO
 #define LOG_DEBUG       LOGLEVEL_DEBUG
 #endif
-        } LOGLEVEL;
+} LOGLEVEL;
 
 
 typedef struct {
-FILE *fp;
-// int fd;
-char logfile[256];
-pthread_mutex_t mutex;
-uint64_t count;
-uint64_t countbyte;
-size_t writefail;
-size_t bakcount;
+        FILE *fp;
+        // int fd;
+        char logfile[256];
+        pthread_mutex_t mutex;
+
+        uint64_t success_count;
+        uint64_t success_byte;
+        size_t fprintf_fail_count;
+        size_t makebak_count;
+        uint64_t debug_count;
+        uint64_t info_count;
+        uint64_t warning_count;
+        uint64_t error_count;
+        uint64_t fatal_count;
+        uint64_t alert_count;
+        uint64_t emerg_count;
+        uint64_t unhandle_count;
 }logfp;
 
 typedef struct _loger loger;
 struct _loger {
-LOGLEVEL loglevel;
-logfp *lfp;
+        LOGLEVEL loglevel;
+        logfp *lfp;
 #ifdef SOCKLOG
-int sockfd;
-struct sockaddr_in addr;
+        int sockfd;
+        struct sockaddr_in addr;
 #endif
 };
 

@@ -4,7 +4,7 @@
  * Copyright (C) 2015 liyunteng
  * Auther: liyunteng <li_yunteng@163.com>
  * License: GPL
- * Update time:  2015/12/16 19:41:29
+ * Update time:  2015/12/16 22:10:16
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms and conditions of the GNU General Public License,
@@ -33,8 +33,8 @@
 
 pthread_mutex_t logmutex = PTHREAD_MUTEX_INITIALIZER;
 static logfp lfps[MAX_OPENFILE] = {
-        {.fp = NULL, .logfile = "default.log", .count = 0},
-        /* {.fd = -1, .logfile = "default.log", .count = 0}, */
+        {.fp = NULL, .logfile = "default.log"},
+        /* {.fd = -1, .logfile = "default.log"}, */
 };
 loger sloger = {
         .loglevel = LOGLEVEL_DEBUG,
@@ -71,33 +71,17 @@ static inline void makebak(const char *filename)
                 if(!access(old_bakfile, F_OK)) {
                         if (bakcnt == MAX_BAK) {
                                 unlink(old_bakfile);
+                                /* fprintf(stderr, "unlink %s bakcnt: %d\n", old_bakfile, bakcnt); */
                                 continue;
                         } else {
                                 snprintf(new_bakfile, sizeof(new_bakfile), "%s.%d", filename, bakcnt);
+                                /* fprintf(stderr, "rename %s to %s bakcnt: %d\n", old_bakfile, new_bakfile, bakcnt); */
                                 rename(old_bakfile, new_bakfile);
 
                         }
                 }
+                bakcnt--;
         }
-
-#if 0
-        for (bakcnt = MAX_BAK - 1; bakcnt >=0 ; bakcnt--) {
-                if (bakcnt == 0){
-                        snprintf(old_bakfile, sizeof(old_bakfile), "%s", filename);
-                        snprintf(new_bakfile, sizeof(new_bakfile), "%s.%d", filename, bakcnt);
-                } else {
-                        snprintf(old_bakfile, sizeof(old_bakfile), "%s.%d", filename, bakcnt);
-                        snprintf(new_bakfile, sizeof(new_bakfile), "%s.%d", filename, bakcnt+1);
-                }
-                if (!access(old_bakfile, F_OK) && (bakcnt == MAX_BAK -1)) {
-                                unlink(old_bakfile);
-                                continue;
-                }
-                snprintf(new_bakfile, sizeof(new_bakfile), "%s.%d", filename, bakcnt + 1);
-                rename(old_bakfile, new_bakfile);
-        }
-#endif
-
 }
 
 loger *log_create(const char *file, LOGLEVEL level)
@@ -124,17 +108,24 @@ loger *log_create(const char *file, LOGLEVEL level)
                         if (!lfps[i].fp)  {
                         /* if (lfps[i].fd == -1) { */
                                 strncpy(lfps[i].logfile, file, sizeof(lfps[i].logfile));
-                                makebak(handler->lfp->logfile);
+                                makebak(file);
+                                lfps[i].success_count = 0;
+                                lfps[i].success_byte = 0;
+                                lfps[i].makebak_count = 1;
+                                lfps[i].debug_count = 0;
+                                lfps[i].info_count = 0;
+                                lfps[i].warning_count = 0;
+                                lfps[i].error_count = 0;
+                                lfps[i].fatal_count = 0;
+                                lfps[i].alert_count = 0;
+                                lfps[i].emerg_count = 0;
+                                lfps[i].unhandle_count = 0;
+
                                 lfps[i].fp = fopen(file, "a+");
                                 if (lfps[i].fp == NULL) {
                                         free(handler);
                                         return NULL;
                                 }
-                                lfps[i].count = 0;
-                                lfps[i].countbyte = 0;
-                                lfps[i].writefail = 0;
-                                lfps[i].bakcount = 0;
-
                                 /*
                                  * lfps[i].fd = open(file, O_CREAT|O_APPEND | O_WRONLY, FILEPERM);
                                  * if (lfps[i].fd < 0) {
@@ -146,6 +137,7 @@ loger *log_create(const char *file, LOGLEVEL level)
                                 pthread_mutex_init(&lfps[i].mutex, NULL);
 
                                 handler->lfp = &lfps[i];
+                                /* fprintf(stderr, "create file in: %d file: %s\n", i, file); */
                                 break;
                         }
                 }
@@ -162,8 +154,6 @@ loger *log_create(const char *file, LOGLEVEL level)
         } else {
                 handler->loglevel = LOGLEVEL_DEBUG;
         }
-
-
 
 #ifdef SOCKLOG
         handler->sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -191,8 +181,12 @@ loger *log_create(const char *file, LOGLEVEL level)
 void vlog(loger *handle, LOGLEVEL level, const char *file, size_t filelen,
           const char *function, size_t functionlen, long line, const char *format, va_list args)
 {
-        if (handle == NULL || handle->loglevel < level)
+        if (handle == NULL)
                 return;
+        if (handle->loglevel < level) {
+                handle->lfp->unhandle_count++;
+                return;
+        }
 
         char buf[BUFSZ];
 
@@ -238,7 +232,7 @@ void vlog(loger *handle, LOGLEVEL level, const char *file, size_t filelen,
                         /* fprintf(stderr, "size: %lu, len: %lu\n", (unsigned long)st.st_size, (unsigned long)len); */
                         fclose(handle->lfp->fp);
                         makebak(handle->lfp->logfile);
-                        handle->lfp->bakcount++;
+                        handle->lfp->makebak_count++;
                         handle->lfp->fp = fopen(handle->lfp->logfile, "a+");
                         /*
                          * close(handle->lfp->fd);
@@ -250,10 +244,35 @@ void vlog(loger *handle, LOGLEVEL level, const char *file, size_t filelen,
         /* write(handle->lfp->fd, buf, len); */
         if (fprintf(handle->lfp->fp, "%s", buf) != (int)len) {
                 perror("fprintf");
-                handle->lfp->writefail ++;
+                handle->lfp->fprintf_fail_count ++;
         } else {
-                handle->lfp->count ++;
-                handle->lfp->countbyte += len;
+                handle->lfp->success_count ++;
+                handle->lfp->success_byte += len;
+                switch(level) {
+                case LOG_DEBUG:
+                        handle->lfp->debug_count++;
+                        break;
+                case LOG_INFO:
+                        handle->lfp->info_count++;
+                        break;
+                case LOG_WARNING:
+                        handle->lfp->warning_count++;
+                        break;
+                case LOG_ERROR:
+                        handle->lfp->error_count++;
+                        break;
+                case LOG_FATAL:
+                        handle->lfp->fatal_count++;
+                        break;
+                case LOG_ALERT:
+                        handle->lfp->alert_count++;
+                        break;
+                case LOG_EMERG:
+                        handle->lfp->emerg_count++;
+                        break;
+                default:
+                        handle->lfp->unhandle_count++;
+                }
         }
         /* fflush(handle->lfp->fp); */
         /* fclose(handle->fp); */
@@ -273,96 +292,12 @@ void vlog(loger *handle, LOGLEVEL level, const char *file, size_t filelen,
 void mlog(loger *handle, LOGLEVEL level, const char *file, size_t filelen,
          const char *function, size_t functionlen, long line, const char *format, ...)
 {
-#if 1
+
         va_list args;
         va_start(args, format);
         vlog(handle, level, file, filelen, function, functionlen, line, format, args);
         va_end(args);
         return;
-#endif
-#if 0
-        if (handle == NULL || handle->loglevel < level)
-                return;
-
-        char buf[BUFSZ];
-
-        int idx = 0;
-#ifdef VERBOSE
-        char timebuf[24];
-        time_t t= time(NULL);
-        struct tm now;
-        localtime_r(&t, &now);
-        strftime(timebuf, sizeof(timebuf), VERBOSE_TIMEFORMAT, &now);
-        idx = snprintf(buf, sizeof(buf), "%s [%-5.5s] %lu(%lu) %s %s():%ld ",
-                       timebuf, LOGLEVELSTR[level], (unsigned long)getpid(), (unsigned long)pthread_self(), file, function, line);
-#endif
-        va_list args;
-        va_start(args, format);
-        int n = vsnprintf(buf + idx, sizeof(buf) - idx, format, args);
-        va_end(args);
-        if (n < 0) {
-                fprintf(stderr, "vsnprintf failed\n");
-                return ;
-        }
-
-        size_t len = n + idx;
-        if (len >= sizeof(buf)) {
-                fprintf(stderr, "msg too long, truancated.\n");
-                len = sizeof(buf) - 1;
-                buf[len-1] = '\n';
-                buf[len] = '\0';
-        } else {
-                buf[len] = '\n';
-                len++;
-                buf[len] = '\0';
-        }
-
-#ifdef SOCKLOG
-        socklen_t addrlen = sizeof(handle->addr);
-        sendto(handle->sockfd, buf, len+1, 0, (struct sockaddr *)&handle->addr, addrlen);
-        /* close(sockfd); */
-#endif
-
-        pthread_mutex_lock(&handle->lfp->mutex);
-        /* pthread_mutex_lock(&logmutex); */
-        struct stat st;
-        if (stat(handle->lfp->logfile, &st) == 0) {
-                if (st.st_size + len  >= MAX_FILESIZE) {
-                        /* fprintf(stderr, "size: %lu, len: %lu\n", (unsigned long)st.st_size, (unsigned long)len); */
-                        fclose(handle->lfp->fp);
-                        makebak(handle->lfp->logfile);
-                        handle->lfp->bakcount++;
-                        handle->lfp->fp = fopen(handle->lfp->logfile, "a+");
-
-                        /*
-                         * close(handle->lfp->fd);
-                         * handle->lfp->fd = open(handle->lfp->logfile, O_CREAT | O_APPEND | O_WRONLY, FILEPERM);
-                         */
-                }
-        }
-
-        /* write(handle->lfp->fd, buf, len); */
-        if (fprintf(handle->lfp->fp, "%s", buf) != (int)len) {
-                perror("fprintf");
-                handle->lfp->writefail ++;
-        } else {
-                handle->lfp->count ++;
-                handle->lfp->countbyte += len;
-        }
-        /* fflush(handle->lfp->fp); */
-        /* fclose(handle->fp); */
-
-#ifdef STDERRLOG
-        fprintf(stderr, "%s", buf);
-#endif
-
-#ifdef SYSLOG
-        syslog(level, "%s", buf);
-#endif
-        /* handle->lfp->count++; */
-        /* pthread_mutex_unlock(&logmutex); */
-        pthread_mutex_unlock(&handle->lfp->mutex);
-#endif
 }
 
 
@@ -374,6 +309,18 @@ int slog_init(const char *file, LOGLEVEL level)
                 strncpy(lfps[0].logfile, file, sizeof(lfps[0].logfile));
         }
         makebak(lfps[0].logfile);
+        lfps[0].success_count = 0;
+        lfps[0].success_byte = 0;
+        lfps[0].makebak_count = 1;
+        lfps[0].debug_count = 0;
+        lfps[0].info_count = 0;
+        lfps[0].warning_count = 0;
+        lfps[0].error_count = 0;
+        lfps[0].fatal_count = 0;
+        lfps[0].alert_count = 0;
+        lfps[0].emerg_count = 0;
+        lfps[0].unhandle_count = 0;
+
         lfps[0].fp = fopen(lfps[0].logfile, "a+");
         if (lfps[0].fp == NULL) {
                 return -1;
@@ -383,12 +330,7 @@ int slog_init(const char *file, LOGLEVEL level)
          * if (lfps[0].fd < 0)
          *         return -1;
          */
-
         pthread_mutex_init(&lfps[0].mutex, NULL);
-        lfps[0].count = 0;
-        lfps[0].countbyte = 0;
-        lfps[0].writefail = 0;
-        lfps[0].bakcount = 0;
         pthread_mutex_unlock(&logmutex);
 
         if (level <= LOGLEVEL_DEBUG && level >= LOGLEVEL_NONE) {
@@ -422,103 +364,6 @@ void slog(LOGLEVEL level, const char * file, size_t filelen, const char * functi
         vlog(&sloger, level, file, filelen, function, functionlen, line, format,  args);
         va_end(args);
         return ;
-#if 0
-        if (sloger.loglevel < level)
-                return;
-
-        char buf[BUFSZ];
-
-        int idx = 0;
-#ifdef VERBOSE
-        char timebuf[24];
-        time_t t= time(NULL);
-        struct tm now;
-        localtime_r(&t, &now);
-        strftime(timebuf, sizeof(timebuf), VERBOSE_TIMEFORMAT, &now);
-        idx = snprintf(buf, sizeof(buf), "%s [%-5.5s] %lu(%lu) %s %s():%ld ",
-                       timebuf, LOGLEVELSTR[level], (unsigned long)getpid(),(unsigned long)pthread_self(), file, function, line);
-#endif
-        va_list args;
-        va_start(args, format);
-        int n = vsnprintf(buf + idx, sizeof(buf) - idx, format, args);
-        va_end(args);
-
-        size_t len = n + idx;
-        if (len >= sizeof(buf)) {
-                fprintf(stderr, "msg too long, truancated.\n");
-                len = sizeof(buf) - 1;
-                buf[len-1] = '\n';
-                buf[len] = '\0';
-        } else {
-                buf[len] = '\n';
-                len++;
-                buf[len] = '\0';
-        }
-
-
-#ifdef SOCKLOG
-        socklen_t addrlen = sizeof(sloger.addr);
-        sendto(sloger.sockfd, buf, len+1, 0, (struct sockaddr *)&sloger.addr, addrlen);
-        /* close(sockfd); */
-#endif
-
-        /* pthread_mutex_lock(&logmutex); */
-        pthread_mutex_lock(&sloger.lfp->mutex);
-        if (sloger.lfp->fp == NULL) {
-                sloger.lfp->fp = fopen(sloger.lfp->logfile, "a+");
-        }
-        /*
-         * if (sloger.lfp->fd == -1) {
-         *         sloger.lfp->fd = open(sloger.lfp->logfile, O_CREAT | O_APPEND | O_WRONLY, FILEPERM);
-         * }
-         */
-        struct stat st;
-        if (stat(sloger.lfp->logfile, &st) == 0) {
-                if (st.st_size + len  >= MAX_FILESIZE) {
-                        /* fprintf(stderr, "size: %lu, len: %lu\n", (unsigned long)st.st_size, (unsigned long)len); */
-                        fclose(sloger.lfp->fp);
-                        makebak(sloger.lfp->logfile);
-                        sloger.lfp->bakcount++;
-                        sloger.lfp->fp = fopen(sloger.lfp->logfile, "a+");
-
-                        /*
-                         * close(sloger.lfp->fd);
-                         * sloger.lfp->fd = open(sloger.lfp->logfile, O_CREAT | O_APPEND | O_WRONLY, FILEPERM);
-                         */
-                }
-        } else {
-                perror("stat");
-        }
-
-        /*
-         * if (write(sloger.lfp->fd, buf, len) != (ssize_t)len) {
-         *         perror("write");
-         *         sloger.lfp->writefail ++;
-         * } else {
-         *         sloger.lfp->count++;
-         *         sloger.lfp->countbyte += len;
-         * }
-         */
-        if (fprintf(sloger.lfp->fp, "%s", buf) != (int)len) {
-                perror("fprintf\n");
-                sloger.lfp->writefail ++;
-        } else {
-                sloger.lfp->count++;
-                sloger.lfp->countbyte += len;
-        }
-        /* fflush(sloger.lfp->fp); */
-        /* fclose(handle->fp); */
-
-#ifdef STDERRLOG
-        fprintf(stderr, "%s", buf);
-#endif
-
-#ifdef SYSLOG
-        syslog(level, "%s", buf);
-#endif
-        /* pthread_mutex_unlock(&logmutex); */
-        pthread_mutex_unlock(&sloger.lfp->mutex);
-#endif
 }
 
 void log_dump()
@@ -526,10 +371,15 @@ void log_dump()
         int i;
         for (i = 0; i < MAX_OPENFILE; i++) {
                 if (lfps[i].fp != NULL) {
-                        fprintf(stderr, "logfile: %s\nsuccess:%llu\nsuccessSize:%llu\nwritefail:%lu\nbakcount:%lu\n\n",
-                                lfps[i].logfile,
-                                (unsigned long long)lfps[i].count, (unsigned long long)lfps[i].countbyte,
-                                (unsigned long)lfps[i].writefail, (unsigned long)lfps[i].bakcount);
+                        fprintf(stderr, "logfile: %s\nsuccess: %llu\nsuccessSize: %llu\nwritefail: %lu\nmakebak: %lu\n"
+                                "debug: %llu\ninfo: %llu\nwarning: %llu\nerror: %llu\nfatal: %llu\nalert: %llu\nemerg: %llu\n"
+                                "unhandle: %llu\n\n",
+                                lfps[i].logfile, (unsigned long long)lfps[i].success_count, (unsigned long long)lfps[i].success_byte,
+                                (unsigned long)lfps[i].fprintf_fail_count, (unsigned long)lfps[i].makebak_count,
+                                (unsigned long long)lfps[i].debug_count, (unsigned long long)lfps[i].info_count,
+                                (unsigned long long)lfps[i].warning_count, (unsigned long long)lfps[i].error_count,
+                                (unsigned long long)lfps[i].fatal_count, (unsigned long long)lfps[i].alert_count,
+                                (unsigned long long)lfps[i].emerg_count, (unsigned long long)lfps[i].unhandle_count);
 
                 }
         }
